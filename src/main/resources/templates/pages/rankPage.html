@@ -1,0 +1,101 @@
+<html lang="ko"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org/" xmlns:v-on="http://www.w3.org/1999/xhtml"
+      xmlns:v-bind="http://www.w3.org/1999/xhtml">
+
+<!-- head Start-->
+<div th:replace="fragment/head :: head"></div>
+<!-- head End-->
+
+
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+
+
+    <!-- HEADER Start -->
+    <div th:replace="fragment/headerTitle :: headerTitle"></div>
+    <!-- HEADER End -->
+
+    <!-- Side Menu Start -->
+    <div th:replace="fragment/sideMenu :: sideMenu(${code},${menuList})"></div>
+    <!-- Side Menu End -->
+
+
+    <!-- Contents-->
+    <div class="content-wrapper">
+        <section class="content-header">
+            <h1>
+                직위
+                <small>조회</small>
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-dashboard"></i>직위</a></li>
+                <li class="active">조회,등록,수정</li>
+            </ol>
+        </section>
+
+        <section class="content">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="box">
+                        <div class="box-header">
+                            <h3 class="box-title">조회</h3>
+                        </div>
+                        <!-- /.box-header -->
+                        <div class="box-body">
+                            <div id="example2_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <table id="" class="table table-bordered table-hover dataTable font-14"
+                                               role="grid" aria-describedby="example2_info">
+                                            <thead>
+                                            <tr role="row">
+                                                <th class="text-center bg-dark-blue-gradient" tabindex="0" rowspan="1" colspan="1" width="15%">
+                                                    번호
+                                                </th>
+                                                <th class="text-center bg-dark-blue-gradient" tabindex="0" rowspan="1" colspan="1" width="75%">
+                                                    직위
+                                                </th>
+                                                <th class="text-center bg-dark-blue-gradient" tabindex="0" rowspan="1" colspan="1" width="10%">
+                                                    <button id="addBtn" type="button" class="btn btn-default btn-xs">추가</button>
+                                                </th>
+                                            </tr>
+                                            </thead>
+                                            <tbody id="rankList">
+                                            <tr role="row" class="odd" v-for="(dto, index) in list">
+                                                <td class="text-center">{{index + 1}}</td>
+                                                <td name = "rank" class="text-center">{{dto.rank_name}}</td>
+                                                <td class="text-center"><button name = "deleteBtn" type="button" class="btn btn-danger btn-xs" v-on:click="deleteLine">삭제</button></td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="box-footer">
+                            <div class="box-tools" style="text-align:center;">
+                                <button id="saveBtn" type="button" class="btn btn-default">확인</button>
+                                <button id="cancelBtn" type="button" class="btn btn-default">취소</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <!-- Content End -->
+
+    <!-- Footer Start -->
+    <div th:replace="fragment/footer :: footer"></div>
+    <!-- Footer End -->
+
+    <!-- controlSidebar Start -->
+    <div th:replace="fragment/controlSidebar :: controlSidebar"></div>
+    <!-- controlSidebar End -->
+
+    <div class="control-sidebar-bg"></div>
+</div>
+<script src="/app/rankPage.js"></script>
+</body>
+</html>
