@@ -1,0 +1,121 @@
+<html lang="ko"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org/" xmlns:v-on="http://www.w3.org/1999/xhtml"
+      xmlns:v-bind="http://www.w3.org/1999/xhtml">
+
+<!-- head Start-->
+<div th:replace="fragment/head :: head"></div>
+<!-- head End-->
+
+
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+
+
+    <!-- HEADER Start -->
+    <div th:replace="fragment/headerTitle :: headerTitle"></div>
+    <!-- HEADER End -->
+
+    <!-- Side Menu Start -->
+    <div th:replace="fragment/sideMenu :: sideMenu(${code},${menuList})"></div>
+    <!-- Side Menu End -->
+
+
+
+    <div class="content-wrapper">
+        <section class="content-header">
+            <h1>
+                사용자
+                <small>
+                    추가/복사
+                </small>
+            </h1>
+        </section>
+        <section class="content">
+            <!-- Horizontal Form -->
+            <div class="box box-info">
+                <div class="box-header with-border">
+                    <h3 class="box-title">사용자 추가</h3>
+                </div>
+                <!-- /.box-header -->
+                <!-- form start -->
+                <form class="form-horizontal">
+                    <div class="box-body">
+                        <div class="form-group">
+                            <label for="inputCode" class="col-sm-2 control-label">사번</label>
+                            <div class="col-sm-5">
+                                <input type="text" class="form-control" id="inputCode" placeholder="사번">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputName" class="col-sm-2 control-label">이름</label>
+                            <div class="col-sm-5">
+                                <input type="text" class="form-control" id="inputName" placeholder="이름">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputEmail" class="col-sm-2 control-label">이메일</label>
+                            <div class="col-sm-5">
+                                <input type="email" class="form-control" id="inputEmail" placeholder="이메일">
+                            </div>
+                        </div>
+                    </div>
+                    <hr align="center" style="width:80%;">
+                    <div class="box-body">
+                        <div class="form-group">
+                            <label for="inputFindCode" class="col-sm-2 control-label">복사할 사번</label>
+                            <div class="col-sm-5">
+                                <input type="text" class="form-control" id="inputFindCode" placeholder="사번">
+                            </div>
+                            <div class="col-sm-2">
+                                <Button type="Button" id="selectBtn" class= "btn-sm " >조회</Button>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputFindDepart" class="col-sm-2 control-label">부서/팀</label>
+                                <div class="margin-bottom-none">
+                                    <div class="col-sm-2">
+                                        <input type="text" class="form-control" id="inputFindDepart" placeholder="부서" disabled>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <input type="text" class="form-control" id="inputFindTeam" placeholder="팀" disabled>
+                                    </div>
+
+                                </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputFindName" class="col-sm-2 control-label">이름</label>
+                            <div class="col-sm-5">
+                                <input type="text" class="form-control" id="inputFindName" placeholder="이름" disabled>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.box-body -->
+
+
+                    <div class="box-footer">
+                        <button type="submit" class="btn btn-default">Cancel</button>
+                        <button type="submit" class="btn btn-info pull-right">Sign in</button>
+                    </div>
+                </form>
+
+            </div>
+            <!-- /.box -->
+        </section>
+    </div>
+
+    <!-- Footer Start -->
+    <div th:replace="fragment/footer :: footer"></div>
+    <!-- Footer End -->
+
+    <!-- controlSidebar Start -->
+    <div th:replace="fragment/controlSidebar :: controlSidebar"></div>
+    <!-- controlSidebar End -->
+
+    <div class="control-sidebar-bg"></div>
+</div>
+
+
+<script src="/app/UserAddCopyPage.js"></script>
+</body>
+</html>

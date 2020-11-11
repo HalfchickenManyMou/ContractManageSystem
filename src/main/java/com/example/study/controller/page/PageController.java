@@ -1,14 +1,10 @@
 package com.example.study.controller.page;
 
-import com.example.study.model.network.response.ContractTypeResponse;
-import com.example.study.service.ContractTypeApiLogicService;
 import com.example.study.service.SideMenuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-
-import java.util.List;
 
 @Controller
 @RequestMapping("/pages")
@@ -46,6 +42,13 @@ public class PageController {
         return new ModelAndView("/pages/rankPage")
                 .addObject("menuList", sideMenuService.getSideMenu("직위 관리"))
                 .addObject("code", "user")
+                ;
+    }
+    @RequestMapping(path ={"/userAdd"})
+    public ModelAndView userAdd(){
+        return new ModelAndView("/pages/userAddCopyPage")
+                .addObject("menuList",sideMenuService.getSideMenu("사용자추가/복사"))
+                .addObject("code","user")
                 ;
     }
 }
