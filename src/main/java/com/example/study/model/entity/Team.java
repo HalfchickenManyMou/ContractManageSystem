@@ -1,11 +1,10 @@
 package com.example.study.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
 import lombok.experimental.Accessors;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 
 @Data
 @Entity
@@ -13,16 +12,16 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 @Builder
 @Accessors(chain = true)
-@ToString(exclude = {"department"})
 public class Team {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idx;
 
-    @NotNull(message = "The department has not been entered.")
+    private String team;
+
     @ManyToOne
+    @ToString.Exclude
+    @JsonBackReference //직렬화 수행x
     private Department department;
 
-    @NotEmpty(message = "The team has not been entered.")
-    private String team;
 }

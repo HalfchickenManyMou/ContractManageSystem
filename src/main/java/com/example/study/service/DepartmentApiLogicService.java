@@ -2,10 +2,12 @@ package com.example.study.service;
 
 import com.example.study.ifs.CrudInterface;
 import com.example.study.model.entity.Department;
+import com.example.study.model.entity.Team;
 import com.example.study.model.network.Header;
 import com.example.study.model.network.request.DepartmentRequest;
 import com.example.study.model.network.response.DepartmentResponse;
 import com.example.study.repository.DepartmentRepository;
+import com.example.study.repository.TeamRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,6 +21,9 @@ public class DepartmentApiLogicService implements CrudInterface<DepartmentReques
 
     @Autowired
     DepartmentRepository departmentRepository;
+
+    @Autowired
+    TeamRepository teamRepository;
 
     @Override
     public Header<DepartmentResponse> create(Header<DepartmentRequest> request){
@@ -48,7 +53,6 @@ public class DepartmentApiLogicService implements CrudInterface<DepartmentReques
         List<DepartmentResponse> responsesList = departments.stream()
                 .map(dpt -> response(dpt))
                 .collect(Collectors.toList());
-
         return Header.OK(responsesList);
     }
 
@@ -79,14 +83,49 @@ public class DepartmentApiLogicService implements CrudInterface<DepartmentReques
                 .orElseGet(()-> Header.ERROR("데이터 없음"));
     }
 
+    public Header bulkCreate(Header<DepartmentRequest> request) {
+        return Optional.ofNullable(request.getData())
+                .map(body -> {
+                    Department department = new Department();
+                    department.setDepartment(body.getDepartment());
+                    departmentRepository.save(department);
+
+                    for(Team team : body.getTeamList()){
+                        department.addTeam(team);
+                        teamRepository.save(team);
+                    }
+                    return Header.OK();
+                })
+                .orElseGet(() -> Header.ERROR("데이터 없음"));
+    }
+
+    public Header bulkUpdate(Header<DepartmentRequest> request, Long idx) {
+        return Optional.ofNullable(request.getData())
+                .map(body -> departmentRepository.findByIdx(idx)
+                    .map(dpt -> {
+                        dpt.setDepartment(body.getDepartment());
+                        dpt.deleteTeamAll();
+                        departmentRepository.save(dpt);
+
+                        for(Team team : body.getTeamList()){
+                            dpt.addTeam(team);
+                            teamRepository.save(team);
+                        }
+                        return Header.OK();
+                    })
+                    .orElseGet(()->Header.ERROR("데이터 없음"))
+                )
+                .orElseGet(()->Header.ERROR("데이터 없음"));
+    }
 
     public DepartmentResponse response(Department department){
         DepartmentResponse body = DepartmentResponse.builder()
                 .idx(department.getIdx())
                 .department(department.getDepartment())
-//                TODO : stackOverFlow 에러 해결 필요
-//                .teamList(department.getTeamList())
+                .teamList(department.getTeamList())
                 .build();
         return body;
     }
+
+
 }

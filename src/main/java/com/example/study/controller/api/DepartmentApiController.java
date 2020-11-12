@@ -21,7 +21,6 @@ public class DepartmentApiController implements CrudInterface<DepartmentRequest,
     @Override
     @PostMapping("/department")
     public Header<DepartmentResponse> create(@RequestBody Header<DepartmentRequest> request) {
-        System.out.println(request);
         return departmentApiLogicService.create(request);
     }
 
@@ -31,10 +30,12 @@ public class DepartmentApiController implements CrudInterface<DepartmentRequest,
         return departmentApiLogicService.read(idx);
     }
 
+
     @GetMapping("/department")
     public Header<List<DepartmentResponse>> readAll() {
         return departmentApiLogicService.readAll();
     }
+
 
     @Override
     @PutMapping("/department")
@@ -42,11 +43,22 @@ public class DepartmentApiController implements CrudInterface<DepartmentRequest,
         return departmentApiLogicService.update(request);
     }
 
+
     @Override
     @DeleteMapping("/department/{idx}")
     public Header delete(@PathVariable Long idx) {
         return departmentApiLogicService.delete(idx);
     }
 
+    
+    @PostMapping("/department/team")
+    public Header bulkCreate(@RequestBody Header<DepartmentRequest> request){
+        return departmentApiLogicService.bulkCreate(request);
+    }
 
+
+    @PutMapping("/department/team/{idx}")
+    public Header bulkUpdate(@PathVariable Long idx, @RequestBody Header<DepartmentRequest> request){
+        return departmentApiLogicService.bulkUpdate(request, idx);
+    }
 }

@@ -9,6 +9,7 @@ import java.util.Optional;
 
 public interface TeamRepository extends JpaRepository<Team, Long> {
     void deleteByIdx(Long idx);
+    void deleteAllByDepartmentIdx(int departmentIdx);
     List<Team> findAllByDepartmentIdx(Long departmentIdx);
     List<Team> findAll();
     Team save(Team team);

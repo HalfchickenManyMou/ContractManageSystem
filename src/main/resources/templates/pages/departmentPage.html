@@ -46,7 +46,7 @@
                             <div id="example2_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
                                 <div class="row">
                                     <div class="col-lg-3">
-                                        <table id="" class="table table-bordered table-hover dataTable font-14"
+                                        <table class="table table-bordered table-hover dataTable font-14"
                                                role="grid" aria-describedby="example2_info">
                                             <thead>
                                             <tr role="row">
@@ -60,8 +60,8 @@
                                             </thead>
                                             <tbody id="departmentList">
                                             <tr role="row" class="odd" v-for="(dto, index) in itemList">
-                                                <td class="text-center">{{index + 1}}</td>
-                                                <td name = "type" class="text-center">{{dto.department}}</td>
+                                                <td class="text-center" v-on:click="itemRowHandler(event, dto)">{{index + 1}}</td>
+                                                <td name = "type" class="text-center" v-on:click="itemRowHandler(event, dto)">{{dto.department}}</td>
                                             </tr>
                                             </tbody>
                                         </table>
@@ -69,7 +69,11 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="box-footer"></div>
+                        <div class="box-footer">
+                            <div class="box-tools" style="text-align:center;">
+                                <button id="enrollBtn" type="button" class="btn btn-default">등록</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -86,7 +90,12 @@
     <!-- controlSidebar End -->
 
     <div class="control-sidebar-bg"></div>
+
+    <!--Modal Start-->
+    <div th:replace="fragment/departmentDetailModal :: departmentDetailModal"></div>
+    <div th:replace="fragment/departmentEnrollModal :: departmentEnrollModal"></div>
+    <!--Modal End-->
 </div>
-<script src="/app/departmentAndTeamPage.js"></script>
+<script src="/app/departmentPage.js"></script>
 </body>
 </html>

@@ -35,7 +35,7 @@ public class PageController {
 
     @RequestMapping(path = {"/department"})
     public ModelAndView departmentPage() {
-        return new ModelAndView("/pages/departmentAndTeamPage")
+        return new ModelAndView("/pages/departmentPage")
                 .addObject("menuList", sideMenuService.getSideMenu("부서/팀 관리"))
                 .addObject("code", "user")
                 ;

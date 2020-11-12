@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @NoArgsConstructor
@@ -15,5 +16,5 @@ import java.util.List;
 public class DepartmentResponse {
     private Long idx;
     private String department;
-    private List<Team> teamList;
+    private List<Team> teamList = new ArrayList<>();
 }

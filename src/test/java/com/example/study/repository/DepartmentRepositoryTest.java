@@ -1,63 +1,75 @@
 package com.example.study.repository;
 
-
-import com.example.study.StudyApplicationTests;
 import com.example.study.model.entity.Department;
-import org.junit.Test;
+import com.example.study.model.entity.Team;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
+import java.util.List;
 
-class DepartmentRepositoryTest extends StudyApplicationTests {
+@SpringBootTest
+class DepartmentRepositoryTest{
 
     @Autowired
     DepartmentRepository departmentRepository;
 
+    @Autowired
+    TeamRepository teamRepository;
+
     @Test
-    void create(){
-        Department department = new Department()
-                .setDepartment("영업부");
-        Department newDepartment = departmentRepository.save(department);
-        Assertions.assertNotNull(newDepartment);
+    void saveDepartmentAndTeam(){
+        //부서 생성
+        Department department = new Department();
+        department.setDepartment("부서1");
+
+        departmentRepository.save(department);
+
+        //팀 생성
+        Team team1 = Team.builder().team("부서1-1팀").build();
+        Team team2 = Team.builder().team("부서1-2팀").build();
+
+        department.addTeam(team1);
+        department.addTeam(team2);
+
+        teamRepository.save(team1);
+        teamRepository.save(team2);
     }
 
     @Test
-    @Transactional
-    void read(){
-        Optional<Department> department = departmentRepository.findByIdx(3L);
-        department.ifPresent(d-> {
-            System.out.println("--------부서--------");
-            System.out.println(d.getDepartment());
-            System.out.println("--------팀--------");
-            d.getTeamList().stream().forEach(t->{
-                System.out.println(t.getTeam());
-            });
-        });
+    void readDepartmentAndTeam() {
+        Department department = departmentRepository.findByIdx(27).orElseGet(null);
+
+        System.out.println(department.getDepartment());
+        System.out.println(department.getTeamList());
     }
 
     @Test
-    @Transactional
-    void update(){
-        Optional<Department> department = departmentRepository.findByIdx(3L);
-        department.ifPresent(d->{
-            d.setDepartment("영업부");
-            departmentRepository.save(d);
-        });
+    void updateDepartmentAndTeam(){
+        Department department = departmentRepository.findByIdx(27).orElseGet(null);
+
+        department.setDepartment("부서1(변경4)");
+        departmentRepository.save(department);
+
+        Department updated = departmentRepository.findByIdx(27).orElseGet(null);
+        Assertions.assertEquals(updated.getDepartment(), "부서1(변경4)");
+
+        List<Team> teams = teamRepository.findAllByDepartmentIdx(27L);
+        for(Team team : teams){
+            Assertions.assertEquals(team.getDepartment(), "부서1(변경4)");
+        }
     }
 
     @Test
-    @Transactional
-    void delete(){
-        Optional<Department> department = departmentRepository.findByIdx(3L);
-        Assertions.assertTrue(department.isPresent());
+    void deleteTeam(){
+        Department department = departmentRepository.findByIdx(31).orElseGet(null);
+        department.deleteTeamAll();
+        departmentRepository.save(department);
 
-        department.ifPresent(d->{
-            departmentRepository.delete(d);
-        });
+        List<Team> teams = teamRepository.findAllByDepartmentIdx(31L);
+        Assertions.assertEquals(teams.size(), 0);
 
-        Optional<Department> deleted = departmentRepository.findByIdx(3L);
-        Assertions.assertFalse(deleted.isPresent());
     }
 }
