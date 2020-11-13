@@ -18,7 +18,7 @@ public class AuthUserRepositoryTest extends StudyApplicationTests {
     public void create(){
         AuthUser authUser = new AuthUser();
         authUser.setIdx(1L);
-        authUser.setContract_idx(2222);
+        authUser.setContract_idx(2L);
         authUser.setDepartment_idx(2020);
         authUser.setTeam_idx(1010);
         authUser.setUseridx("khs");
@@ -43,7 +43,7 @@ public class AuthUserRepositoryTest extends StudyApplicationTests {
     public void update(){
         Optional<AuthUser> userInfo = authuserRepository.findById(1L);
         userInfo.ifPresent(selectUser -> {
-            selectUser.setContract_idx(1234);
+            selectUser.setContract_idx(1234L);
             selectUser.setDepartment_idx(4321);
             selectUser.setIdx(22L);
             selectUser.setTeam_idx(2345);

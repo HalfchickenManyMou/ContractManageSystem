@@ -1,11 +1,11 @@
 package com.example.study.model.entity;
 
-import com.example.study.model.enumclass.UserStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
+import org.hibernate.annotations.GenericGenerator;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
@@ -19,45 +19,38 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-//@ToString(exclude = {"orderGroupList"})
 @EntityListeners(AuditingEntityListener.class)
 @Builder
 @Accessors(chain = true)
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+//    @GeneratedValue(generator="uuid")     1
+//    @GenericGenerator(name="uuid", strategy = "uuid2")    1
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(name = "UUID" , strategy = "org.hibernate.id.UUIDGenerator")
+//    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(updatable=false, nullable=false)
+    private String userCode;
 
-    private String account;
-
-    private String password;
-
-    @Enumerated(EnumType.STRING)
-    private UserStatus status;  // REGISTERED / UNREGISTERED/ WAITING /
+    private String name;
 
     private String email;
 
+    private String pwd;
+
+
+    private Integer departmentIdx;
+
+    private Integer teamIdx;
+
+    private Integer rankIdx;
+
     private String phoneNumber;
+    private LocalDateTime registerDate;
+    private String registerUser;
+    private LocalDateTime updateDate;
+    private String updateUser;
 
-    private LocalDateTime registeredAt;
-
-    private LocalDateTime unregisteredAt;
-
-    @CreatedDate
-    private LocalDateTime createdAt;
-
-    @CreatedBy
-    private String createdBy;
-
-    @LastModifiedDate
-    private LocalDateTime updatedAt;
-
-    @LastModifiedBy
-    private String updatedBy;
-
-//    // User 1 : N OrderGroup
-//    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
-//    private List<OrderGroup> orderGroupList;
 
 }

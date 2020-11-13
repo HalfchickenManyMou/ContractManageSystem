@@ -22,7 +22,7 @@ public class SideMenuService {
 
                 SideMenu.builder().title("계약서 권한 관리1").url("/pages/authuser").mode("item").build().check(title),
                 SideMenu.builder().title("내 정보 조회 및 수정").url("/pages/myInfo").mode("item").build().check(title),
-                SideMenu.builder().title("사용자 정보").url("/pages/userInfo").mode("item").build().check(title)
+                SideMenu.builder().title("권한 문의").url("/pages/authInquire").mode("item").build().check(title)
                 );
     }
 }

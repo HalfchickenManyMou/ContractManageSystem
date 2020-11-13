@@ -32,7 +32,7 @@ public class AuthUserApiLogicService implements CrudInterface<AuthUserRequest, A
                             .build();
                     return authuser;
                 })
-                .map(dpt -> authuserRepository.save(dpt))
+                .map(au -> authuserRepository.save(au))
                 .map(saved -> response(saved))
                 .map(Header::OK)
                 .orElseGet( () -> Header.ERROR("데이터 없음"));

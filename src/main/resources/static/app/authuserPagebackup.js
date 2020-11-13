@@ -62,11 +62,13 @@
         }
     });
 
-
+//
     $('#search').click(function () {
         searchStart(0)
     });
 
+
+    //
     $(document).ready(function () {
         searchStart(0)
     });

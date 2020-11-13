@@ -69,9 +69,9 @@ public class PageController {
                 ;
     }
 
-    @RequestMapping(path = {"/userInfo"})
-    public ModelAndView userInfoPage() {
-        return new ModelAndView("/pages/userInfo")
+    @RequestMapping(path = {"/authInquire"})
+    public ModelAndView authInquirePage() {
+        return new ModelAndView("/pages/authInquire")
                 .addObject("menuList", sideMenuService.getSideMenu("사용자 정보"))
                 .addObject("code", "user")
                 ;
