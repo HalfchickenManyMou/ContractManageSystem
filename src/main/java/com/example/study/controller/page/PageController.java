@@ -51,4 +51,8 @@ public class PageController {
                 .addObject("code","user")
                 ;
     }
+    @RequestMapping(path={"/inquire"})
+    public ModelAndView inquire(){
+        return new ModelAndView("/pages/inquirePage");
+    }
 }

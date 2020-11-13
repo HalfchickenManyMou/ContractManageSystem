@@ -17,7 +17,7 @@ class ContractTypeRepositoryTest extends StudyApplicationTests {
     ContractTypeRepository contractTypeRepository;
 
     @Test
-    void create(){
+    public void create(){
         ContractType contractType = ContractType.builder()
                 .type("근로계약서")
                 .build();
