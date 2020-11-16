@@ -25,7 +25,9 @@ public class User {
 
     private String name;
     private String email;
+
     private String pwd;
+
     private String phoneNumber;
 
     @ManyToOne
@@ -46,7 +48,7 @@ public class User {
     @LastModifiedDate
     private LocalDateTime updateDate;
 
-    //TODO 로그인 유저정보 저장
+    //TODO : 로그인 유저정보 저장
     private String registerUser;
     private String updateUser;
 

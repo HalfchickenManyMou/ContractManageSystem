@@ -33,7 +33,12 @@ public class Header<T> {
     // OK
 
     public static <T> Header<T> OK(){
-        return (Header<T>)Header.builder().transactionTime(LocalDateTime.now()).resultCode("OK").description("ㅅㅂ").data("ok").build();
+        return (Header<T>)Header.builder()
+                .transactionTime(LocalDateTime.now())
+                .resultCode("OK")
+                .description("성공")
+                .data("ok")
+                .build();
     }
 
 
