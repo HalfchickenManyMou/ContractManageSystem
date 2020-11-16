@@ -42,12 +42,12 @@
 <div class="wrapper">
 
 
-    <!-- HEADER Start -->
-    <div th:replace="fragment/headerTitle :: headerTitle(${code},${userInfo})"></div>
+<!--    HEADER Start &ndash;&gt;-->
+    <div th:replace="fragment/headerTitle :: headerTitle"></div>
     <!-- HEADER End -->
 
     <!-- Side Menu Start -->
-    <div th:replace="fragment/sideMenu :: sideMenu(${code},${authList})"></div>
+    <div th:replace="fragment/sideMenu :: sideMenu(${code},${menuList})"></div>
     <!-- Side Menu End -->
 
     <!-- Contents-->
@@ -316,7 +316,7 @@
     <!-- Footer End -->
 
     <!-- controlSidebar Start -->
-    <!--    <div th:replace="fragment/controlSidebar :: controlSidebar"></div>-->
+        <div th:replace="fragment/controlSidebar :: controlSidebar"></div>
     <!-- controlSidebar End -->
 
 

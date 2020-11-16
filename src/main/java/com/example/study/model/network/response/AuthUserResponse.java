@@ -13,15 +13,10 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class AuthUserResponse {
-    private String authuser;
     private Long idx;
     private Long contract_idx;
     private Integer department_idx;
     private Integer team_idx;
     private String useridx;
     private AuthType auth_type;
-    private LocalDateTime registerDate;
-    private String registerUser;
-    private LocalDateTime updateDate;
-    private String updateUser;
 }

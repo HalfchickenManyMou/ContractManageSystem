@@ -3,9 +3,7 @@ package com.example.study.controller.api;
 import com.example.study.ifs.CrudInterface;
 import com.example.study.model.network.Header;
 import com.example.study.model.network.request.ContractRequest;
-import com.example.study.model.network.request.UserApiRequest;
 import com.example.study.model.network.response.ContractResponse;
-import com.example.study.model.network.response.UserApiResponse;
 import com.example.study.service.ContractApiLogicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -28,6 +26,7 @@ public class ContractApiController implements CrudInterface<ContractRequest, Con
     @Override
     @GetMapping("/contract/{id}")
     public Header<ContractResponse> read(@PathVariable  Long id) {
+
         return contractApiLogicService.read(id);
     }
 

@@ -28,7 +28,7 @@ public class AuthUserApiLogicService implements CrudInterface<AuthUserRequest, A
         return Optional.ofNullable(request.getData())
                 .map(au -> {
                     AuthUser authuser = AuthUser.builder()
-                            .authuser(au.getAuthuser())
+                            .useridx(au.getUseridx())
                             .build();
                     return authuser;
                 })
@@ -61,7 +61,7 @@ public class AuthUserApiLogicService implements CrudInterface<AuthUserRequest, A
         return Optional.ofNullable(request.getData())
                 .map(body -> authuserRepository.findByIdx(body.getIdx())
                         .map(au -> {
-                            au.setAuthuser(body.getAuthuser());
+                            au.setUseridx(body.getUseridx());
                             return au;
                         })
                         .map(au -> authuserRepository.save(au))
@@ -86,9 +86,11 @@ public class AuthUserApiLogicService implements CrudInterface<AuthUserRequest, A
     public AuthUserResponse response(AuthUser authuser){
         AuthUserResponse body = AuthUserResponse.builder()
                 .idx(authuser.getIdx())
-                .authuser(authuser.getAuthuser())
-//                TODO : stackOverFlow 에러 해결 필요
-//                .teamList(department.getTeamList())
+                .contract_idx(authuser.getContract_idx())
+                .useridx(authuser.getUseridx())
+                .team_idx(authuser.getTeam_idx())
+                .department_idx(authuser.getDepartment_idx())
+                .auth_type(authuser.getAuth_type())
                 .build();
         return body;
     }

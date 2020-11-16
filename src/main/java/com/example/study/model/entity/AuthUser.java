@@ -31,7 +31,6 @@ public class AuthUser {
     private LocalDateTime updateDate;
     private String updateUser;
 
-    private String authuser;
 }
 
 

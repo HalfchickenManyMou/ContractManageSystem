@@ -48,16 +48,19 @@
                                     <div class="form-group row row-center text-center">
                                         <label class="col-sm-1 col-form-label">계약서 번호</label>
                                         <div class="col-sm-2">
-                                            <label class="sr-only" for="itemId"></label>
-                                            <input type="text" class="form-control" id="itemId" placeholder="계약서 번호"
-                                                   v-model="id">
+                                            <label class="sr-only" for="contractNum"></label>
+                                            <input type="text" class="form-control" id="contractNum"
+                                                   placeholder="계약서 번호">
                                         </div>
                                         <label class="col-sm-1 col-form-label">계약서 종류</label>
                                         <div class="col-sm-2">
-                                            <select id="superCate" class="form-control" v-model="superCate"
-                                                    v-on:change="handleCate01">
+                                            <select id="contractTypeList" class="form-control">
                                                 <option value="">선택</option>
-                                                <option v-for="category in selectCate01">{{category}}</option>
+                                                <option >{{contractTypeList}}</option>
+<!--                                                <option th:each="data:${data}"-->
+<!--                                                        th:value="${data.contractTypeIdx}"-->
+<!--                                                        th:text="${data.contractTypeIdx}"></option>-->
+                                                <!--                                                <option v-for="type in list">{{type}}</option>-->
                                             </select>
                                         </div>
                                     </div>
@@ -65,17 +68,19 @@
                                     <div class="form-group row row-center text-center">
                                         <label class="col-sm-1 col-form-label">부서/팀</label>
                                         <div class="col-sm-4">
-                                            <select id="superCate" class="form-control" v-model="superCate"
-                                                    v-on:change="handleCate01">
+                                            <select id="departmentList" class="form-control">
                                                 <option value="">선택</option>
-                                                <option v-for="category in selectCate01">{{category}}</option>
+                                                <option>{{departmentList}}</option>
+<!--                                                <option th:each="data:${data}" th:value="${data.idx}"-->
+<!--                                                        th:text="${data.idx}"></option>-->
                                             </select>
                                         </div>
                                         <div class="col-sm-4">
-                                            <select id="subCateFirst" class="form-control" v-model="subCateFirst"
-                                                    v-on:change="handleCate02">
+                                            <select id="teamList" class="form-control">
                                                 <option value="">선택</option>
-                                                <option v-for="category in selectCate02">{{category}}</option>
+                                                <option>{{teamList}}</option>
+<!--                                                <option th:each="data:${data}" th:value="${data.idx}"-->
+<!--                                                        th:text="${data.idx}"></option>-->
                                             </select>
 
                                         </div>
@@ -84,15 +89,13 @@
                                     <div class="form-group row row-center text-center">
                                         <label class="col-sm-1 col-form-label">검색</label>
                                         <div class="col-sm-5">
-                                            <label class="sr-only" for="itemId"></label>
-                                            <input type="text" class="form-control" id="itemId" placeholder="검색"
-                                                   v-model="id">
+                                            <label class="sr-only" for="search"></label>
+                                            <input type="text" class="form-control" id="search" placeholder="검색">
                                         </div>
                                     </div>
 
                                     <div class="row text-center">
-                                        <button type="button" class="btn btn-sm btn-primary dark"
-                                                v-on:click="searchItems"> 조회
+                                        <button id=searchBtn type="button" class="btn btn-sm btn-primary dark"> 조회
                                         </button>
                                     </div>
                                 </div>
@@ -150,18 +153,22 @@
                                             </tr>
                                             </thead>
                                             <tbody id="itemList">
-                                            <tr role="row" class="odd item" th:each="data : ${data}">
-                                                <td class="text-center" th:text="${data.idx}"></td>
-                                                <td class="text-center" th:text="${data.contract_idx}"></td>
-                                                <td class="text-center" th:text="${data.team_idx}"></td>
-                                                <td class="text-center" th:text="${data.department_idx}"></td>
-                                                <td class="text-center" th:text="${data.team_idx}"></td>
-                                                <td class="text-center" th:text="${data.useridx}"></td>
-                                                <td class="text-center" th:text="${data.auth_type}"></td>
-                                                <td class="text-center"
-                                                    onClick="location.href='/pages/authuser/authuserPageDetail'"
-                                                    th:text="${data.auth_type}"></td>
+                                            <tr role="row" class="odd" v-for="item in itemList">
+                                                <td class="text-center">{{itemList.idx}}</td>
                                             </tr>
+<!--                                            <tr role="row" class="odd item" th:each="data : ${data}">-->
+<!--                                                <td class="text-center" th:text="${data.idx}"></td>-->
+<!--                                                <td class="text-center" th:text="${data.code}"></td>-->
+<!--                                                <td class="text-center" th:text="${data.name}"></td>-->
+<!--                                                <td class="text-center" th:text="${data.contractTypeIdx}"></td>-->
+<!--                                                <td class="text-center" th:text="${data.userCode}"></td>-->
+<!--                                                <td class="text-center" th:text="${data.ownerName}"></td>-->
+<!--                                                <td class="text-center" th:text="${data.otherName}"></td>-->
+<!--                                                <td class="text-center"-->
+<!--                                                    onClick="location.href='/pages/contract/authuser'"-->
+<!--                                                    th:text="${data.contractQty}"></td>-->
+<!--                                            </tr>-->
+
                                             </tbody>
                                         </table>
                                     </div>

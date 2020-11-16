@@ -46,14 +46,14 @@ public class PageController {
     }
 
 
-    @RequestMapping(path = {"/authuser"})
+    @RequestMapping(path = {"/contract"})
     public ModelAndView authuserPage() {
         return new ModelAndView("/pages/authuserPage")
                 .addObject("menuList", sideMenuService.getSideMenu("계약서 권한 관리1"))
                 .addObject("code", "user")
                 ;
     }
-    @RequestMapping(path = {"/authuser/authuserdetail"})
+    @RequestMapping(path = {"/authuser"})
     public ModelAndView authuserPageDetail() {
         return new ModelAndView("/pages/authuserPageDetail")
                 .addObject("menuList", sideMenuService.getSideMenu("계약서 권한 관리2"))
@@ -61,13 +61,13 @@ public class PageController {
                 ;
     }
 
-    @RequestMapping(path = {"/myInfo"})
-    public ModelAndView myInfoPage() {
-        return new ModelAndView("/pages/myInfo")
-                .addObject("menuList", sideMenuService.getSideMenu("내 정보 조회 및 수정"))
-                .addObject("code", "user")
-                ;
-    }
+//    @RequestMapping(path = {"/myInfo"})
+//    public ModelAndView myInfoPage() {
+//        return new ModelAndView("/pages/myInfo")
+//                .addObject("menuList", sideMenuService.getSideMenu("내 정보 조회 및 수정"))
+//                .addObject("code", "user")
+//                ;
+//    }
 
     @RequestMapping(path = {"/authInquire"})
     public ModelAndView authInquirePage() {

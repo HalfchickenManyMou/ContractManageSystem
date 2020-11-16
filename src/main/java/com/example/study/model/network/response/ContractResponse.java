@@ -20,20 +20,11 @@ public class ContractResponse {
     private String name;
     private Long contractTypeIdx;
     private String userCode;
-    private Long departmentIdx;
-    private String content;
+
     private String ownerName;
-    private String ownerBusinessNumber;
-    private String ownerAddress;
+
     private String otherName;
-    private String otherBusinessNumber;
-    private String otherAddress;
-    private Date startDate;
-    private Date endDate;
-    private String contractAmount;
+
     private String contractQty;
-    private LocalDateTime registerDate;
-    private LocalDateTime updateDate;
-    private String registerUser;
-    private String updateUser;
+
 }
