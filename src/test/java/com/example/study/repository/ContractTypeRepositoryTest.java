@@ -11,10 +11,10 @@ import java.util.List;
 import java.util.Optional;
 
 
-class ContractTypeRepositoryTest extends StudyApplicationTests {
+public class ContractTypeRepositoryTest extends StudyApplicationTests {
 
     @Autowired
-    ContractTypeRepository contractTypeRepository;
+    public ContractTypeRepository contractTypeRepository;
 
     @Test
     public void create(){
@@ -26,7 +26,7 @@ class ContractTypeRepositoryTest extends StudyApplicationTests {
     }
 
     @Test
-    void read(){
+    public void read(){
         List<ContractType> contractTypeList = contractTypeRepository.findAll();
         System.out.println("-----계약서 종류--------");
         for(ContractType c : contractTypeList){
@@ -35,7 +35,7 @@ class ContractTypeRepositoryTest extends StudyApplicationTests {
     }
 
     @Test
-    void update(){
+    public void update(){
         Optional<ContractType> contractType = contractTypeRepository.findByIdx(9L);
         contractType.ifPresent(c ->{
             c.setType("임금계약서");
@@ -45,7 +45,7 @@ class ContractTypeRepositoryTest extends StudyApplicationTests {
 
     @Test
     @Transactional
-    void delete(){
+    public void delete(){
         Optional<ContractType> contractType = contractTypeRepository.findByIdx(9L);
         contractType.ifPresent(c ->{
             contractTypeRepository.deleteByIdx(9L);

@@ -9,6 +9,7 @@ import com.example.study.service.MailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.mail.MessagingException;
 import java.util.Map;
 
 @RestController
@@ -22,10 +23,9 @@ public class InquireController implements CrudInterface<MailRequest, MailRespons
     }
 
     @PostMapping("/inquire")
-    public @ResponseBody void execMail(@RequestBody Map<String, String> mailInfo){
+    public @ResponseBody void execMail(@RequestBody Map<String, String> mailInfo) throws MessagingException {
         System.out.println("이메일 전송 완료1");
-        Mail mail = mailService.createMail(mailInfo.get("userEmail"),mailInfo.get("userTitle"),mailInfo.get("userText"));
-        mailService.mailSend(mail);
+        mailService.mailSend();
     }
 
     @Override

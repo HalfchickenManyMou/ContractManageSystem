@@ -9,11 +9,15 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
+
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
 
 @Service
 @AllArgsConstructor
-public class MailService implements CrudInterface<MailRequest, MailResponse> {
+public class MailService {
 
     @Autowired
     private JavaMailSender mailSender;
@@ -21,40 +25,16 @@ public class MailService implements CrudInterface<MailRequest, MailResponse> {
 
 
 
-    public Mail createMail(String userEmail, String userTitle, String userText){
-        Mail mail = new Mail();
-        mail.setAddress(userEmail);
-        mail.setTitle(userTitle);
-        mail.setContent(userText);
-        return mail;
-    }
-    public void mailSend(Mail mail){
-        System.out.println("이메일 전송 완료");
-        SimpleMailMessage message = new SimpleMailMessage();
-        message.setTo(mail.getAddress()); //보내는 사람 주소
-        message.setFrom(MailService.TO_ADDRESS); //받는사람주
-        message.setSubject(mail.getTitle());
-        message.setText(mail.getContent());
+
+    public void mailSend() throws MessagingException {
+        MimeMessage message = mailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(message , true);
+
+        helper.setSubject("TEST1");
+        helper.setTo("shkimm5189@naver.com");
+        helper.setText("TEST");
         mailSender.send(message);
     }
 
-    @Override
-    public Header<MailResponse> create(Header<MailRequest> request) {
-        return null;
-    }
 
-    @Override
-    public Header<MailResponse> read(Long id) {
-        return null;
-    }
-
-    @Override
-    public Header<MailResponse> update(Header<MailRequest> request) {
-        return null;
-    }
-
-    @Override
-    public Header delete(Long id) {
-        return null;
-    }
 }
