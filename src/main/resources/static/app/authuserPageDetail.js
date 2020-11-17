@@ -27,8 +27,6 @@
         el : '#itemList',
         data : {
             itemList         : {},
-            selectedItemList : {},
-            amountSelect     : 0    // 현재 page에서 보여지는 값들중 선택된 값의 수
         },methods:{
         }
     });
@@ -66,13 +64,12 @@
 
 
     $(document).ready(function () {
-     //   search(0)
         getData();
 
     });
 
     function getData( ) {
-        $.get("/api/authuser",function(res){
+        $.get("/api/authuser?id="+index,function(res){
             itemList.list=res.data;
         });
     }

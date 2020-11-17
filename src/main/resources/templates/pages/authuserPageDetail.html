@@ -1,6 +1,6 @@
 <html lang="ko"
       xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.w3.org/1999/xhtml" xmlns:v-on="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org/" xmlns:v-on="http://www.w3.org/1999/xhtml"
       xmlns:v-bind="http://www.w3.org/1999/xhtml" xmlns:float="http://www.w3.org/1999/xhtml"
       xmlns:list-style="http://www.w3.org/1999/xhtml" xmlns:display="http://www.w3.org/1999/xhtml"
       xmlns:background="http://www.w3.org/1999/xhtml">
@@ -42,7 +42,7 @@
 <div class="wrapper">
 
 
-<!--    HEADER Start &ndash;&gt;-->
+    <!--    HEADER Start &ndash;&gt;-->
     <div th:replace="fragment/headerTitle :: headerTitle"></div>
     <!-- HEADER End -->
 
@@ -54,7 +54,7 @@
     <div class="content-wrapper">
         <section class="content-header">
             <h1>
-                권한 수정
+                계약서 권한 관리2
             </h1>
             <ol class="breadcrumb">
             </ol>
@@ -62,37 +62,37 @@
 
         <section class="content">
 
-            <div class="row" th:each="data: ${data}">
+            <div class="row" >
                 <div class="col-xs-12">
                     <div class="box">
                         <!-- /.box-header -->
                         <div class="box-body">
-                            <form method="post" class="example-form">
+                            <form id="itemList" class="example-form">
                                 <div class="row">
                                     <div class="col-xs-3">
                                         <div>
                                             <label>계약서 ID</label>
                                         </div>
-                                        <div th:value="${data.idx}" th:text="${data.idx}"></div>
+                                        <div>{{itemList.idx}}</div>
                                         <table border="1"></table>
                                     </div>
                                     <div class="col-xs-3">
                                         <label>계약서 명</label>
-                                        <div th:value="${data.useridx}" th:text="${data.useridx}"></div>
+                                        <div>계약서 명</div>
                                         <table border="1"></table>
                                     </div>
                                     <div class="col-xs-3">
                                         <div>
                                             <label>계약서 종류</label>
                                         </div>
-                                        <div th:value="${data.team_idx}" th:text="${data.team_idx}"></div>
+                                        <div>{{itemList.team_idx}}</div>
                                         <table border="1"></table>
                                     </div>
                                     <div class="col-xs-3">
                                         <div>
                                             <label>담당자</label>
                                         </div>
-                                        <div th:value="${data.registerUser}" th:text="${data.registerUser}"></div>
+                                        <div>{{itemList.useridx}}</div>
                                         <table border="1"></table>
                                     </div>
                                 </div>
@@ -115,26 +115,25 @@
                                     <div class="col-sm-12">
                                         <table id="example1" class="table table-bordered table-hover dataTable"
                                                role="grid" aria-describedby="example1_info">
-
+                                            <tbody>
                                             <tr role="row">
                                                 <div>
                                                     <label>부서/팀 :</label>
                                                     &emsp;
                                                     <select name="부서">
-                                                        <option value="개발팀">개발팀</option>
-                                                        <option value="법무팀">법무팀</option>
+                                                        <option>{{itemList.department_idx}}</option>
                                                     </select>
                                                     &nbsp;
                                                     <button style='width:auto; height:auto;' , id="addDept"
                                                             type="submit"
                                                             class="btn btn-primary bg-light-blue-gradient margin-bottom">
-                                                        조회
+                                                        추가
                                                     </button>
                                                 </div>
 
                                                 <ul>
                                                     <li display:block; background:#000; float:left; list-style:none;
-                                                        th:text="${data.department_idx}"></li>
+                                                        >{{itemList.departmnet_idx}}</li>
                                                 </ul>
                                             </tr>
 
@@ -143,23 +142,21 @@
                                                     <label>팀 :</label>
                                                     &emsp;
                                                     <select name="부서">
-                                                        <option value="개발팀">개발팀</option>
-                                                        <option value="법무팀">법무팀</option>
+                                                        <option >{{개발팀}}</option>
                                                     </select>
                                                     &nbsp;
                                                     <select name="팀">
-                                                        <option value="개발1팀">개발1팀</option>
-                                                        <option value="개발2팀">개발2팀</option>
+                                                        <option >{{개발1팀}}</option>
                                                     </select>
                                                     &nbsp;
                                                     <button id="addTeam" type="submit"
                                                             class="btn btn-primary bg-light-blue-gradient margin-bottom">
-                                                        조회
+                                                        추가
                                                     </button>
                                                 </div>
                                                 <ul>
                                                     <li display:block; background:#000; float:left; list-style:none;
-                                                        th:text="${data.team_idx}"></li>
+                                                        >{{itemList.team_idx}}</li>
                                                 </ul>
                                             </tr>
 
@@ -168,30 +165,28 @@
                                                     <label>개인 :</label>
                                                     &emsp;
                                                     <select name="부서">
-                                                        <option value="개발팀">개발팀</option>
-                                                        <option value="법무팀">법무팀</option>
+                                                        <option >{{개발팀}}</option>
                                                     </select>
                                                     &nbsp;
                                                     <select name="팀">
-                                                        <option value="개발1팀">개발1팀</option>
-                                                        <option value="개발2팀">개발2팀</option>
+                                                        <option >{{개발1팀}}</option>
                                                     </select>
                                                     &nbsp;
                                                     <select name="이름">
-                                                        <option value="홍길동">홍길동</option>
-                                                        <option value="아무개">아무개</option>
+                                                        <option >{{홍길동}}</option>
                                                     </select>
                                                     &nbsp;
                                                     <button id="addPerson" type="submit"
                                                             class="btn btn-primary bg-light-blue-gradient margin-bottom">
-                                                        조회
+                                                        추가
                                                     </button>
                                                 </div>
                                                 <ul>
                                                     <li display:block; background:#000; float:left; list-style:none;
-                                                        th:text="${data.useridx}"></li>
+                                                        >{{itemList.useridx}}</li>
                                                 </ul>
                                             </tr>
+                                            </tbody>
                                         </table>
                                     </div>
                                 </div>
@@ -222,17 +217,16 @@
                                                     &emsp;
                                                     <select name="부서">
                                                         <option value="개발팀">개발팀</option>
-                                                        <option value="법무팀">법무팀</option>
                                                     </select>
                                                     &nbsp;
                                                     <button id="addMDept" type="submit"
                                                             class="btn btn-primary bg-light-blue-gradient margin-bottom">
-                                                        조회
+                                                        추가
                                                     </button>
                                                 </div>
                                                 <ul>
                                                     <li display:block; background:#000; float:left; list-style:none;
-                                                        th:text="${data.department_idx}"></li>
+                                                        >{{itemList.department_idx}}</li>
                                                 </ul>
                                             </tr>
                                             <tr>
@@ -241,22 +235,20 @@
                                                     &emsp;
                                                     <select name="부서">
                                                         <option value="개발팀">개발팀</option>
-                                                        <option value="법무팀">법무팀</option>
                                                     </select>
                                                     &nbsp;
                                                     <select name="팀">
                                                         <option value="개발1팀">개발1팀</option>
-                                                        <option value="개발2팀">개발2팀</option>
                                                     </select>
                                                     &nbsp;
                                                     <button id="addMTeam" type="submit"
                                                             class="btn btn-primary bg-light-blue-gradient margin-bottom">
-                                                        조회
+                                                        추가
                                                     </button>
                                                 </div>
                                                 <ul>
                                                     <li display:block; background:#000; float:left; list-style:none;
-                                                        th:text="${data.team_idx}"></li>
+                                                        >{{itemList.team_idx}}</li>
                                                 </ul>
                                             </tr>
                                             <tr>
@@ -265,27 +257,24 @@
                                                     &emsp;
                                                     <select name="부서">
                                                         <option value="개발팀">개발팀</option>
-                                                        <option value="법무팀">법무팀</option>
                                                     </select>
                                                     &nbsp;
                                                     <select name="팀">
                                                         <option value="개발1팀">개발1팀</option>
-                                                        <option value="개발2팀">개발2팀</option>
                                                     </select>
                                                     &nbsp;
                                                     <select name="이름">
                                                         <option value="홍길동">홍길동</option>
-                                                        <option value="아무개">아무개</option>
                                                     </select>
                                                     &nbsp;
                                                     <button id="addMPerson" type="submit"
                                                             class="btn btn-primary bg-light-blue-gradient margin-bottom">
-                                                        조회
+                                                        추가
                                                     </button>
                                                 </div>
                                                 <ul>
                                                     <li display:block; background:#000; float:left; list-style:none;
-                                                        th:text="${data.useridx}"></li>
+                                                        >{{itemList.useridx}}</li>
                                                 </ul>
                                             </tr>
                                         </table>
@@ -296,7 +285,9 @@
 
                             <p>
                             <div class="pull-right">
-                                <button type="button" class="btn btn-primary bg-light-blue-gradient pull-right" onclick="location.href ='/pages/auth' ">확인</button>
+                                <button type="button" class="btn btn-primary bg-light-blue-gradient pull-right"
+                                        onclick="location.href ='/pages/auth' ">확인
+                                </button>
 
                             </div>
                             </p>
@@ -316,7 +307,7 @@
     <!-- Footer End -->
 
     <!-- controlSidebar Start -->
-        <div th:replace="fragment/controlSidebar :: controlSidebar"></div>
+    <div th:replace="fragment/controlSidebar :: controlSidebar"></div>
     <!-- controlSidebar End -->
 
 

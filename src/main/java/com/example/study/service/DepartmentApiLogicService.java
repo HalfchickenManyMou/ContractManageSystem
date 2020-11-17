@@ -84,8 +84,6 @@ public class DepartmentApiLogicService implements CrudInterface<DepartmentReques
         DepartmentResponse body = DepartmentResponse.builder()
                 .idx(department.getIdx())
                 .department(department.getDepartment())
-//                TODO : stackOverFlow 에러 해결 필요
-//                .teamList(department.getTeamList())
                 .build();
         return body;
     }

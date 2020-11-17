@@ -43,7 +43,8 @@
                         </div>
                         <!-- /.box-header -->
                         <div class="box-body">
-                            <form id="queryConditions">
+                            <!--                            <form id="queryConditions">-->
+                            <form>
                                 <div class="col-sm-12">
                                     <div class="form-group row row-center text-center">
                                         <label class="col-sm-1 col-form-label">계약서 번호</label>
@@ -54,13 +55,9 @@
                                         </div>
                                         <label class="col-sm-1 col-form-label">계약서 종류</label>
                                         <div class="col-sm-2">
-                                            <select id="contractTypeList" class="form-control">
+                                            <select id="contractTypeList" class="form-control" >
                                                 <option value="">선택</option>
-                                                <option >{{contractTypeList}}</option>
-<!--                                                <option th:each="data:${data}"-->
-<!--                                                        th:value="${data.contractTypeIdx}"-->
-<!--                                                        th:text="${data.contractTypeIdx}"></option>-->
-                                                <!--                                                <option v-for="type in list">{{type}}</option>-->
+                                                <option v-for="contractType in contractTypeList" v-bind:value="contractType.idx">{{contractType.type}}</option>
                                             </select>
                                         </div>
                                     </div>
@@ -70,17 +67,14 @@
                                         <div class="col-sm-4">
                                             <select id="departmentList" class="form-control">
                                                 <option value="">선택</option>
-                                                <option>{{departmentList}}</option>
-<!--                                                <option th:each="data:${data}" th:value="${data.idx}"-->
-<!--                                                        th:text="${data.idx}"></option>-->
+                                                <option v-for="dept in departmentList">{{dept.department}}</option>
+
                                             </select>
                                         </div>
                                         <div class="col-sm-4">
                                             <select id="teamList" class="form-control">
                                                 <option value="">선택</option>
-                                                <option>{{teamList}}</option>
-<!--                                                <option th:each="data:${data}" th:value="${data.idx}"-->
-<!--                                                        th:text="${data.idx}"></option>-->
+                                                <option v-for="team in teamList">{{team.idx}}</option>
                                             </select>
 
                                         </div>
@@ -113,9 +107,10 @@
                             <div id="items_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
                                 <div class="row">
                                     <div class="col-sm-12">
-                                        <table id="items_table"
-                                               class="table table-bordered table-hover dataTable font-14"
-                                               role="grid" aria-describedby="example2_info">
+                                        <!--                                        <table id="items_table"-->
+                                        <table
+                                                class="table table-bordered table-hover dataTable font-14"
+                                                role="grid" aria-describedby="example2_info">
                                             <thead>
                                             <tr role="row">
                                                 <th class="text-center bg-dark-blue-gradient" tabindex="0" rowspan="1"
@@ -153,21 +148,31 @@
                                             </tr>
                                             </thead>
                                             <tbody id="itemList">
-                                            <tr role="row" class="odd" v-for="item in itemList">
-                                                <td class="text-center">{{itemList.idx}}</td>
+                                            <tr role="row" class="odd" v-for="dto in itemList">
+                                                <td class="text-center">{{dto.idx}}</td>
+                                                <td class="text-center">{{dto.code}}</td>
+                                                <td class="text-center">{{dto.name}}</td>
+                                                <td class="text-center">{{dto.contract_type_idx}}</td>
+                                                <td class="text-center">{{dto.user_code}}</td>
+                                                <td class="text-center">{{dto.owner_name}}</td>
+                                                <td class="text-center">{{dto.other_name}}</td><td class="text-center">
+                                                    <button name="authuserBtn" type="button"
+                                                            class="btn btn-danger btn-xs" v-on:click=move()>수정
+                                                    </button>
+                                                </td>
                                             </tr>
-<!--                                            <tr role="row" class="odd item" th:each="data : ${data}">-->
-<!--                                                <td class="text-center" th:text="${data.idx}"></td>-->
-<!--                                                <td class="text-center" th:text="${data.code}"></td>-->
-<!--                                                <td class="text-center" th:text="${data.name}"></td>-->
-<!--                                                <td class="text-center" th:text="${data.contractTypeIdx}"></td>-->
-<!--                                                <td class="text-center" th:text="${data.userCode}"></td>-->
-<!--                                                <td class="text-center" th:text="${data.ownerName}"></td>-->
-<!--                                                <td class="text-center" th:text="${data.otherName}"></td>-->
-<!--                                                <td class="text-center"-->
-<!--                                                    onClick="location.href='/pages/contract/authuser'"-->
-<!--                                                    th:text="${data.contractQty}"></td>-->
-<!--                                            </tr>-->
+                                            <!--                                            <tr role="row" class="odd item" th:each="data : ${data}">-->
+                                            <!--                                                <td class="text-center" th:text="${data.idx}"></td>-->
+                                            <!--                                                <td class="text-center" th:text="${data.code}"></td>-->
+                                            <!--                                                <td class="text-center" th:text="${data.name}"></td>-->
+                                            <!--                                                <td class="text-center" th:text="${data.contractTypeIdx}"></td>-->
+                                            <!--                                                <td class="text-center" th:text="${data.userCode}"></td>-->
+                                            <!--                                                <td class="text-center" th:text="${data.ownerName}"></td>-->
+                                            <!--                                                <td class="text-center" th:text="${data.otherName}"></td>-->
+                                            <!--                                                <td class="text-center"-->
+                                            <!--                                                    onClick="location.href='/pages/contract/authuser'"-->
+                                            <!--                                                    th:text="${data.contractQty}"></td>-->
+                                            <!--                                            </tr>-->
 
                                             </tbody>
                                         </table>
@@ -179,9 +184,9 @@
                                         <span class="dataTables_info" role="status" aria-live="polite">
                                             Showing {{currentPage}} to 10 of {{totalElements}} entries
                                         </span>
-                                        <span v-if="selectedElements != 0">
-                                            / selected item(s) {{selectedElements}}
-                                        </span>
+                                        <!--                                        <span v-if="selectedElements != 0">-->
+                                        <!--                                            / selected item(s) {{selectedElements}}-->
+                                        <!--                                        </span>-->
 
                                     </div>
                                 </div>
@@ -194,7 +199,8 @@
 
                                             <li class="paginate_button" v-for="btn in btnList" v-bind:btn_id="btn"
                                                 v-on:click="indexClick">
-                                                <a href="javascript:;" aria-controls="example2" v-bind:btn_id="btn">{{btn}}</a>
+                                                <a href="javascript:;" aria-controls="example2"
+                                                   v-bind:btn_id="btn">{{btn}}</a>
                                             </li>
 
                                             <li class="paginate_button next" id="nextBtn">
