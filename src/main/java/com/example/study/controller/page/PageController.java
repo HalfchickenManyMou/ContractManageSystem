@@ -1,14 +1,10 @@
 package com.example.study.controller.page;
 
-import com.example.study.model.network.response.ContractTypeResponse;
-import com.example.study.service.ContractTypeApiLogicService;
 import com.example.study.service.SideMenuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-
-import java.util.List;
 
 @Controller
 @RequestMapping("/pages")
@@ -49,6 +45,7 @@ public class PageController {
                 ;
     }
 
+<<<<<<< HEAD
     @RequestMapping(path ={"/userAdd"})
     public ModelAndView userAdd(){
         return new ModelAndView("/pages/userAddCopyPage")
@@ -65,4 +62,43 @@ public class PageController {
     public ModelAndView contractUpdate(){
         return new ModelAndView("/pages/contractUpdatePage");
     }
+=======
+
+    @RequestMapping(path = {"/authuser"})
+    public ModelAndView authuserPage() {
+        return new ModelAndView("/pages/authuserPage")
+                .addObject("menuList", sideMenuService.getSideMenu("계약서 권한 관리1"))
+                .addObject("code", "user")
+                ;
+    }
+    @RequestMapping(path = {"/authuser/authuserdetail"})
+    public ModelAndView authuserPageDetail() {
+        return new ModelAndView("/pages/authuserPageDetail")
+                .addObject("menuList", sideMenuService.getSideMenu("계약서 권한 관리2"))
+                .addObject("code", "user")
+                ;
+    }
+
+    @RequestMapping(path = {"/myInfo"})
+    public ModelAndView myInfoPage() {
+        return new ModelAndView("/pages/myInfo")
+                .addObject("menuList", sideMenuService.getSideMenu("내 정보 조회 및 수정"))
+                .addObject("code", "user")
+                ;
+    }
+
+    @RequestMapping(path = {"/userInfo"})
+    public ModelAndView userInfoPage() {
+        return new ModelAndView("/pages/userInfo")
+                .addObject("menuList", sideMenuService.getSideMenu("사용자 정보"))
+                .addObject("code", "user")
+                ;
+    }
+
+
+
+
+
+
+>>>>>>> 1db4c611f3674d06ba7213925fd729f4fdf0275a
 }

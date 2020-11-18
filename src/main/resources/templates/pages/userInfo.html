@@ -1,0 +1,145 @@
+<html lang="ko"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org/">
+<!--      xmlns:th="http://www.thymeleaf.org/" -->
+<!--      xmlns:v-on="http://www.w3.org/1999/xhtml"-->
+<!--      xmlns:v-bind="http://www.w3.org/1999/xhtml">-->
+
+<!-- head Start-->
+<div th:replace="fragment/head :: head"></div>
+<!-- head End-->
+
+
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+
+
+    <!-- HEADER Start -->
+    <div th:replace="fragment/headerTitle :: headerTitle"></div>
+    <!-- HEADER End -->
+
+    <!-- Side Menu Start -->
+    <div th:replace="fragment/sideMenu :: sideMenu(${code},${menuList})"></div>
+    <!-- Side Menu End -->
+
+
+    <!-- Contents-->
+    <div class="content-wrapper">
+        <section class="content-header">
+
+            <h1>
+                사용자 정보 조회/수정
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-dashboard"></i>사용자 정보</a></li>
+                <li class="active">수정</li>
+            </ol>
+        </section>
+
+        <section class="content">
+
+            <div class="row" th:each="data : ${data}">
+                <div class="col-xs-12">
+                    <div class="box box-danger">
+                        <div class="box-header with-border">
+                            <h3 class="box-title"></h3>
+                        </div>
+
+                        <form th:action="@{'/pages/userInfo/' + ${data.useridx}}" method="post">
+                            <div class="box-body">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <label for="ID">사원 번호</label>
+                                        <input type="hidden" name="_method" value="put"/>
+                                        <input id="ID" type="text" class="form-control" th:placeholder="${data.idx}"
+                                               th:value="${data.idx}">
+                                    </div>
+                                    <div class="col-xs-3">
+                                    </div>
+                                    <div class="col-xs-3">
+                                        <label for="Name">이름</label>
+                                        <input id="Name" type="text" class="form-control"
+                                               th:placeholder="${data.useridx}">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <div>
+                                            <label>부서/팀</label>
+                                        </div>
+                                        <select name="부서">
+                                            <option th:value="${data.department_idx}" th:text="${data.department_idx}"
+                                                    selected></option>
+                                            <option value="개발팀">개발팀</option>
+                                            <option value="법무팀">법무팀</option>
+                                        </select>
+
+                                        <select name="팀">
+                                            <option th:value="${data.department_idx}" th:text="${data.department_idx}"
+                                                    selected></option>
+                                            <option value="개발1팀">개발1팀</option>
+                                            <option value="개발2팀">개발2팀</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-xs-3">
+                                    </div>
+                                    <div class="col-xs-3">
+                                        <div>
+                                            <label>직급</label>
+                                        </div>
+                                        <select name="직급">
+                                            <option value="사원">사원</option>
+                                            <option value="대리">대리</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <label for="PhoneNumber">핸드폰 번호</label>
+                                        <input id="PhoneNumber" type="text" class="form-control"
+                                               th:placeholder="${data.department_idx}">
+                                    </div>
+                                    <div class="col-xs-3">
+                                    </div>
+                                    <div class="col-xs-3">
+                                        <label for="Email">E-mail</label>
+                                        <input id="Email" type="text" class="form-control" placeholder="Email">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                </div>
+                            </div>
+                        </form>
+                        <div class="pull-right">
+                            <button type="button" class="btn btn-primary bg-light-blue-gradient pull-right"
+                                    onclick="location.href ='#' ">확인
+                            </button>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+
+</section>
+</div>
+<!-- Content End -->
+
+<!-- Footer Start -->
+<div th:replace="fragment/footer :: footer"></div>
+<!-- Footer End -->
+
+<!-- controlSidebar Start -->
+<!--    <div th:replace="fragment/controlSidebar :: controlSidebar"></div>-->
+<!-- controlSidebar End -->
+
+
+<div class="control-sidebar-bg"></div>
+</div>
+
+
+<script src="/app/userInfo.js"></script>
+</body>
+</html>

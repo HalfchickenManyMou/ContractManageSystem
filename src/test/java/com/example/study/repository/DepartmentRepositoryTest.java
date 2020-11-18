@@ -1,7 +1,12 @@
 package com.example.study.repository;
 
 import com.example.study.model.entity.Department;
+<<<<<<< HEAD
 import com.example.study.model.entity.Team;
+=======
+
+import org.junit.Test;
+>>>>>>> 1db4c611f3674d06ba7213925fd729f4fdf0275a
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
