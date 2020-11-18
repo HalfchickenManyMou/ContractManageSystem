@@ -41,7 +41,7 @@ class UserRepositoryTest {
         Ranks rank = rankRepository.findByIdx(10).orElse(null);
         User user = User.builder()
                 .userCode("test1")
-                .name("test")
+                .name("test2")
                 .email("test@naver.com")
                 .pwd(passwordEncoder.encode("1234"))
                 .phoneNumber("010-1234-1234")

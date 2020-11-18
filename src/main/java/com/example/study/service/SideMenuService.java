@@ -18,7 +18,8 @@ public class SideMenuService {
                 SideMenu.builder().title("관리자").mode("header").build(),
                 SideMenu.builder().title("계약서 타입 관리").url("/pages/contract/contractType").mode("item").build().check(title),
                 SideMenu.builder().title("부서/팀 관리").url("/pages/department").mode("item").build().check(title),
-                SideMenu.builder().title("직위 관리").url("/pages/rank").mode("item").build().check(title)
+                SideMenu.builder().title("직위 관리").url("/pages/rank").mode("item").build().check(title),
+                SideMenu.builder().title("사용자추가/복사").url("/pages/userAdd").mode("item").build().check(title)
                 );
     }
 }

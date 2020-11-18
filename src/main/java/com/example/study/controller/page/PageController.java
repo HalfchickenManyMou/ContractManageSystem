@@ -48,4 +48,16 @@ public class PageController {
                 .addObject("code", "user")
                 ;
     }
+
+    @RequestMapping(path ={"/userAdd"})
+    public ModelAndView userAdd(){
+        return new ModelAndView("/pages/userAddCopyPage")
+                .addObject("menuList",sideMenuService.getSideMenu("사용자추가/복사"))
+                .addObject("code","user")
+                ;
+    }
+    @RequestMapping(path={"/inquire"})
+    public ModelAndView inquire(){
+        return new ModelAndView("pages/inquirePage");
+    }
 }
