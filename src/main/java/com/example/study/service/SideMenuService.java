@@ -23,7 +23,11 @@ public class SideMenuService {
                 SideMenu.builder().title("사용자 추가").url("/pages/user/admin/add").mode("item").build().check(title),
                 SideMenu.builder().title("계약서 종류 관리").url("/pages/contract/contractType").mode("item").build().check(title),
                 SideMenu.builder().title("부서/팀 관리").url("/pages/department").mode("item").build().check(title),
-                SideMenu.builder().title("직위 관리").url("/pages/rank").mode("item").build().check(title)
+                SideMenu.builder().title("직위 관리").url("/pages/rank").mode("item").build().check(title),
+
+                SideMenu.builder().title("TEST").mode("header").build(),
+                SideMenu.builder().title("계약관리").url("/pages/contract").mode("item").build().check(title),
+                SideMenu.builder().title("사용자 관리").url("/pages/user").mode("item").build().check(title)
                 );
     }
 }

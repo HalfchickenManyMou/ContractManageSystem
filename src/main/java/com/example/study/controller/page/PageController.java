@@ -72,4 +72,12 @@ public class PageController {
                 .addObject("code", "user")
                 ;
     }
+
+    @RequestMapping(path = {"/contract"})
+    public ModelAndView contractPage() {
+        return new ModelAndView("/pages/contractPage")
+                .addObject("menuList", sideMenuService.getSideMenu("계약관리"))
+                .addObject("code", "user")
+                ;
+    }
 }
