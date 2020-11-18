@@ -1,0 +1,149 @@
+<html lang="ko"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org/" xmlns:v-on="http://www.w3.org/1999/xhtml"
+      xmlns:v-bind="http://www.w3.org/1999/xhtml">
+
+<!-- head Start-->
+<div th:replace="fragment/head :: head"></div>
+<!-- head End-->
+
+
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+
+
+    <!-- HEADER Start -->
+    <div th:replace="fragment/headerTitle :: headerTitle"></div>
+    <!-- HEADER End -->
+
+    <!-- Side Menu Start -->
+    <div th:replace="fragment/sideMenu :: sideMenu(${code},${menuList})"></div>
+    <!-- Side Menu End -->
+
+
+    <!-- Contents-->
+    <div class="content-wrapper">
+        <section class="content-header">
+            <h1>
+                회원정보
+                <small>내정보 조회</small>
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-dashboard"></i>회원정보</a></li>
+                <li class="active">내 정보 조회</li>
+            </ol>
+        </section>
+
+        <section class="content">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="box">
+                        <div class="box-header">
+                            <h3 class="box-title">내 정보 조회</h3>
+                        </div>
+                        <!-- /.box-header -->
+                        <div class="box-body">
+                            <form id="userInfo">
+                                <div class="col-sm-12">
+                                    <div class="form-group row row-center">
+                                        <div class="col-sm-6">
+                                            <label class="col-sm-3 col-form-label">사원번호</label>
+                                            <div class="col-sm-5">
+                                                <label class="sr-only" for="userCode"></label>
+                                                <span class="form-control text-center" id="userCode">{{info.user_code}}</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <label class="col-sm-3 col-form-label">이메일</label>
+                                            <div class="col-sm-5">
+                                                <label class="sr-only" for="userEmail"></label>
+                                                <span class="form-control text-center" id="userEmail">{{info.email}}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div class="form-group row row-center">
+                                        <div class="col-sm-6">
+                                            <label class="col-sm-3 col-form-label">이름</label>
+                                            <div class="col-sm-5">
+                                                <label class="sr-only" for="userName"></label>
+                                                <span class="form-control text-center" id="userName">{{info.name}}</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <label class="col-sm-3 col-form-label">전화번호</label>
+                                            <div class="col-sm-5">
+                                                <label class="sr-only" for="userPhoneNumber"></label>
+                                                <span class="form-control text-center" id="userPhoneNumber">{{info.phone_number}}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div class="form-group row row-center">
+                                        <div class="col-sm-6">
+                                            <label class="col-sm-3 col-form-label">부서/팀</label>
+                                            <div class="col-sm-4">
+                                                <label class="sr-only" for="department"></label>
+                                                <span class="form-control text-center" id="department">{{info.department.department}}</span>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <label class="sr-only" for="team"></label>
+                                                <span class="form-control text-center" id="team">{{info.team.team}}</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <label class="col-sm-3 col-form-label">직위</label>
+                                            <div class="col-sm-4">
+                                                <label class="sr-only" for="rank"></label>
+                                                <span class="form-control text-center" id="rank">{{info.rank.rank_name}}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div class="form-group row row-center">
+                                        <div class="col-sm-6">
+                                            <label class="col-sm-3 col-form-label">가입일</label>
+                                            <div class="col-sm-5">
+                                                <label class="sr-only" for="registerDate"></label>
+                                                <span class="form-control text-center" id="registerDate">{{info.register_date}}</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <label class="col-sm-3 col-form-label">최근 업데이트일</label>
+                                            <div class="col-sm-5">
+                                                <label class="sr-only" for="updateDate"></label>
+                                                <span class="form-control text-center" id="updateDate">{{info.update_date}}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="box-footer">
+                            <div class="box-tools" style="text-align:center;">
+                                <button id="modifyBtn" type="button" class="btn btn-primary">수정</button>
+                                <button id="deleteBtn" type="button" class="btn btn-danger">탈퇴</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <!-- Content End -->
+
+    <!-- Footer Start -->
+    <div th:replace="fragment/footer :: footer"></div>
+    <!-- Footer End -->
+
+    <!-- controlSidebar Start -->
+    <div th:replace="fragment/controlSidebar :: controlSidebar"></div>
+    <!-- controlSidebar End -->
+
+    <div class="control-sidebar-bg"></div>
+
+</div>
+
+<script src="/app/userInfoPage.js"></script>
+</body>
+</html>

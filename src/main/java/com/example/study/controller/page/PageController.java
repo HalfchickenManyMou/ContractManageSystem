@@ -25,6 +25,30 @@ public class PageController {
                 ;
     }
 
+    @RequestMapping(path = {"/user/myInfo"})
+    public ModelAndView userInfoPage() {
+        return new ModelAndView("/pages/userInfoPage")
+                .addObject("menuList", sideMenuService.getSideMenu("내 정보 조회"))
+                .addObject("code", "user")
+                ;
+    }
+
+    @RequestMapping(path = {"/user/myInfo/edit"})
+    public ModelAndView userInfoEditPage() {
+        return new ModelAndView("/pages/userInfoEditPage")
+                .addObject("menuList", sideMenuService.getSideMenu("내 정보 수정"))
+                .addObject("code", "user")
+                ;
+    }
+
+    @RequestMapping(path = {"/user/admin/add"})
+    public ModelAndView userAddCopyPage() {
+        return new ModelAndView("/pages/userAddCopyPage")
+                .addObject("menuList", sideMenuService.getSideMenu("사용자 추가"))
+                .addObject("code", "user")
+                ;
+    }
+
     @RequestMapping(path = {"/contract/contractType"})
     public ModelAndView contractTypePage(){
         return new ModelAndView("/pages/contractTypePage")

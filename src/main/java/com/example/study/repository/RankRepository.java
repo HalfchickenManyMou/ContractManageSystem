@@ -8,4 +8,5 @@ import java.util.Optional;
 
 public interface RankRepository extends JpaRepository<Ranks, Long> {
     Optional<Ranks> findByIdx(long idx);
+    void deleteByIdx(Long idx);
 }

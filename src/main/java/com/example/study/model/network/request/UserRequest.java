@@ -16,10 +16,8 @@ import java.time.LocalDateTime;
 @Builder
 public class UserRequest {
     private String userCode;
-
     private String name;
     private String email;
-    private String pwd;
     private String phoneNumber;
     private Department department;
     private Team team;

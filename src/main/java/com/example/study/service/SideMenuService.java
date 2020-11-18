@@ -15,8 +15,13 @@ public class SideMenuService {
                 SideMenu.builder().title("HOME").mode("header").build(),
                 SideMenu.builder().title("대시보드").url("/pages/dashboard").mode("item").build().check(title),
 
+                SideMenu.builder().title("회원정보").mode("header").build(),
+                SideMenu.builder().title("내 정보 조회").url("/pages/user/myInfo").mode("item").build().check(title),
+                SideMenu.builder().title("내 정보 수정").url("/pages/user/myInfo/edit").mode("item").build().check(title),
+
                 SideMenu.builder().title("관리자").mode("header").build(),
-                SideMenu.builder().title("계약서 타입 관리").url("/pages/contract/contractType").mode("item").build().check(title),
+                SideMenu.builder().title("사용자 추가").url("/pages/user/admin/add").mode("item").build().check(title),
+                SideMenu.builder().title("계약서 종류 관리").url("/pages/contract/contractType").mode("item").build().check(title),
                 SideMenu.builder().title("부서/팀 관리").url("/pages/department").mode("item").build().check(title),
                 SideMenu.builder().title("직위 관리").url("/pages/rank").mode("item").build().check(title)
                 );

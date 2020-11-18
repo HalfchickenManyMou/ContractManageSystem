@@ -44,9 +44,9 @@ public class ContractTypeApiController implements CrudInterface<ContractTypeRequ
         return contractTypeApiLogicService.delete(idx);
     }
 
-    @PostMapping("/contractType/all")
-    public Header<List<ContractType>> allDeleteAndCreate(@RequestBody Header<List<ContractType>> request) {
-        return contractTypeApiLogicService.allDeleteAndCreate(request);
+    @PostMapping("/contractType/bulkCreate")
+    public Header<List<ContractType>> bulkCreate(@RequestBody Header<List<ContractType>> request) {
+        return contractTypeApiLogicService.bulkCreate(request);
     }
 
     @GetMapping("/contractType")

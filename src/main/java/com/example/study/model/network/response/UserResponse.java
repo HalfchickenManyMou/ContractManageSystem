@@ -23,8 +23,8 @@ public class UserResponse {
     private Team team;
     private Ranks rank;
     private String phoneNumber;
-    private LocalDateTime registerDate;
+    private String registerDate;
     private String registerUser;
-    private LocalDateTime updateDate;
+    private String updateDate;
     private String updateUser;
 }

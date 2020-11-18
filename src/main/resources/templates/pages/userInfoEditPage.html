@@ -1,0 +1,161 @@
+<html lang="ko"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org/" xmlns:v-on="http://www.w3.org/1999/xhtml"
+      xmlns:v-bind="http://www.w3.org/1999/xhtml">
+
+<!-- head Start-->
+<div th:replace="fragment/head :: head"></div>
+<!-- head End-->
+
+
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+
+
+    <!-- HEADER Start -->
+    <div th:replace="fragment/headerTitle :: headerTitle"></div>
+    <!-- HEADER End -->
+
+    <!-- Side Menu Start -->
+    <div th:replace="fragment/sideMenu :: sideMenu(${code},${menuList})"></div>
+    <!-- Side Menu End -->
+
+
+    <!-- Contents-->
+    <div class="content-wrapper">
+        <section class="content-header">
+            <h1>
+                회원정보
+                <small>내 정보 수정</small>
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-dashboard"></i>회원정보</a></li>
+                <li class="active">내 정보 수정</li>
+            </ol>
+        </section>
+
+        <section class="content">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="box">
+                        <div class="box-header">
+                            <h3 class="box-title">내 정보 수정</h3>
+                            <div class="box-tools pull-right">
+                                <button id="editPasswordBtn" type="button" class="btn btn-primary btn-sm">비밀번호 변경</button>
+                            </div>
+                        </div>
+                        <!-- /.box-header -->
+                        <div class="box-body">
+                            <form id="editUserInfo">
+                                <div class="col-sm-12">
+                                    <div class="form-group row row-center">
+                                        <div class="col-sm-6">
+                                            <label class="col-sm-3 col-form-label">사원번호</label>
+                                            <div class="col-sm-5">
+                                                <label class="sr-only" for="editUserCode"></label>
+                                                <input disabled type="text" class="form-control text-center" id="editUserCode" v-model="user.user_code">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <label class="col-sm-3 col-form-label">이메일</label>
+                                            <div class="col-sm-5">
+                                                <label class="sr-only" for="editUserEmail"></label>
+                                                <input type="text" class="form-control text-center" id="editUserEmail" v-model="user.email">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div class="form-group row row-center">
+                                        <div class="col-sm-6">
+                                            <label class="col-sm-3 col-form-label">이름</label>
+                                            <div class="col-sm-5">
+                                                <label class="sr-only" for="editUserName"></label>
+                                                <input type="text" class="form-control text-center" id="editUserName" v-model="user.name">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <label class="col-sm-3 col-form-label">전화번호</label>
+                                            <div class="col-sm-5">
+                                                <label class="sr-only" for="editUserPhoneNumber"></label>
+                                                <input type="text" class="form-control text-center" id="editUserPhoneNumber" v-model="user.phone_number">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div class="form-group row row-center">
+                                        <div class="col-sm-6">
+                                            <label class="col-sm-3 col-form-label">부서/팀</label>
+                                            <div class="col-sm-4">
+                                                <label class="sr-only" for="department"></label>
+                                                <select id="department" class="form-control" v-model="selectedDepartment.department" v-on:change="departmentHandle" style="text-align-last: center">
+                                                    <option v-for="department in departmentCategory">{{department.department}}</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <label class="sr-only" for="team"></label>
+                                                <select id="team" class="form-control" v-model="selectedTeam.team" v-on:change="teamHandle" style="text-align-last: center">
+                                                    <option v-for="team in selectedDepartment.team_list">{{team.team}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <label class="col-sm-3 col-form-label">직위</label>
+                                            <div class="col-sm-4">
+                                                <label class="sr-only" for="rank"></label>
+                                                <select id="rank" class="form-control" v-model="selectedRank.rank_name" v-on:change="rankHandle" style="text-align-last: center">
+                                                    <option v-for="rank in rankCategory">{{rank.rank_name}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div class="form-group row row-center">
+                                        <div class="col-sm-6">
+                                            <label class="col-sm-3 col-form-label">가입일</label>
+                                            <div class="col-sm-5">
+                                                <label class="sr-only" for="registerDate"></label>
+                                                <input disabled type="text" class="form-control text-center" id="registerDate" v-model="user.register_date">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <label class="col-sm-3 col-form-label">최근 업데이트일</label>
+                                            <div class="col-sm-5">
+                                                <label class="sr-only" for="updateDate"></label>
+                                                <input disabled type="text" class="form-control text-center" id="updateDate" v-model="user.update_date">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="box-footer">
+                            <div class="box-tools" style="text-align:center;">
+                                <button id="updateBtn" type="button" class="btn btn-primary">확인</button>
+                                <button id="cancelBtn" type="button" class="btn btn-primary">취소</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <!-- Content End -->
+
+    <!-- Footer Start -->
+    <div th:replace="fragment/footer :: footer"></div>
+    <!-- Footer End -->
+
+    <!-- controlSidebar Start -->
+    <div th:replace="fragment/controlSidebar :: controlSidebar"></div>
+    <!-- controlSidebar End -->
+
+    <div class="control-sidebar-bg"></div>
+
+    <!--Modal Start-->
+    <div th:replace="fragment/userPasswordEditModal :: userPasswordEditModal"></div>
+    <!--Modal End-->
+</div>
+
+<script src="/app/userInfoEditPage.js"></script>
+</body>
+</html>

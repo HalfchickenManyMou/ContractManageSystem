@@ -1,8 +1,8 @@
 (function ($) {
 
     $(document).ready(function () {
-        deleteLine();
         getData();
+        deleteNewLine();
     });
 
     let contractTypeList = new Vue({
@@ -11,8 +11,17 @@
             list : [],
         },methods:{
             deleteLine: function (event) {
-                let target = event.target.parentNode.parentNode
-                target.remove();
+                let target = event.target.parentNode.parentNode.firstChild;
+                let idx = target.innerHTML;
+                if(confirm("삭제하시겠습니까?")) {
+                    $.ajax({
+                        type: 'DELETE',
+                        url: '/api/contractType/' + idx,
+                        success: function(data) { window.location.assign("/pages/contract/contractType") },
+                        contentType: "application/json",
+                        dataType: 'json'
+                    });
+                }
             }
         }
     });
@@ -24,8 +33,8 @@
         })
     }
 
-    //계약서 타입 삭제
-    function deleteLine() {
+    //행 삭제
+    function deleteNewLine() {
         $('button[name="deleteBtn"]').on("click", function (e) {
             let tr = $(this).parent().parent();
             tr.remove();
@@ -35,13 +44,14 @@
     //계약서 타입 추가
     $("#addBtn").on("click", function (e) {
         let tbody = $("#contractTypeList");
-        td = $('<tr role="row" class="odd">' +
+        let td = $('<tr role="row" class="odd">' +
+            '<td hidden></td>'+
             '<td class="text-center"></td>' +
             '<td name = "type" class="text-center"><input type="text" style="width: auto; text-align: center;"></td>' +
             '<td class="text-center"><button name = "deleteBtn" type="button" class="btn btn-danger btn-xs">삭제</button></td>' +
             '</tr>');
         tbody.append(td);
-        deleteLine();
+        deleteNewLine();
     });
 
     $("#saveBtn").on("click", function (e) {
@@ -49,17 +59,19 @@
         let postBody = [];
         let type;
         for(let i =0; i<typeTd.length; i++){
-            if(typeTd[i].childNodes[0].type === undefined ) type = typeTd[i].childNodes[0].nodeValue;
-            else type = typeTd[i].childNodes[0].value;
+            // console.log(typeTd[i].childNodes[0].value)
+            type = typeTd[i].childNodes[0].value;
             postBody[i] = {
                 type : type
             }
         }
 
+        console.log(postBody);
+
         if(confirm("수정하시겠습니까?")) {
             $.ajax({
                 type: 'POST',
-                url: '/api/contractType/all',
+                url: '/api/contractType/bulkCreate',
                 data: JSON.stringify({'data':postBody}),
                 success: function(data) { window.location.assign("/pages/contract/contractType") },
                 contentType: "application/json",

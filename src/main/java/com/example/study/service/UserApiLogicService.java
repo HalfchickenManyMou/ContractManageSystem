@@ -12,9 +12,13 @@ import com.example.study.model.network.request.UserPasswordRequest;
 import com.example.study.model.network.request.UserRequest;
 import com.example.study.model.network.response.UserResponse;
 import com.example.study.repository.UserRepository;
+import lombok.ToString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
 @Service
@@ -42,7 +46,7 @@ public class UserApiLogicService implements CrudInterface<UserRequest, UserRespo
                 .userCode(userRequest.getUserCode())
                 .name(userRequest.getName())
                 .email(userRequest.getEmail())
-                .pwd(passwordEncoder.encode(userRequest.getPwd()))
+                .pwd(passwordEncoder.encode(userRequest.getEmail()))
                 .phoneNumber(userRequest.getPhoneNumber())
                 .department(userRequest.getDepartment())
                 .team(userRequest.getTeam())
@@ -119,6 +123,10 @@ public class UserApiLogicService implements CrudInterface<UserRequest, UserRespo
         .orElseThrow(DataNotFoundException::new);
     }
     private UserResponse response(User user) {
+        //LocalDateTime 형식 바꾸기
+        String registerDate = user.getRegisterDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+        String updateDate = user.getUpdateDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+
         UserResponse body = UserResponse.builder()
                 .userCode(user.getUserCode())
                 .name(user.getName())
@@ -127,9 +135,9 @@ public class UserApiLogicService implements CrudInterface<UserRequest, UserRespo
                 .department(user.getDepartment())
                 .team(user.getTeam())
                 .rank(user.getRank())
-                .registerDate(user.getRegisterDate())
+                .registerDate(registerDate)
                 .registerUser(user.getRegisterUser())
-                .updateDate(user.getUpdateDate())
+                .updateDate(updateDate)
                 .updateUser(user.getUpdateUser())
                 .build();
         return body;

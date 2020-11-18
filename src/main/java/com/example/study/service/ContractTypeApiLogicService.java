@@ -81,9 +81,7 @@ public class ContractTypeApiLogicService implements CrudInterface<ContractTypeRe
                 .orElseGet(()-> Header.ERROR("데이터 없음"));
     }
 
-    @Transactional
-    public Header<List<ContractType>> allDeleteAndCreate(Header<List<ContractType>> request) {
-        contractTypeRepository.deleteAll();
+    public Header<List<ContractType>> bulkCreate(Header<List<ContractType>> request) {
         return Optional.ofNullable(request.getData())
                 .map(typeList -> contractTypeRepository.saveAll(typeList))
                 .map(Header::OK)

@@ -15,6 +15,7 @@
             }
         }, methods:{
             closeHandler : function () {
+
                 $('#departmentDetailModal').modal("hide");
                 this.modalReset();
             },

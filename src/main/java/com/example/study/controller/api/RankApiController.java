@@ -16,9 +16,9 @@ public class RankApiController{
     @Autowired
     RankApiLogicService rankApiLogicService;
 
-    @PostMapping("/rank/all")
-    public Header<List<Ranks>> allDeleteAndCreate(@RequestBody Header<List<Ranks>> request) {
-        return rankApiLogicService.allDeleteAndCreate(request);
+    @PostMapping("/rank/bulkCreate")
+    public Header<List<Ranks>> bulkCreate(@RequestBody Header<List<Ranks>> request) {
+        return rankApiLogicService.bulkCreate(request);
     }
 
     @GetMapping("/rank")
@@ -26,4 +26,9 @@ public class RankApiController{
         return rankApiLogicService.readAll();
     }
 
+
+    @DeleteMapping("/rank/{idx}")
+    public Header delete(@PathVariable Long idx) {
+        return rankApiLogicService.delete(idx);
+    }
 }

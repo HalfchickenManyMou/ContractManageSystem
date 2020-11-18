@@ -1,8 +1,8 @@
 (function ($) {
 
     $(document).ready(function () {
-        deleteLine();
         getData();
+        deleteNewLine();
     });
 
     let rankList = new Vue({
@@ -11,8 +11,17 @@
             list : [],
         },methods:{
             deleteLine: function (event) {
-                let target = event.target.parentNode.parentNode
-                target.remove();
+                let target = event.target.parentNode.parentNode.firstChild;
+                let idx = target.innerHTML;
+                if(confirm("삭제하시겠습니까?")) {
+                    $.ajax({
+                        type: 'DELETE',
+                        url: '/api/rank/' + idx,
+                        success: function(data) { window.location.assign("/pages/rank") },
+                        contentType: "application/json",
+                        dataType: 'json'
+                    });
+                }
             }
         }
     });
@@ -25,7 +34,7 @@
     }
 
     //계약서 타입 삭제
-    function deleteLine() {
+    function deleteNewLine() {
         $('button[name="deleteBtn"]').on("click", function (e) {
             let tr = $(this).parent().parent();
             tr.remove();
@@ -41,25 +50,26 @@
             '<td class="text-center"><button name = "deleteBtn" type="button" class="btn btn-danger btn-xs">삭제</button></td>' +
             '</tr>');
         tbody.append(td);
-        deleteLine();
+        deleteNewLine();
     });
 
     $("#saveBtn").on("click", function (e) {
-        let typeTd = $('td[name="rank"]');
+        let rankTd = $('td[name="rank"]');
         let postBody = [];
-        let rank;
-        for(let i =0; i<typeTd.length; i++){
-            if(typeTd[i].childNodes[0].type === undefined ) rank = typeTd[i].childNodes[0].nodeValue;
-            else rank = typeTd[i].childNodes[0].value;
+        let name;
+        for(let i =0; i<rankTd.length; i++){
+            name = rankTd[i].childNodes[0].value;
             postBody[i] = {
-                rank_name : rank
+                rank_name : name
             }
         }
+
+        //console.log(postBody);
 
         if(confirm("수정하시겠습니까?")) {
             $.ajax({
                 type: 'POST',
-                url: '/api/rank/all',
+                url: '/api/rank/bulkCreate',
                 data: JSON.stringify({'data':postBody}),
                 success: function(data) { window.location.assign("/pages/rank") },
                 contentType: "application/json",

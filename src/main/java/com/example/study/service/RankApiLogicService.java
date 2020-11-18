@@ -18,9 +18,7 @@ public class RankApiLogicService{
     @Autowired
     RankRepository rankRepository;
 
-    @Transactional
-    public Header<List<Ranks>> allDeleteAndCreate(Header<List<Ranks>> request) {
-        rankRepository.deleteAll();
+    public Header<List<Ranks>> bulkCreate(Header<List<Ranks>> request) {
         return Optional.ofNullable(request.getData())
                 .map(rankList -> rankRepository.saveAll(rankList))
                 .map(Header::OK)
@@ -34,6 +32,16 @@ public class RankApiLogicService{
                 .collect(Collectors.toList());
 
         return Header.OK(responsesList);
+    }
+
+    @Transactional
+    public Header delete(Long idx) {
+        return rankRepository.findByIdx(idx)
+                .map(deleted -> {
+                    rankRepository.deleteByIdx(idx);
+                    return Header.OK();
+                })
+                .orElseGet(()-> Header.ERROR("데이터 없음"));
     }
 
     public RankResponse response(Ranks ranks){
