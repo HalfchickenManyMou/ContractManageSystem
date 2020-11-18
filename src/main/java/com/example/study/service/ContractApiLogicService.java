@@ -1,6 +1,7 @@
 package com.example.study.service;
 
 
+import com.example.study.config.ContractSpec;
 import com.example.study.ifs.CrudInterface;
 import com.example.study.model.entity.Contract;
 import com.example.study.model.network.Header;
@@ -84,10 +85,24 @@ public class ContractApiLogicService implements CrudInterface<ContractRequest, C
                 .orElseGet(()-> Header.ERROR("데이터 없음"));
     }
 
-    public Header<List<ContractResponse>> readAll( Pageable pageable ) {
+    public Header<List<ContractResponse>> readAll( Pageable pageable, ContractRequest request ) {
 
+        System.out.println("request readAll : "+request);
 
-        Page<Contract> contracts = ContractRepository.findAll( pageable );
+        Page<Contract> contracts = ContractRepository.findAll(
+                ContractSpec.idx( request.getIdx() ).and(
+                        ContractSpec.contractName(request.getName())).and(
+                        ContractSpec.register_user(request.getRegisterUser())).and(
+                        ContractSpec.owner_name(request.getOwnerName())).and(
+                        ContractSpec.owner_business_number( request.getOwnerBusinessNumber())).and(
+                        ContractSpec.owner_address( request.getOwnerAddress())).and(
+                        ContractSpec.ohter_name( request.getOtherName() )).and(
+                        ContractSpec.other_business_number( request.getOtherBusinessNumber())).and(
+                        ContractSpec.other_address( request.getOtherAddress())).and(
+                        ContractSpec.start_date( request.getStartDate())).and(
+                        ContractSpec.end_date( request.getEndDate()))
+
+                , pageable );
 
         List<ContractResponse> responsesList = contracts.stream()
                 .map(r -> response(r))
@@ -113,7 +128,8 @@ public class ContractApiLogicService implements CrudInterface<ContractRequest, C
                             .map(
                                 updated -> {
                                     LocalDate date = LocalDate.now();
-                                    return updated.setIdx( body.getIdx() )
+                                    return updated
+                                            .setIdx( body.getIdx() )
                                             .setCode( body.getCode() )
                                             .setName( body.getName() )
                                             .setContractTypeIdx( body.getContractTypeIdx() )
@@ -154,6 +170,7 @@ public class ContractApiLogicService implements CrudInterface<ContractRequest, C
         return ContractResponse.builder()
                 .idx( contract.getIdx() )
                 .code( contract.getCode() )
+                .name( contract.getName() )
                 .contractTypeIdx( contract.getContractTypeIdx() )
                 .userCode( contract.getUserCode() )
                 .departmentIdx( contract.getDepartmentIdx() )

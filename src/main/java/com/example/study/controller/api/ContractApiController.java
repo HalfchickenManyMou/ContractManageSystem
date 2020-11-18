@@ -46,8 +46,9 @@ public class ContractApiController implements CrudInterface<ContractRequest, Con
     }
 
     @GetMapping("/contract")
-    public Header<List<ContractResponse>> readAll(@PageableDefault(sort = { "idx" }, direction = Sort.Direction.ASC) Pageable pageable ) {
-        return contractApiLogicService.readAll( pageable );
+    @ResponseBody
+    public Header<List<ContractResponse>> readAll(@PageableDefault(sort = { "idx" }, direction = Sort.Direction.ASC) Pageable pageable, ContractRequest request ) {
+        return contractApiLogicService.readAll( pageable , request );
     }
 
 

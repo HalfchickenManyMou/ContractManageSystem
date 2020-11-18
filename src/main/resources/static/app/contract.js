@@ -27,13 +27,41 @@
         });
 
         // 등록일 datepicker 처리
-        $('#createDate').datepicker({
+        $('#start_date').datepicker({
             format: "yyyy-mm-dd",	//데이터 포맷 형식(yyyy : 년 mm : 월 dd : 일 )
             autoclose : true,	//사용자가 날짜를 클릭하면 자동 캘린더가 닫히는 옵션
             startDate: '-10d',	//달력에서 선택 할 수 있는 가장 빠른 날짜. 이전으로는 선택 불가능 ( d : 일 m : 달 y : 년 w : 주)
             language : "ko"	//달력의 언어 선택, 그에 맞는 js로 교체해줘야한다.
         }).on('changeDate', function (event) {
             conditions.setCreateDate( dateString(event.date) )
+        });
+        // 등록일 datepicker 처리
+        $('#start_date_to').datepicker({
+            format: "yyyy-mm-dd",	//데이터 포맷 형식(yyyy : 년 mm : 월 dd : 일 )
+            autoclose : true,	//사용자가 날짜를 클릭하면 자동 캘린더가 닫히는 옵션
+            startDate: '-10d',	//달력에서 선택 할 수 있는 가장 빠른 날짜. 이전으로는 선택 불가능 ( d : 일 m : 달 y : 년 w : 주)
+            language : "ko"	//달력의 언어 선택, 그에 맞는 js로 교체해줘야한다.
+        }).on('changeDate', function (event) {
+            conditions.setCreateDateto( dateString(event.date) )
+        });
+
+        // 등록일 datepicker 처리
+        $('#end_date').datepicker({
+            format: "yyyy-mm-dd",	//데이터 포맷 형식(yyyy : 년 mm : 월 dd : 일 )
+            autoclose : true,	//사용자가 날짜를 클릭하면 자동 캘린더가 닫히는 옵션
+            startDate: '-10d',	//달력에서 선택 할 수 있는 가장 빠른 날짜. 이전으로는 선택 불가능 ( d : 일 m : 달 y : 년 w : 주)
+            language : "ko"	//달력의 언어 선택, 그에 맞는 js로 교체해줘야한다.
+        }).on('changeDate', function (event) {
+            conditions.setEndDate( dateString(event.date) )
+        });
+        // 등록일 datepicker 처리
+        $('#end_date_to').datepicker({
+            format: "yyyy-mm-dd",	//데이터 포맷 형식(yyyy : 년 mm : 월 dd : 일 )
+            autoclose : true,	//사용자가 날짜를 클릭하면 자동 캘린더가 닫히는 옵션
+            startDate: '-10d',	//달력에서 선택 할 수 있는 가장 빠른 날짜. 이전으로는 선택 불가능 ( d : 일 m : 달 y : 년 w : 주)
+            language : "ko"	//달력의 언어 선택, 그에 맞는 js로 교체해줘야한다.
+        }).on('changeDate', function (event) {
+            conditions.setEndDateTo( dateString(event.date) )
         });
 
     });
@@ -47,7 +75,15 @@
 
     // 데이터 받아오기
     function search(index,conditions) {
-        $.get(["/api/contract?page="+index,conditions].join('&'), function (response) {
+        let URL = "/api/contract"
+
+        if( index!=null) URL = URL.concat( "?page="+index );
+
+        if( conditions!=null) URL = URL.concat( conditions );
+
+        console.log("URL : ", URL );
+
+        $.get( URL, function (response) {
             /* 데이터 셋팅 */
             // 페이징 처리 데이터
             indexBtn = [];
@@ -100,38 +136,49 @@
     let conditions = new Vue({
         el : '#queryConditions',
         data : {
-            idx             :   "",
-            idx             :   "",
-            idx             :   "",
-            idx             :   "",
-            idx             :   "",
-            idx             :   "",
-            idx             :   "",
-            idx             :   "",
-            idx             :   "",
-            idx             :   "",
-            idx             :   "",
+            item : {
+                code                   :   "",
+                name                   :   "",
+                registerUser           :   "",
+                contractTypeIdx        :   "",
 
+                ownerName              :   "",
+                ownerBusinessNumber    :   "",
+                ownerAddress           :   "",
 
+                otherName              :   "",
+                otherBusinessNumber    :   "",
+                otherAddress           :   "",
 
-            selectcontract  :   [],
+                startDate              :   "",
+                startDateTo            :   "",
+
+                endDate                :   "",
+                endDateTo              :   "",
+            }
 
         },methods: {
-            searchcontracts : function () {
-                search(0, this.getParameter() );
-
-                contractList.amountSelect       = 0;
-                contractList.selectedcontractList   = {};
-
+            searchContract  : function () {
+                search(0,
+                Object.entries( this.item ).filter( item=>item[1]!='').reduce( (acc,cur)=> { return acc.concat('&',cur.join('=') );} ,"" )
+                );
             },
-            createcontract  : function () {
-                location.href = "/pages/contract/enroll"
+            createContract  : function () {
+                contractModal.modalMode = 0;
+                contractModal.item      = {};
+                $('#contractModal').modal();
             },
             setCreateDate:function ( date ) {
-                this.createDate = date;
+                this.startDate = date;
             },
-            setExpireDate:function ( date ) {
-                this.expireDate = date;
+            setCreateDateTo:function ( date ) {
+                this.startDateTo = date;
+            },
+            setEndDate:function ( date ) {
+                this.endDate = date;
+            },
+            setEndDateTo:function ( date ) {
+                this.endDateTo = date;
             },
         }
     });
@@ -163,50 +210,9 @@
             selectedontractList : {},
             amountSelect     : 0    // 현재 page에서 보여지는 값들중 선택된 값의 수
         },methods:{
-            handlerCheckBox: function(event){
-                event.stopImmediatePropagation();
-
-                let seletedcontract = this.contractList[ parseInt( event.target.getAttribute("index") ) ];
-
-                if(event.target.checked){
-                    Object.defineProperty( this.selectedcontractList, seletedcontract.id, { value: seletedcontract, configurable:true, enumerable:true } );
-                    this.amountSelect += 1;
-                }else{
-                    delete this.selectedcontractList[seletedcontract.id];
-                    this.amountSelect -= 1;
-                }
-
-                showPage.selectedElements = Object.entries( this.selectedcontractList ).length
-
-                $('#selectAll input').prop('checked',(this.amountSelect==10)? true : false );
-            },
-            denoteCheckBox: function( ){
-                let contracts = $("#contracts_table").find( "td input:checkbox" ).toArray()
-                    .filter(element=>( this.selectedcontractList.hasOwnProperty( element.getAttribute("contractId"))) )
-                    .map( (element)=>{
-                        element.checked = true;
-                    })
-
-                this.amountSelect = contracts.length;
-
-                $('#selectAll input').prop('checked',(contracts.length==10)? true : false );
-
-            },
-            disableAllCheckBox: function( ){
-                $("#contracts_table").find( "td input:checkbox" ).prop('checked',false );
-            },
-            setcontractList: function( contractList ){
-                this.disableAllCheckBox( );
-                this.contractList = contractList;
-                setTimeout( ()=>{
-                    this.denoteCheckBox( )
-                },50);
-            },
-            contractRowHandler : function( event, contract ){
-                contractModal.pageMode              = 1;
-                contractModal.selectedcontract      = $.extend(true, {}, contract );
-                contractModal.modalSelectcontract   = conditions.selectcontract;
-                contractModal.modalSelectRental     = conditions.selectRental;
+            updateHandler : function( event, contract ){
+                contractModal.modalMode             = 1;
+                contractModal.item                  = $.extend(true, {}, contract );
 
                 $('#contractModal').modal().off()
             },
@@ -246,89 +252,141 @@
 
 
     let contractModal = new Vue({
-        el: '#contractModalForm',
+        el: '#contractModal',
         data: {
-            pageMode            : 0,    // modal type 지정  0:create / 1:update
-            selectedContract    : {},
+            modalMode   : 0,    // modal type 지정  0:create / 1:update
+            item        : {},
 
         },methods: {
-            initCategory: function( ){
-                this.selectCate01  = Object.keys( this.categories );
-                this.selectCate02  = Object.keys( this.categories[this.selectedcontract.superCate] )
-                this.selectCate03  = this.categories[this.selectedcontract.superCate][this.selectedcontract.subCateFirst];
+            saveHandler: function ( event ){
+                let postBody = Object.entries( this.item ).filter( item=>item[1]!='')
+                    .reduce( (acc,cur)=> { acc[cur[0]] = cur[1]; return acc; } ,{ } )
 
-                this.isChange  =  false;
+                console.log("call saveHandler!!")
+                console.log("call postBody!!",postBody)
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/api/contract',
+                    data: JSON.stringify({'data':postBody}), // or JSON.stringify ({name: 'jonas'}),
+                    success: function(data) {
+
+                        contractModal.initHandler();
+
+                        search(0);
+
+                        alert("create done");
+
+                        $('#contractModal').modal("hide");
+                    },
+                    contentType: "application/json",
+                    dataType: 'json'
+                });
+
+
+
             },
-            handleCate01: function () {
-                if( this.categories.hasOwnProperty( this.selectedcontract.superCate) ) {
-                    this.selectCate02 = Object.keys(this.categories[this.selectedcontract.superCate]);
-                    this.selectedcontract.subCateFirst = ""
-                    this.selectedcontract.subCateSecond = ""
-                }
-            },
-            handleCate02: function () {
-                if (this.categories[this.selectedcontract.superCate].hasOwnProperty(this.selectedcontract.subCateFirst)) {
-                    this.selectCate03 = this.categories[this.selectedcontract.superCate][this.selectedcontract.subCateFirst];
-                    this.selectedcontract.subCateSecond = ""
-                }
-            },
-            updatecontract  : function ( updateUser ) {
-                Object.entries(this._data.selectedcontract).map((t)=>{console.log("T : ",t)});
-
-                console.log( "validation : "+this.validation() )
-
-                let postBody = Object.entries(this._data.selectedcontract)
-                    .filter( (v)=>( (v[1]!=null)&&(v[1].constructor!=Object)&&(v[1].constructor!=Array) ))
-                    .reduce( (acc,cur)=>{ acc[cur[0]] = cur[1]; return acc;  }, {} );
-
-                Object.defineProperty(postBody, 'updateUser', { value : updateUser})
+            updateHandler: function ( event ){
+                let postBody = Object.entries( this.item ).filter( item=>item[1]!='')
+                    .reduce( (acc,cur)=> { acc[cur[0]] = cur[1]; return acc; } ,{ } )
 
                 $.ajax({
                     type: 'PUT',
                     url: '/api/contract',
                     data: JSON.stringify({'data':postBody}), // or JSON.stringify ({name: 'jonas'}),
-                    success: function(data) { alert('data: ' + data); },function(response){
-                        console.log( "response : ",response)
+                    success: function(data) {
+
+                        contractModal.initHandler();
+
+                        search(0);
+
+                        alert("update done");
+
+                        $('#contractModal').modal("hide");
                     },
                     contentType: "application/json",
                     dataType: 'json'
                 });
+
+
+
+            },
+            deleteHandler: function ( idx ){
+
+                $.ajax({
+                    type: 'DELETE',
+                    url: '/api/contract/'+idx,
+                    success: function(data) {
+
+                        contractModal.initHandler();
+
+                        search(0);
+
+                        alert("delete done");
+
+                        $('#contractModal').modal("hide");
+                    },
+                    contentType: "application/json",
+                    dataType: 'json'
+                });
+
+
+
+            },
+            setStartDate:function ( date ) {
+                this.item.start_date = date;
+            },
+            initHandler:function ( date ) {
+                this.item = {
+                    code                   :   "",
+                    name                   :   "",
+                    register_user           :   "",
+                    contract_type_idx        :   "",
+
+                    owner_name              :   "",
+                    owner_business_number    :   "",
+                    owner_address           :   "",
+
+                    other_name              :   "",
+                    other_business_number    :   "",
+                    other_address           :   "",
+
+                    start_date              :   "",
+                    start_date_to            :   "",
+
+                    end_date                :   "",
+                    end_date_to              :   "",
+                }
+            },
+            setEndDate:function ( date ) {
+                this.item.end_date = date;
             },
             closeHandler: function ( event ){
-                if( !this.validation() ){
-                    console.log( "not changed ")
-                    $('#contractModal').modal("hide");
-                }else{
-                    console.log( "changed ");
-
-                }
-
-
-            },validation: function(){
-                let originData = contractList.contractList.filter((contract)=>(contract.id==contractModal.selectedcontract.id))[0];
-                return Object.entries( contractModal.selectedcontract ).reduce( ( acc, cur )=>{ return acc || (originData[cur[0]]!=cur[1]) }, false )
+                this.item = {};
+                $('#contractModal').modal("hide");
             }
         },mounted: function( ) {
-            // 등록일 datepicker 처리
-            $('#modalRegisterDate').datepicker({
-                format: "yyyy-mm-dd",	//데이터 포맷 형식(yyyy : 년 mm : 월 dd : 일 )
-                autoclose : true,	//사용자가 날짜를 클릭하면 자동 캘린더가 닫히는 옵션
-                startDate: '-10d',	//달력에서 선택 할 수 있는 가장 빠른 날짜. 이전으로는 선택 불가능 ( d : 일 m : 달 y : 년 w : 주)
-                language : "ko"	//달력의 언어 선택, 그에 맞는 js로 교체해줘야한다.
-            }).on('changeDate', function (event) {
-                console.log("changeDate : ")
-                contractModal.selectedcontract.createDate = dateString(event.date);
-            }).unbind('change');
+            this.initHandler();
 
-            // 만료일 datepicker 처리
-            $('#modalExpireDate').datepicker({
+            // 등록일 datepicker 처리
+            $('#start_date_modal').datepicker({
                 format: "yyyy-mm-dd",	//데이터 포맷 형식(yyyy : 년 mm : 월 dd : 일 )
                 autoclose : true,	//사용자가 날짜를 클릭하면 자동 캘린더가 닫히는 옵션
                 startDate: '-10d',	//달력에서 선택 할 수 있는 가장 빠른 날짜. 이전으로는 선택 불가능 ( d : 일 m : 달 y : 년 w : 주)
                 language : "ko"	//달력의 언어 선택, 그에 맞는 js로 교체해줘야한다.
             }).on('changeDate', function (event) {
-                contractModal.selectedcontract.exprieDate =  dateString(event.date);
-            }).unbind('change');
+                contractModal.setStartDate( dateString(event.date) )
+            });
+
+            // 등록일 datepicker 처리
+            $('#end_date_modal').datepicker({
+                format: "yyyy-mm-dd",	//데이터 포맷 형식(yyyy : 년 mm : 월 dd : 일 )
+                autoclose : true,	//사용자가 날짜를 클릭하면 자동 캘린더가 닫히는 옵션
+                startDate: '-10d',	//달력에서 선택 할 수 있는 가장 빠른 날짜. 이전으로는 선택 불가능 ( d : 일 m : 달 y : 년 w : 주)
+                language : "ko"	//달력의 언어 선택, 그에 맞는 js로 교체해줘야한다.
+            }).on('changeDate', function (event) {
+                contractModal.setEndDate( dateString(event.date) )
+            });
         }
     })
 

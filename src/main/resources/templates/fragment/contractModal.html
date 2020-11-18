@@ -7,106 +7,126 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close" v-on:click="closeHandler"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">자산 정보 수정</h4>
+                <h4 v-if="!modalMode" class="modal-title"> 계약 관리 등록 </h4>
+                <h4 v-if="modalMode" class="modal-title">  자산 정보 수정 </h4>
+
             </div>
             <div class="modal-body">
                 <form id="contractModalForm" >
-                    <div class="col-sm-12">
-                        <div class="form-group row row-center text-center">
-                            <label class="col-sm-2 col-form-label">자산ID</label>
-                            <div class="col-sm-5">
-                                <label class="sr-only" for="modalItemId">superCate</label>
-                                <input disabled type="text" class="form-control" id="modalItemId" placeholder="자산ID" v-model="selectedContract.id">
-                            </div>
-                            <label class="col-sm-2 col-form-label">자산이름</label>
-                            <div class="col-sm-5">
-                                <label class="sr-only" for="CategoryModalName">superCate</label>
-                                <input type="text" class="form-control" id="CategoryModalName" placeholder="자산이름" v-model="selectedContract.name">
-                            </div>
+
+                    <!-- contract -->
+                    <div class="row row-center text-center md-3">
+                        <label class="col-sm-3 col-form-label">계약서idx</label>
+                        <div class="col-sm-9">
+                            <label class="sr-only" for="idx">계약서idx</label>
+                            <input type="text" class="form-control" id="idx" placeholder="계약서번호" v-model="item.idx">
                         </div>
                     </div>
 
-                    <div class="col-sm-12">
-                        <div class="form-group row row-center text-center">
-                            <label class="col-sm-2 col-form-label">등록일</label>
-                            <div class="col-sm-5">
-                                <input  type="text" id="modalRegisterDate" class="form-control col-sm-3" placeholder="등록일" v-model="selectedContract.registerDate">
-                            </div>
+                    <div class="row row-center text-center md-3">
+                        <label class="col-sm-3 col-form-label">계약서번호</label>
+                        <div class="col-sm-9">
+                            <label class="sr-only" for="code">계약서번호</label>
+                            <input type="text" class="form-control" id="code" placeholder="계약서번호" v-model="item.code">
+                        </div>
+                    </div>
 
-                            <label class="col-sm-2 col-form-label">만료일</label>
-                            <div class="col-sm-5">
-                                <input type="text" id="modalExpireDate" class="form-control col-sm-3" placeholder="만료일" v-model="selectedContract.expireDate" >
-                            </div>
+                    <div class="row row-center text-center md-3">
+                        <label class="col-sm-3 col-form-label">계약서명</label>
+                        <div class="col-sm-9">
+                            <label class="sr-only" for="contractName">계약서명</label>
+                            <input type="text" class="form-control" id="contractName" placeholder="계약서명" v-model="item.name">
+                        </div>
+                    </div>
+
+                    <div class="row row-center text-center md-3">
+                        <label class="col-sm-3 col-form-label">담당자</label>
+                        <div class="col-sm-9">
+                            <label class="sr-only" for="register_user">담당자</label>
+                            <input type="text" class="form-control col-sm-3" id="register_user" placeholder="담당자" v-model="item.register_user" >
+                        </div>
+                    </div>
+
+                    <div class="row row-center text-center md-3">
+                        <label class="col-sm-3 col-form-label">계약종류</label>
+                        <div class="col-sm-9">
+                            <label class="sr-only" for="contract_type_idx">계약종류</label>
+                            <input type="text" class="form-control col-sm-3" id="contract_type_idx" placeholder="계약종류" v-model="item.contract_type_idx" >
+                        </div>
+                    </div>
+
+                    <div class="row row-center text-center md-3">
+                        <label class="col-sm-4 col-form-label">시작일</label>
+                        <div class="col-sm-4">
+                            <input type="text" id="start_date_modal" class="form-control col-sm-3" placeholder="시작일" v-model="item.start_date">
+                        </div>
+                        <label class="col-sm-4 col-form-label">만료일</label>
+                        <div class="col-sm-4">
+                            <input type="text" id="end_date_modal" class="form-control col-sm-3" placeholder="만료일" v-model="item.end_date">
                         </div>
                     </div>
 
 
+                    <!-- owner -->
+                    <div class="row row-center text-center md-3">
+                        <label class="col-sm-3 col-form-label">갑.이름</label>
+                        <div class="col-sm-9">
+                            <label class="sr-only" for="owner_name">갑.이름</label>
+                            <input type="text" class="form-control" id="owner_name" placeholder="갑.이름" v-model="item.owner_name">
+                        </div>
+                    </div>
 
-                    <div class="form-group row row-center text-center">
-                        <label class="col-sm-2 col-form-label">분류정보</label>
-                        <div class="col-sm-12">
-                            <div class="form-group row row-center text-center">
-                                <label for="superCate" class="col-sm-2">대분류</label>
-                                <div class="input-group col-sm-10">
-                                    <div class="col-sm-5 pr-0">
-                                        <input v-if="!selectCate01.includes(superCate)&&subCateSecond!=''" disabled type="text" class="form-control"  v-model="superCate">
-                                        <select v-else class="form-control" v-model="superCate" v-on:change="handleCate01">
-                                            <option value="">선택</option>
-                                            <option v-for="category in selectCate01" >{{category}}</option>
-                                        </select>
-                                    </div><!-- /input-group -->
+                    <div class="row row-center text-center md-3">
+                        <label class="col-sm-3 col-form-label">갑.사업자번호</label>
+                        <div class="col-sm-9">
+                            <label class="sr-only" for="owner_business_nnumber">갑.사업자번호</label>
+                            <input type="text" class="form-control" id="owner_business_nnumber" placeholder="갑.사업자번호" v-model="item.owner_business_number">
+                        </div>
+                    </div>
 
-                                    <div class="col-sm-7 pl-0">
-                                        <input type="text" class="form-control" id="superCate" placeholder="대분류" v-model="superCate">
-                                    </div><!-- /input-group -->
+                    <div class="row row-center text-center md-3">
+                        <label class="col-sm-3 col-form-label">갑.주소</label>
+                        <div class="col-sm-9">
+                            <label class="sr-only" for="owner_address">갑.주소</label>
+                            <input type="text" class="form-control col-sm-3" id="owner_address" placeholder="갑.주소" v-model="item.owner_address" >
+                        </div>
+                    </div>
 
-                                </div>
-                            </div>
 
-                            <div class="form-group row row-center text-center">
-                                <label for="subCateFirst" class="col-sm-2">소분류 1</label>
-                                <div class="input-group col-sm-10">
-                                    <div class="col-sm-5 pr-0">
-                                        <input v-if="!selectCate02.includes(subCateFirst)&&subCateSecond!=''" disabled type="text" class="form-control"  v-model="subCateFirst">
-                                        <select v-else class="form-control" v-model="subCateFirst" v-on:change="handleCate02">
-                                            <option value="">선택</option>
-                                            <option v-for="category in selectCate02" >{{category}}</option>
-                                        </select>
-                                    </div><!-- /input-group -->
+                    <!-- other -->
+                    <div class="row row-center text-center md-3">
+                        <label class="col-sm-3 col-form-label">을.이름</label>
+                        <div class="col-sm-9">
+                            <label class="sr-only" for="other_name">을.이름</label>
+                            <input type="text" class="form-control" id="other_name" placeholder="을.이름" v-model="item.other_name">
+                        </div>
+                    </div>
 
-                                    <div class="col-sm-7 pl-0">
-                                        <input type="text" class="form-control" id="subCateFirst" placeholder="소분류 1" v-model="subCateFirst">
-                                    </div><!-- /input-group -->
+                    <div class="row row-center text-center md-3">
+                        <label class="col-sm-3 col-form-label">을.사업자번호</label>
+                        <div class="col-sm-9">
+                            <label class="sr-only" for="other_business_number">을.사업자번호</label>
+                            <input type="text" class="form-control" id="other_business_number" placeholder="을.사업자번호" v-model="item.other_business_number">
+                        </div>
+                    </div>
 
-                                </div>
-                            </div>
-
-                            <div class="form-group row row-center text-center">
-                                <label for="subCateSecond" class="col-sm-2">소분류 2</label>
-                                <div class="input-group col-sm-10">
-                                    <div class="col-sm-5 pr-0">
-                                        <input v-if="!selectCate03.includes(subCateSecond)&&subCateSecond!=''" disabled type="text" class="form-control"  v-model="subCateSecond">
-                                        <select v-else class="form-control" v-model="subCateSecond" >
-                                            <option value="">선택</option>
-                                            ]                                                       <option v-for="category in selectCate03" >{{category}}</option>
-                                        </select>
-                                    </div><!-- /input-group -->
-
-                                    <div class="col-sm-7 pl-0">
-                                        <input type="text" class="form-control" id="subCateSecond" placeholder="소분류 2" v-model="subCateSecond">
-                                    </div><!-- /input-group -->
-
-                                </div>
-                            </div>
-
+                    <div class="row row-center text-center md-3">
+                        <label class="col-sm-3 col-form-label">을.주소</label>
+                        <div class="col-sm-9">
+                            <label class="sr-only" for="other_address">을.주소</label>
+                            <input type="text" class="form-control col-sm-3" id="other_address" placeholder="을.주소" v-model="item.other_address" >
                         </div>
                     </div>
 
                 </form>
             </div>
+
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" v-on:click="updateItem( window.updateUser)" >Save</button>
-                <button type="button" class="btn btn-default" data-dismiss="modal" v-on:click="closeHandler">Close</button>
+
+                <button v-if="!modalMode" type="button" class="btn btn-primary" v-on:click="saveHandler" >      Save</button>
+                <button v-if="modalMode" type="button" class="btn btn-danger"   v-on:click="deleteHandler(item.idx)" >    delete</button>
+                <button v-if="modalMode"  type="button" class="btn btn-primary" v-on:click="updateHandler" >    Save changes</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" v-on:click="closeHandler">   Close</button>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->

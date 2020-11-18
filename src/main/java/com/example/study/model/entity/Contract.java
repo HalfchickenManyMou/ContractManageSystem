@@ -19,7 +19,6 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@EntityListeners(AuditingEntityListener.class)
 @Accessors(chain = true)
 public class Contract {
     @Id
