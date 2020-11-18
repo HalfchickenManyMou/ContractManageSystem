@@ -1,6 +1,7 @@
 <html lang="ko"
       xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org/">
+      xmlns:th="http://www.thymeleaf.org"
+>
 
 <!-- head Start-->
 <div th:replace="fragment/head :: head"></div>
@@ -11,22 +12,22 @@
         <img class = "register-logo"src="/lib/img/logo.png" href="../login/loginPage.html" alt="spigenLogo">
     <div class="register-box-body">
         <p class="mailbox">입력하신 이메일로 문의 결과가 전송됩니다</p>
-        <form th:object="${mail}" th:action="@{/pages/inquire}" method="post">
+        <form id="sendMail">
             <div class="form-group">
-                <label for="inputEmail">이메일 주소</label>
-                <input th:text="${address}" type="email" class="form-control" id="inputEmail" placeholder="name@example.com">
+                <label for="sender">이메일 주소</label>
+                <input type="email" class="form-control" id="sender" placeholder="name@example.com">
             </div>
             <div class="form-group">
-                <label for="inputTitle">제목</label>
-                <input  th:text="${title}" type="text" class="form-control" id="inputTitle" placeholder="제목을 입력하세요" >
+                <label for="title">제목</label>
+                <input type="text" class="form-control" id="title" placeholder="제목을 입력하세요" >
             </div>
             <div class="form-group">
-                <label for="inputText">내용</label>
-                <textarea th:text="${content}" class="form-control" id="inputText" rows="10"></textarea>
+                <label for="content">내용</label>
+                <textarea class="form-control" id="content" rows="10"></textarea>
             </div>
             <div class="row">
                 <div class="col-xs-pull-2">
-                    <button type="submit" id="sendEmail" class="btn btn-primary btn-block btn-flat">send</button>
+                    <button type="button" id="btnSend" class="btn btn-primary btn-block btn-flat">send</button>
                 </div>
                 <!-- /.col -->
             </div>
@@ -35,6 +36,6 @@
     <!-- /.form-box -->
 </div>
 <!-- /.register-box -->
-<script src="/app/inquire.js"></script>
+<script src="/app/inquirePage.js"></script>
 </body>
 </html>

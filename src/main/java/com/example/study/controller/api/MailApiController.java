@@ -1,13 +1,20 @@
 package com.example.study.controller.api;
 
 import com.example.study.ifs.CrudInterface;
+
+import com.example.study.model.entity.Mail;
 import com.example.study.model.network.Header;
 import com.example.study.model.network.request.MailRequest;
 import com.example.study.model.network.response.MailResponse;
 import com.example.study.service.MailLogicService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
+
+import javax.validation.Valid;
+
 
 @RestController
 @RequestMapping("/api")
@@ -15,12 +22,16 @@ public class MailApiController implements CrudInterface<MailRequest,MailResponse
 
     @Autowired
     MailLogicService mailLogicService;
-    public void mailSend(){
-        
+
+    @GetMapping("/inquire")
+    public String Mail(){
+        return "inquire";
     }
 
+    @PostMapping("/inquire")
     @Override
-    public Header<MailResponse> create(Header<MailRequest> request) {
+    public Header<MailResponse> create(@RequestBody Header<MailRequest> request) {
+        mailLogicService.mailSender(request);
         return mailLogicService.create(request);
     }
 

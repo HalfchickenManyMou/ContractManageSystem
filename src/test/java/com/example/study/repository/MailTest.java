@@ -20,8 +20,7 @@ public class MailTest {
     @Test
     public void mailsend(){
         String text="testOK";
-        malService.mailSender(text);
-
+//        malService.mailSender(text);
     }
     @Test
     public void create(){

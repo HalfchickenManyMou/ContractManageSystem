@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @Data
 @Builder
 public class MailResponse {
-    private long idx;
+
     private String sender;
     private String title;
     private String content;

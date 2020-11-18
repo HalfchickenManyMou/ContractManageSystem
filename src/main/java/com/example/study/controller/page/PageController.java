@@ -58,6 +58,11 @@ public class PageController {
     }
     @RequestMapping(path={"/inquire"})
     public ModelAndView inquire(){
-        return new ModelAndView("pages/inquirePage");
+        return new ModelAndView("/pages/inquirePage");
+    }
+
+    @RequestMapping(path={"/contract/contractUpdate"})
+    public ModelAndView contractUpdate(){
+        return new ModelAndView("/pages/contractUpdatePage");
     }
 }

@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 @Builder
 
 public class MailRequest {
-    private long idx;
+
     private String sender;
     private String title;
     private String content;
