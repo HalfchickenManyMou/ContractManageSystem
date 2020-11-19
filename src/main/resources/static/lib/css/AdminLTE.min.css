@@ -39,3 +39,5 @@ transparent 25%, transparent 50%, rgba(255,255,255,0.15) 50%, rgba(255,255,255,0
 .btn-primary.dark{background-color: #2765AA!important;}
 
 .CheckSelector{margin-right:10px}
+
+.row-justify-center{justify-content: center}

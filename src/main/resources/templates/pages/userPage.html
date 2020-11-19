@@ -1,0 +1,221 @@
+<html lang="ko"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org/" xmlns:v-on="http://www.w3.org/1999/xhtml"
+      xmlns:v-bind="http://www.w3.org/1999/xhtml">
+
+<!-- head Start-->
+<div th:replace="fragment/head :: head"></div>
+<!-- head End-->
+
+
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+
+
+    <!-- HEADER Start -->
+    <div th:replace="fragment/headerTitle :: headerTitle"></div>
+    <!-- HEADER End -->
+
+    <!-- Side Menu Start -->
+    <div th:replace="fragment/sideMenu :: sideMenu(${code},${menuList})"></div>
+    <!-- Side Menu End -->
+
+
+    <!-- Contents-->
+    <div class="content-wrapper">
+        <section class="content-header">
+            <h1>
+                사용자 관리
+                <small>사용자상세내역</small>
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-dashboard"></i> 사용자 관리</a></li>
+                <li class="active">사용자 조회 및 등록</li>
+            </ol>
+        </section>
+
+        <section class="content">
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="box">
+                        <div class="box-header">
+                            <h3 class="box-title">사용자상세정보</h3>
+                        </div>
+                        <!-- /.box-header -->
+                        <div class="box-body">
+                            <form id="queryConditions" >
+
+                                <div class="row row-center row-justify-center" >
+
+                                    <div class="col-sm-10">
+
+                                        <div class="row row-center text-center md-3">
+                                            <label class="col-sm-2 col-form-label">사원번호</label>
+                                            <div class="col-sm-3">
+                                                <label class="sr-only" for="userCode">사원번호</label>
+                                                <input type="text" class="form-control" id="userCode" placeholder="사원번호" v-model="item.userCode">
+                                            </div>
+
+                                            <label class="col-sm-2 col-form-label">이름</label>
+                                            <div class="col-sm-3">
+                                                <label class="sr-only" for="name">이름</label>
+                                                <input type="text" class="form-control" id="name" placeholder="이름" v-model="item.name">
+                                            </div>
+
+                                            <div class="col-sm-5"></div>
+
+                                        </div>
+
+                                        <div class="row row-center text-center md-3">
+                                            <label class="col-sm-2 col-form-label">부서</label>
+                                            <div class="col-sm-3">
+                                                <label class="sr-only" for="departmentIdx">부서</label>
+                                                <select id="departmentIdx" class="form-control" v-model="item.department"  style="text-align-last: center">
+                                                    <option value="">선택</option>
+                                                    <option v-for="department in departments" >{{department[1]}}</option>
+                                                </select>
+                                            </div>
+
+                                            <label class="col-sm-2 col-form-label">팀</label>
+                                            <div class="col-sm-3">
+                                                <label class="sr-only" for="teamIdx">팀</label>
+                                                <select id="teamIdx" class="form-control" v-model="item.team"  style="text-align-last: center">
+                                                    <option value="">선택</option>
+                                                    <option v-for="team in teams">{{team[1]}}</option>
+                                                </select>
+                                            </div>
+
+                                            <label class="col-sm-2 col-form-label">직급</label>
+                                            <div class="col-sm-3">
+                                                <label class="sr-only" for="positionIdx">직급</label>
+                                                <select id="positionIdx" class="form-control" v-model="item.rank" style="text-align-last: center">
+                                                    <option value="">선택</option>
+                                                    <option v-for="rank in ranks" >{{rank[1]}}</option>
+                                                </select>
+                                            </div>
+
+
+                                        </div>
+
+                                    </div>
+
+                                    <div class="col-sm-2">
+                                        <div class="row text-center md-4">
+                                            <button type="button" class="btn btn-primary dark" v-on:click="createUser"> 추가 </button>
+                                        </div>
+
+                                        <div class="row text-center">
+                                            <button type="button" class="btn btn-primary dark" v-on:click="searchUser"> 조회 </button>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="box">
+                        <!-- /.box-header -->
+                        <div class="box-body">
+                            <div id="users_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <table id="users_table" class="table table-bordered table-hover dataTable font-14"
+                                               role="grid" aria-describedby="example2_info">
+                                            <thead>
+                                            <tr role="row">
+                                                <th id="selectAll" class="text-center bg-dark-blue-gradient table-middle" tabindex="0" rowspan="1" colspan="1">
+                                                    <input type="checkbox" id="rowID" aria-label="Checkbox for following text input">
+                                                </th>
+                                                <th class="text-center bg-dark-blue-gradient" tabindex="0" rowspan="1" colspan="1">
+                                                    사원번호
+                                                </th>
+                                                <th class="text-center bg-dark-blue-gradient" tabindex="0" rowspan="1" colspan="1">
+                                                    부서
+                                                </th>
+                                                <th class="text-center bg-dark-blue-gradient" tabindex="0" rowspan="1" colspan="1">
+                                                    팀
+                                                </th>
+                                                <th class="text-center bg-dark-blue-gradient" tabindex="0" rowspan="1" colspan="1">
+                                                    직급
+                                                </th>
+                                                <th class="text-center bg-dark-blue-gradient" tabindex="0" rowspan="1" colspan="1">
+                                                    이름
+                                                </th>
+                                            </tr>
+                                            </thead>
+                                            <tbody id="userList">
+                                            <tr role="row" class="odd user" v-for="(dto, idx) in userList" >
+                                                <td class="text-center"> <input type="checkbox" aria-label="Checkbox for following text input" v-bind:index="idx"  v-bind:userId="dto.id"> </td>
+                                                <td class="text-center" v-on:click="updateHandler(event, dto)">{{dto.user_code}}                </td>
+                                                <td class="text-center" v-on:click="updateHandler(event, dto)">{{dto?.department?.department}}    </td>
+                                                <td class="text-center" v-on:click="updateHandler(event, dto)">{{dto?.team?.team}}                </td>
+                                                <td class="text-center" v-on:click="updateHandler(event, dto)">{{dto?.rank?.rank_name}}           </td>
+                                                <td class="text-center" v-on:click="updateHandler(event, dto)">{{dto.name}}                     </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div id="showPage" class="col-sm-6">
+                                        <span  class="dataTables_info" role="status" aria-live="polite">
+                                            Showing {{current_page}} to 10 of {{total_elements}} entries
+                                        </span>
+
+                                    </div>
+                                </div>
+                                <div class="row text-center col-sm-12">
+                                    <div class="dataTables_paginate paging_simple_numbers" id="pageBtn">
+                                        <ul class="pagination">
+                                            <li class="paginate_button previous" id="previousBtn">
+                                                <a href="javascript:;" v-on:click="previousClick">이전</a>
+                                            </li>
+
+                                            <li class="paginate_button" v-for="btn in btnList" v-bind:btn_id="btn" v-on:click="indexClick">
+                                                <a href="javascript:;" aria-controls="example2" v-bind:btn_id="btn">{{btn}}</a>
+                                            </li>
+
+                                            <li class="paginate_button next" id="nextBtn">
+                                                <a href="javascript:;" v-on:click="nextClick">다음</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+    </div>
+    <!-- Content End -->
+
+    <!-- Footer Start -->
+    <div th:replace="fragment/footer :: footer"></div>
+    <!-- Footer End -->
+
+    <!-- controlSidebar Start -->
+    <div th:replace="fragment/controlSidebar :: controlSidebar"></div>
+    <!-- controlSidebar End -->
+
+    <div class="control-sidebar-bg"></div>
+
+    <!--Modal Start-->
+    <div th:replace="fragment/userModal :: userModal"></div>
+    <!--Modal End-->
+</div>
+<script src="/app/user.js"></script>
+</body>
+</html>

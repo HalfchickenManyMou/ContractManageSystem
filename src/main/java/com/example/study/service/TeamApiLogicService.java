@@ -2,6 +2,7 @@ package com.example.study.service;
 
 
 import com.example.study.ifs.CrudInterface;
+import com.example.study.model.entity.Ranks;
 import com.example.study.model.entity.Team;
 import com.example.study.model.network.Header;
 import com.example.study.model.network.request.TeamRequest;
@@ -12,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -95,4 +98,13 @@ public class TeamApiLogicService implements CrudInterface<TeamRequest, TeamRespo
                .build();
         return body;
     }
+
+    public Header readList( ) {
+        List<Team> departments = teamRepository.findAll();
+        List<List> responsesList = departments.stream()
+                .map(team -> new ArrayList( Arrays.asList( team.getIdx(), team.getTeam() ) ) )
+                .collect(Collectors.toList());
+        return Header.OK(responsesList);
+    }
+
 }

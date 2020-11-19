@@ -3,6 +3,7 @@ package com.example.study.controller.api;
 import com.example.study.ifs.CrudInterface;
 import com.example.study.model.network.Header;
 import com.example.study.model.network.request.TeamRequest;
+import com.example.study.model.network.response.DepartmentResponse;
 import com.example.study.model.network.response.TeamResponse;
 import com.example.study.service.TeamApiLogicService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,5 +47,10 @@ public class TeamApiController implements CrudInterface<TeamRequest, TeamRespons
     @DeleteMapping("/team/{idx}")
     public Header delete(@PathVariable Long idx) {
         return teamApiLogicService.delete(idx);
+    }
+
+    @GetMapping("/teams")
+    public Header read( ) {
+        return teamApiLogicService.readList( );
     }
 }

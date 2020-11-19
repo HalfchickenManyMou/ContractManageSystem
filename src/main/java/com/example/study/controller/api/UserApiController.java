@@ -5,9 +5,15 @@ import com.example.study.model.network.Header;
 import com.example.study.model.network.request.UserPasswordRequest;
 import com.example.study.model.network.request.UserRequest;
 import com.example.study.model.network.response.UserResponse;
-import com.example.study.service.UserApiLogicService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
+
+import com.example.study.service.UserApiLogicService;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api")
@@ -19,12 +25,15 @@ public class UserApiController implements CrudInterface<UserRequest, UserRespons
     @Override
     @PostMapping("/user")
     public Header<UserResponse> create(@RequestBody Header<UserRequest> request) {
+        System.out.println("user create request : "+request);
         return userApiLogicService.create(request);
     }
 
     @Override
     @PutMapping("/user")
     public Header<UserResponse> update(@RequestBody Header<UserRequest> request) {
+
+        System.out.println("user update request : "+request);
         return userApiLogicService.update(request);
     }
 
@@ -52,4 +61,14 @@ public class UserApiController implements CrudInterface<UserRequest, UserRespons
     public Header deleteByUserCode(@PathVariable String userCode){
         return userApiLogicService.deleteByUserCode(userCode);
     }
+
+
+    @GetMapping("/users")
+    @ResponseBody
+    public Header< List<UserResponse> > readAll(@PageableDefault(sort = { "userCode" }, direction = Sort.Direction.ASC) Pageable pageable, UserRequest request ) {
+
+        System.out.println("request : "+request);
+        return userApiLogicService.readAll( pageable, request );
+    }
+
 }

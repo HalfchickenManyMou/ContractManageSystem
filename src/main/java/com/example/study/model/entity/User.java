@@ -30,16 +30,24 @@ public class User {
 
     private String phoneNumber;
 
+    private Integer department_idx;
+
+    private Integer team_idx;
+
+    private Integer rank_idx;
+
+
+
     @ManyToOne
-    @JoinColumn(name = "department_idx")
+    @JoinColumn(name = "department_idx" , insertable = false, updatable = false)
     private Department department;
 
     @ManyToOne
-    @JoinColumn(name = "team_idx")
+    @JoinColumn(name = "team_idx" , insertable = false, updatable = false)
     private Team team;
 
     @ManyToOne
-    @JoinColumn(name = "rank_idx")
+    @JoinColumn(name = "rank_idx" , insertable = false, updatable = false)
     private Ranks rank;
 
     @CreatedDate

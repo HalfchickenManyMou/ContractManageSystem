@@ -80,4 +80,12 @@ public class PageController {
                 .addObject("code", "user")
                 ;
     }
+
+    @RequestMapping(path = {"/user"})
+    public ModelAndView userPage() {
+        return new ModelAndView("/pages/userPage")
+                .addObject("menuList", sideMenuService.getSideMenu("사용자관리"))
+                .addObject("code", "user")
+                ;
+    }
 }
