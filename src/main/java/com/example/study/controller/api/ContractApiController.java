@@ -52,17 +52,14 @@ public class ContractApiController implements CrudInterface<ContractRequest, Con
     public Header<List<ContractResponse>> readAll(@PageableDefault(sort = { "idx" }, direction = Sort.Direction.ASC) Pageable pageable, ContractRequest request ) {
         return contractApiLogicService.readAll( pageable , request );
     }
-    
+    /* //api service function 차이로 문제가 발생함.
     @GetMapping("/contract")
     public Header<List<ContractResponse>> readAll(){
         return contractApiLogicService.readAll();
     }
-    
-    @Override
-    @GetMapping("/contract/{id}")
-    public Header<ContractResponse> read(@PathVariable  Long id) {
 
-        return contractApiLogicService.read(id);
-    }
+     */
     
-    }
+
+    
+}

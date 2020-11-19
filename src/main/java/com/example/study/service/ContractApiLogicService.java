@@ -192,17 +192,5 @@ public class ContractApiLogicService implements CrudInterface<ContractRequest, C
                 .build();
 
     }
-    private ContractResponse response(Contract contract) {
-        ContractResponse body = ContractResponse.builder()
-                .idx(contract.getIdx())
-                .code(contract.getCode())
-                .name(contract.getName())
-                .contractTypeIdx(contract.getContractTypeIdx())
-                .userCode(contract.getUserCode())
-                .otherName(contract.getOtherName())
-                .ownerName(contract.getOwnerName())
-                .contractQty(contract.getContractQty())
-                .build();
-        return body;
-    }
+
 }
