@@ -2,66 +2,83 @@
     var maxBtnSize = 7;              // 검색 하단 최대 범위
     var indexBtn = [];               // 인덱스 버튼
 
-
     $(document).ready(function () {
-        searchStart(0);
+//        searchStart(0);
         getData();
     });
-
 
     // 데이터 리스트
     let itemList = new Vue({
         el: '#itemList',
         data: {
-            itemList: [],
+            list: [],
+        }, methods: {
+            btn: function (item) {
+                console.log("abc");
+                console.log(typeof(item.idx));
+                // var id = item.idx;
+                // window.location.assign("/pages/authuser/" + id);
+
+                $.ajax({
+                    type: 'GET',
+                    url: '/api/authuser',
+                    data: item,
+                    success: function () {
+                        window.location.assign("/pages/authuser/"+ item.idx)
+                    },
+                    contentType: "application/json",
+                    dataType: 'json'
+                });
+
+            },
+            setItemList: function( itemList ){
+                this.list = itemList;
+
+                console.log(this.list.idx);
+                debugger
+            }
         }
     });
-    debugger
 
 
     let contractTypeList = new Vue({
         el: '#contractTypeList',
-        data:{
-            contractTypeList:[],
-        }
+        data: {
+            list: [],
+        }, method: {}
     });
-    debugger;
 
     let departmentList = new Vue({
         el: '#departmentList',
-        data:{
-            departmentList:[],
-        }
+        data: {
+            list: [],
+        }, method: {}
     });
-    debugger
 
     let teamList = new Vue({
         el: '#teamList',
-        data:{
-            teamList:[],
-        }
+        data: {
+            list: [],
+        }, method: {}
     });
-    debugger
 
-    function getData( ) {
-        $.get("/api/contract",function(res){
-            itemList.list= res.data;
+
+    function getData() {
+        $.get("/api/contract", function (res) {
+            itemList.list = res.data;
         });
 
-        $.get("/api/contractType",function (res){
-            //contractTypeList.list=res.data;
-           // // contractTypeList.list=console.log(res.data['type']);
-             contractTypeList.list=res.data;
+        $.get("/api/contractType", function (res) {
+            contractTypeList.list = res.data;
         });
 
-        $.get("/api/department",function (res){
-            departmentList.list=res.data;
+        $.get("/api/department", function (res) {
+            departmentList.list = res.data;
         });
 
-        $.get("/api/team",function (res){
-            teamList.list=res.data;
+        $.get("/api/team", function (res) {
+            teamList.list = res.data;
         });
-        debugger
 
     }
 
@@ -69,7 +86,7 @@
     // 페이징 처리 데이터
     var pagination = {
         total_pages: 0,            // 전체 페이지수
-     //   total_elements: 0,         // 전체 데이터수
+        //   total_elements: 0,         // 전체 데이터수
         currentPage: 0,          // 현재 페이지수
         currentElements: 0,        // 현재 데이터수
         amountPerPage: 10,
@@ -117,27 +134,26 @@
         }
     });
 
-    function move(index){
-        System.out.println("movemove");
-    };
-
 
     function searchStart(index) {
-        $.get("/api/contract?id=" + index, function (response) {
-
+        //$.get("/api/contract?id=" + index, function (response) {
+        $.get("/api/contract/"+index,function(response){
             /* 데이터 셋팅 */
             // 페이징 처리 데이터
             indexBtn = [];
-         //   pagination = response.pagination;
+            //   pagination = response.pagination;
 
-
+            console.log(index);
             //전체 페이지
             showPage.totalElements = pagination.currentElements;
             showPage.currentPage = pagination.currentPage + 1;
-            debugger
+
 
             // 검색 데이터
-            itemList.itemList = response.data;
+            itemList.setItemList(response.data);
+            // itemList.list = response.data;
+            // console.log(itemList.list.idx);
+            // debugger
 
             // 이전버튼
             if (pagination.currentPage === 0) {
@@ -153,6 +169,7 @@
             } else {
                 $('#nextBtn').removeClass("disabled")
             }
+
 
             // 페이징 버튼 처리
             var temp = Math.floor(pagination.currentPage / maxBtnSize);
@@ -173,18 +190,38 @@
                 $('li[btn_id]').removeClass("active");
                 $('li[btn_id=' + (pagination.currentPage + 1) + ']').addClass("active");
             }, 50)
+
         });
 
-        debugger
     }
 
 //조회
     $("#searchBtn").on("click", function (e) {
+        console.log("search btn");
         var searchIndex = document.getElementById("contractNum").value;
         searchStart(searchIndex);
-        // $.get("/api/contract?id=" + searchIndex, function (response){
-        //     itemList.list=response.data;
-        // })
+
+        debugger
+        console.log(itemList.list.idx);
     });
 
+
+    // $('button[name="abc"]').on("click",function(e){
+    //     console.log("btn click!");
+    //     // var authuserBtn = $(this);
+    //     // var tr = authuserBtn.parent().parent();
+    //     // console.log(tr);
+    //     // var td = tr.children();
+    //     // var id = td.eq(0).text();
+    //     //
+    //     //
+    //     // $.ajax({
+    //     //     type: 'GET',
+    //     //     url: '/api/authuser',
+    //     //     data: id,
+    //     //     success: function(data) { window.location.assign("/pages/authuser") },
+    //     //     contentType: "application/json",
+    //     //     dataType: 'json'
+    //     // });
+    // });
 })(jQuery);

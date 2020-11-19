@@ -62,37 +62,41 @@
 
         <section class="content">
 
-            <div class="row" >
+            <div class="row">
                 <div class="col-xs-12">
                     <div class="box">
                         <!-- /.box-header -->
-                        <div class="box-body">
-                            <form id="itemList" class="example-form">
+                        <div class="box-body" >
+                            <form class="example-form"  >
                                 <div class="row">
-                                    <div class="col-xs-3">
-                                        <div>
+                                    <div id="itemList" class="col-xs-3">
+                                        <div >
                                             <label>계약서 ID</label>
                                         </div>
-                                        <div>{{itemList.idx}}</div>
+                                        <div>2</div>
+                                        <!--                                        <div v-for="itemList in list">{{itemList.idx}}</div>-->
                                         <table border="1"></table>
                                     </div>
                                     <div class="col-xs-3">
                                         <label>계약서 명</label>
-                                        <div>계약서 명</div>
+                                        <div>name</div>
+                                        <!--                                        <div>{{item.name}}</div>-->
                                         <table border="1"></table>
                                     </div>
                                     <div class="col-xs-3">
                                         <div>
                                             <label>계약서 종류</label>
                                         </div>
-                                        <div>{{itemList.team_idx}}</div>
+                                        <!--                                        <div>{{item.contractTypeIdx}}</div>-->
+                                        <div>계약서 타입 3</div>
                                         <table border="1"></table>
                                     </div>
                                     <div class="col-xs-3">
                                         <div>
                                             <label>담당자</label>
                                         </div>
-                                        <div>{{itemList.useridx}}</div>
+                                        <div>test1</div>
+                                        <!--                                        <div>{{item.useridx}}</div>-->
                                         <table border="1"></table>
                                     </div>
                                 </div>
@@ -115,76 +119,121 @@
                                     <div class="col-sm-12">
                                         <table id="example1" class="table table-bordered table-hover dataTable"
                                                role="grid" aria-describedby="example1_info">
-                                            <tbody>
+                                            <!--                                            <tbody id="userList">-->
+                                            <br>
                                             <tr role="row">
                                                 <div>
-                                                    <label>부서/팀 :</label>
+                                                    <label >부서/팀 :</label>
                                                     &emsp;
-                                                    <select name="부서">
-                                                        <option>{{itemList.department_idx}}</option>
+                                                    <select  class="deptList form-control margin-bottom">
+                                                        <option value="">선택</option>
+                                                        <option>개발부</option>
+                                                        <option>인사부</option>
+                                                        <!--                                                        <option>법무부</option>-->
+                                                        <!--                                                        <option v-for="dept in list">{{dept.department}}</option>-->
+
                                                     </select>
-                                                    &nbsp;
-                                                    <button style='width:auto; height:auto;' , id="addDept"
+
+                                                    &nbsp; &nbsp;
+                                                    <button style='width:auto; height:auto;' id="addDept"
                                                             type="submit"
                                                             class="btn btn-primary bg-light-blue-gradient margin-bottom">
                                                         추가
                                                     </button>
-                                                </div>
 
-                                                <ul>
-                                                    <li display:block; background:#000; float:left; list-style:none;
-                                                        >{{itemList.departmnet_idx}}</li>
-                                                </ul>
+                                                </div>
+                                                <div >
+                                                    <li id="authDeptList">부서 : 법무부, </li>
+                                                    <!--                                                    <li v-for="authDept in list" display:block; background:#000; float:left;-->
+                                                    <!--                                                        list-style:none;-->
+                                                    <!--                                                    >{{authDept.departmentidx}}-->
+                                                    <!--                                                    </li>-->
+
+                                                </div>
+                                                <br>
                                             </tr>
 
                                             <tr role="row">
                                                 <div>
                                                     <label>팀 :</label>
                                                     &emsp;
-                                                    <select name="부서">
-                                                        <option >{{개발팀}}</option>
+                                                    <select class="deptList form-control margin-bottom" name="부서">
+                                                        <option value="">선택</option>
+                                                        <!--                                                        <option v-for="dept in list">{{dept.department}}</option>-->
+                                                        <option>개발부</option>
+                                                        <option>인사부</option>
+                                                        <option>법무부</option>
                                                     </select>
                                                     &nbsp;
-                                                    <select name="팀">
-                                                        <option >{{개발1팀}}</option>
+                                                    <select  class="teamList form-control margin-bottom">
+                                                        <option value="">선택</option>
+                                                        <option>개발1팀</option>
+                                                        <option>개발2팀</option>
+                                                        <!--                                                        <option v-for="team in list">{{team.team}}</option>-->
                                                     </select>
-                                                    &nbsp;
+                                                    &nbsp;&nbsp; &nbsp;
                                                     <button id="addTeam" type="submit"
                                                             class="btn btn-primary bg-light-blue-gradient margin-bottom">
                                                         추가
                                                     </button>
                                                 </div>
-                                                <ul>
-                                                    <li display:block; background:#000; float:left; list-style:none;
-                                                        >{{itemList.team_idx}}</li>
-                                                </ul>
+                                                <div >
+                                                    <li id="authTeamList">팀 : 법무 1팀, 법무 2팀, </li>
+                                                    <!--                                                    <li v-for="authTeam in list" display:block; background:#000; float:left;-->
+                                                    <!--                                                        list-style:none;-->
+                                                    <!--                                                    >{{authTeam.teamidx}}-->
+                                                    <!--                                                    </li>-->
+
+                                                </div>
+                                                <br>
                                             </tr>
 
                                             <tr role="row">
                                                 <div>
                                                     <label>개인 :</label>
                                                     &emsp;
-                                                    <select name="부서">
-                                                        <option >{{개발팀}}</option>
+                                                    <select class="deptList form-control margin-bottom" name="부서">
+                                                        <option value="">선택</option>
+                                                        <option>개발부</option>
+                                                        <option>인사부</option>
+                                                        <option>법무부</option>
+                                                        <!--                                                        <option v-for="dept in list">{{dept.department}}</option>-->
+                                                        <!--                                                        <option>{{개발팀}}</option>-->
                                                     </select>
+                                                    <!--                                                    <select name="부서">-->
+                                                    <!--                                                        <option>{{개발팀}}</option>-->
+                                                    <!--                                                    </select>-->
                                                     &nbsp;
-                                                    <select name="팀">
-                                                        <option >{{개발1팀}}</option>
+                                                    <select  class="teamList form-control margin-bottom">
+                                                        <option value="">선택</option>
+                                                        <option>개발1팀</option>
+                                                        <option>개발2팀</option>
+                                                        <!--                                                        <option v-for="team in list">{{team.team}}</option>-->
                                                     </select>
+                                                    <!--                                                    <select name="팀">-->
+                                                    <!--                                                        <option>{{개발1팀}}</option>-->
+                                                    <!--                                                    </select>-->
                                                     &nbsp;
-                                                    <select name="이름">
-                                                        <option >{{홍길동}}</option>
+                                                    <select  class="userList form-control margin-bottom">
+                                                        <option value="">선택</option>
+                                                        <option>3030</option>
+                                                        <option>khs</option>
                                                     </select>
-                                                    &nbsp;
+                                                    &nbsp;&nbsp; &nbsp;
                                                     <button id="addPerson" type="submit"
                                                             class="btn btn-primary bg-light-blue-gradient margin-bottom">
                                                         추가
                                                     </button>
                                                 </div>
-                                                <ul>
-                                                    <li display:block; background:#000; float:left; list-style:none;
-                                                        >{{itemList.useridx}}</li>
-                                                </ul>
+                                                <div >
+                                                    <li id="authUserList">사용자 : 남상우, </li>
+                                                    <!--                                                    <li v-for="authuser in list" display:block; background:#000; float:left;-->
+                                                    <!--                                                        list-style:none;-->
+                                                    <!--                                                    >{{authuser.useridx}}-->
+                                                    <!--                                                    </li>-->
+
+                                                </div>
+                                                <br>
                                             </tr>
                                             </tbody>
                                         </table>
@@ -201,6 +250,7 @@
                                     <수정 권한>
                                 </label>
                             </div>
+                            <br>
                             <div id="example2_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
                                 <div class="row">
                                     <div class="col-sm-6"></div>
@@ -215,91 +265,128 @@
                                                 <div>
                                                     <label>부서/팀 :</label>
                                                     &emsp;
-                                                    <select name="부서">
-                                                        <option value="개발팀">개발팀</option>
+                                                    <select id="testList" class="form-control margin-bottom">
+                                                        <option value="">선택</option>
+                                                        <option>개발부</option>
+                                                        <option>인사부</option>
+                                                        <option>법무부</option>
+                                                        <!--                                                        <option v-for="dept in list">{{dept.department}}</option>-->
                                                     </select>
-                                                    &nbsp;
+                                                    <!--                                                    <select name="부서">-->
+                                                    <!--                                                        <option value="개발팀">개발팀</option>-->
+                                                    <!--                                                    </select>-->
+                                                    &nbsp;&nbsp;&nbsp; &nbsp;
                                                     <button id="addMDept" type="submit"
                                                             class="btn btn-primary bg-light-blue-gradient margin-bottom">
                                                         추가
                                                     </button>
                                                 </div>
-                                                <ul>
-                                                    <li display:block; background:#000; float:left; list-style:none;
-                                                        >{{itemList.department_idx}}</li>
-                                                </ul>
+                                                <div >
+                                                    <li id="authDeptListM">부서 : 법무부, </li>
+                                                    <!--                                                    <li v-for="authDept in list" display:block; background:#000; float:left;-->
+                                                    <!--                                                        list-style:none;-->
+                                                    <!--                                                    >{{authDept.departmentidx}}-->
+                                                    <!--                                                    </li>-->
+
+                                                </div>
+                                                <br>
                                             </tr>
                                             <tr>
                                                 <div>
                                                     <label>팀 :</label>
                                                     &emsp;
-                                                    <select name="부서">
-                                                        <option value="개발팀">개발팀</option>
+                                                    <select name="부서" class="form-control margin-bottom">
+                                                        <option value="">선택</option>
+                                                        <option>개발부</option>
+                                                        <option>인사부</option>
+                                                        <option>법무부</option>
+                                                        <!--                                                        <option value="개발팀">개발팀</option>-->
                                                     </select>
                                                     &nbsp;
-                                                    <select name="팀">
-                                                        <option value="개발1팀">개발1팀</option>
+                                                    <select name="팀" class="form-control margin-bottom">
+                                                        <option value="">선택</option>
+                                                        <option>개발1팀</option>
+                                                        <option>개발2팀</option>
+                                                        <!--                                                        <option value="개발1팀">개발1팀</option>-->
                                                     </select>
-                                                    &nbsp;
+                                                    &nbsp;&nbsp; &nbsp;
                                                     <button id="addMTeam" type="submit"
                                                             class="btn btn-primary bg-light-blue-gradient margin-bottom">
                                                         추가
                                                     </button>
                                                 </div>
-                                                <ul>
-                                                    <li display:block; background:#000; float:left; list-style:none;
-                                                        >{{itemList.team_idx}}</li>
-                                                </ul>
+                                                <div >
+                                                    <li id="authTeamListM">팀 : 법무 1팀, 법무 2팀, </li>
+                                                    <!--                                                    <li v-for="authTeam in list" display:block; background:#000; float:left;-->
+                                                    <!--                                                        list-style:none;-->
+                                                    <!--                                                    >{{authTeam.teamidx}}-->
+                                                    <!--                                                    </li>-->
+
+                                                </div>
+                                                <br>
                                             </tr>
                                             <tr>
                                                 <div>
                                                     <label>개인 :</label>
                                                     &emsp;
-                                                    <select name="부서">
-                                                        <option value="개발팀">개발팀</option>
+                                                    <select name="부서" class="form-control margin-bottom">
+                                                        <option value="">선택</option>
+                                                        <option>개발부</option>
+                                                        <option>인사부</option>
+                                                        <option>법무부</option>
                                                     </select>
                                                     &nbsp;
-                                                    <select name="팀">
-                                                        <option value="개발1팀">개발1팀</option>
+                                                    <select name="팀" class="form-control margin-bottom">
+                                                        <option value="">선택</option>
+                                                        <option>개발1팀</option>
+                                                        <option>개발2팀</option>
                                                     </select>
                                                     &nbsp;
-                                                    <select name="이름">
-                                                        <option value="홍길동">홍길동</option>
+                                                    <select name="이름" class="form-control margin-bottom">
+                                                        <option value="">선택</option>
+                                                        <option>3030</option>
+                                                        <option>khs</option>
                                                     </select>
-                                                    &nbsp;
+                                                    &nbsp;&nbsp; &nbsp;
                                                     <button id="addMPerson" type="submit"
                                                             class="btn btn-primary bg-light-blue-gradient margin-bottom">
                                                         추가
                                                     </button>
                                                 </div>
-                                                <ul>
-                                                    <li display:block; background:#000; float:left; list-style:none;
-                                                        >{{itemList.useridx}}</li>
-                                                </ul>
+                                                <div >
+                                                    <li id="authUserListM">사용자 : 남상우, </li>
+                                                    <!--                                                    <li v-for="authuser in list" display:block; background:#000; float:left;-->
+                                                    <!--                                                        list-style:none;-->
+                                                    <!--                                                    >{{authuser.useridx}}-->
+                                                    <!--                                                    </li>-->
+
+                                                </div>
                                             </tr>
+
+
+
                                         </table>
                                     </div>
                                 </div>
                             </div>
 
-
-                            <p>
-                            <div class="pull-right">
-                                <button type="button" class="btn btn-primary bg-light-blue-gradient pull-right"
-                                        onclick="location.href ='/pages/auth' ">확인
-                                </button>
-
-                            </div>
-                            </p>
                         </div>
                     </div>
                 </div>
 
             </div>
+            <p>
+            <div class="pull-right" style="text-align: center;">
+                <button id="saveBtn" type="button" class="btn btn-primary bg-light-blue-gradient "
+                >확인
+                </button>
 
-
+            </div>
+            </p>
         </section>
+
     </div>
+
     <!-- Content End -->
 
     <!-- Footer Start -->

@@ -5,7 +5,9 @@ import com.example.study.service.ContractTypeApiLogicService;
 import com.example.study.service.SideMenuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -89,11 +91,13 @@ public class PageController {
                 .addObject("code", "user")
                 ;
     }
-    @RequestMapping(path = {"/authuser"})
-    public ModelAndView authuserPageDetail() {
+    @RequestMapping(path = {"/authuser/{idx}"}, method= RequestMethod.GET)
+    public ModelAndView authuserPageDetail(@PathVariable Long idx) {
+        System.out.println("path : " + idx);
         return new ModelAndView("/pages/authuserPageDetail")
                 .addObject("menuList", sideMenuService.getSideMenu("계약서 권한 관리2"))
                 .addObject("code", "user")
+                .addObject("pathIdx", idx)
                 ;
     }
 

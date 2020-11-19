@@ -1,125 +1,213 @@
 (function ($) {
 
-    let maxBtnSize = 7;              // 검색 하단 최대 범위
-    let indexBtn = [];               // 인덱스 버튼
-
-    // 페이징 처리 데이터
-    let pagination = {
-        totalPages         :  0,       // 전체 페이지수
-        totalElements      :  0,       // 전체 데이터수
-        currentPage        :  0,       // 현재 페이지수
-        currentElements    :  0,        // 현재 데이터수
-        amountPerPage      :  10,
-    };
-
-    // 페이지 정보
-    let showPage = new Vue({
-        el : '#showPage',
-        data : {
-            totalElements       : {},
-            currentPage         : {},
-            selectedElements    : 0,    // 현재 조건 중 선택된 값들의 수
-        }
-    });
-
-    // 데이터 리스트
+    // 권한 수정할 계약서 정보
     let itemList = new Vue({
         el : '#itemList',
         data : {
-            itemList         : {},
+            list         : [],
         },methods:{
         }
     });
 
-    // 페이지 버튼 리스트
-    let pageBtnList = new Vue({
-        el : '#pageBtn',
+    //  전체 user 정보
+    let userList = new Vue({
+        el: '.userList',
         data : {
-            btnList : {}
-        },
-        methods: {
-            indexClick: function (event) {
-                let id = parseInt( event.target.getAttribute("btn_id") );
-                search(id-1, conditions.getParameter());
-            },
-            previousClick:function (event) {
-                if(pagination.currentPage !== 0){
-                    search(pagination.currentPage-1, conditions.getParameter() );
-                }
-            },
-            nextClick:function (event) {
-                if(pagination.currentPage !== pagination.totalPages-1){
-                    search(pagination.currentPage+1, conditions.getParameter() );
-                }
-            }
-        },
-        mounted:function () {
-            // 제일 처음 랜더링 후 색상 처리
-            setTimeout(function () {
-                $('li[btn_id]').removeClass( "active" );
-                $('li[btn_id='+(pagination.currentPage+1)+']').addClass( "active" );
-            },50)
+            list:[],
+        },methods:{
+
+        }
+    })
+
+    // 전체 dept 종류
+    let deptList= new Vue({
+        el : '.deptList',
+        data : {
+            list : [],
+        },methods:{
+
+        }
+    });
+
+    // 전체 team 종류
+    let teamList= new Vue({
+        el : '.teamList',
+        data : {
+            list : [],
+        },methods:{
+
+        }
+    });
+
+    //해당 계약서의 권한을 가진 부서 정보
+    let authDeptList= new Vue({
+        el : '#authDeptList',
+        data : {
+            list : [],
+        },methods:{
+
+        }
+    });
+
+    //해당 계약서의 권한을 가진 팀 정보
+    let authTeamList = new Vue({
+        el:'#authTeamList',
+        data:{
+            list:[],
+        },methods:{
+
+        }
+    });
+
+    //해당 계약서의 권한을 가진 유저 정보
+    let authUserList = new Vue({
+        el:'#authUserList',
+        data:{
+            list:[],
+        },methods:{
+
         }
     });
 
 
+    //해당 계약서의 권한을 가진 부서 정보
+    let authDeptListM= new Vue({
+        el : '#authDeptListM',
+        data : {
+            list : [],
+        },methods:{
+
+        }
+    });
+
+    //해당 계약서의 권한을 가진 팀 정보
+    let authTeamListM = new Vue({
+        el:'#authTeamListM',
+        data:{
+            list:[],
+        },methods:{
+
+        }
+    });
+
+    //해당 계약서의 권한을 가진 유저 정보
+    let authUserListM = new Vue({
+        el:'#authUserListM',
+        data:{
+            list:[],
+        },methods:{
+
+        }
+    });
+//테스트용
+    let testList = new Vue({
+        el:'#testList',
+        data:{
+            list:[],
+        },methods:{
+
+        }
+    });
+
     $(document).ready(function () {
         getData();
+        debugger
+    });
+
+    // function getParameterByName(name) {
+    //     name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+    //     var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+    //         results = regex.exec(location.search);
+    //     return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+    // }
+
+    function getData( ) {
+        // // var idx = getParameterByName('idx');
+        //  var link= document.location.href;
+        //  //var idx = link.split("?");
+        //  var path = '${pathIdx}'
+        //  console.log(path);
+        //  debugger
+        //  $.get("/api/contract?id="+idx,function(res){
+        //      itemList.list=res.data;
+        //  });
+        //
+        //  $.get("/api/authuser?id="+idx, function(res){
+        //     userList.list=res.data;
+        //  });
+        itemList.list.idx=2;
+        itemList.list.name="name";
+        itemList.list.contractTypeIdx="계약서 타입 3";
+        itemList.list.usercode="test1";
+        debugger
+        $.get("/api/department", function (res) {
+            deptList.list = res.data;
+            testList.list=res.data;
+        });
+        debugger
+
+        $.get("/api/team", function (res) {
+            teamList.list = res.data;
+        });
+
+        $.get("/api/authuser", function(res){
+            userList.list=res.data;
+        })
+
+        $.get("/api/authdept", function(res){
+            authDeptList.list=res.data;
+            authDeptListM.list=res.data;
+        })
+        $.get("/api/authteam", function(res){
+            authTeamList.list=res.data;
+            authTeamListM.list=res.data;
+        })
+        $.get("/api/authuser", function(res){
+            authUserList.list = res.data;
+            authUserListM.list=res.data;
+        })
+    }
+
+
+
+//계약서 읽기 권한 추가
+    $("#addDept").on("click", function (e) {
+        let tbody = $("#authDeptList");
+        tbody.append($(".deptList option:selected").val()+',  ');
+
+    });
+    $("#addTeam").on("click", function (e) {
+        let tbody = $("#authTeamList");
+        tbody.append($(".teamList option:selected").val()+', ');
+
+    });
+    $("#addPerson").on("click", function (e) {
+        let tbody = $("#authUserList");
+        tbody.append($(".userList option:selected").val()+', ');
 
     });
 
-    function getData( ) {
-        $.get("/api/authuser?id="+index,function(res){
-            itemList.list=res.data;
-        });
-    }
- //받아오기
- //    function search(index,conditions) {
- //        $.get(["/api/items?page="+index,conditions].join('&'), function (response) {
- //            /* 데이터 셋팅 */
- //            // 페이징 처리 데이터
- //            indexBtn = [];
- //            pagination = response.pagination;
- //
- //            //전체 페이지
- //            showPage.totalElements      = pagination.currentElements;
- //            showPage.currentPage        = pagination.currentPage+1;
- //            // 검색 데이터
- //            itemList.setItemList( response.data );
- //
- //            // 이전버튼
- //            if(pagination.currentPage === 0){
- //                $('#previousBtn').addClass("disabled")
- //            }else{
- //                $('#previousBtn').removeClass("disabled")
- //            }
- //            // 다음버튼
- //            if(pagination.currentPage === pagination.totalPages-1){
- //                $('#nextBtn').addClass("disabled")
- //            }else{
- //                $('#nextBtn').removeClass("disabled")
- //            }
- //
- //            // 페이징 버튼 처리
- //            var temp = Math.floor(pagination.currentPage / maxBtnSize);
- //            for(var i = 1; i <= maxBtnSize; i++){
- //                var value = i+(temp*maxBtnSize);
- //
- //                if(value <= pagination.totalPages){
- //                    indexBtn.push(value)
- //                }
- //            }
- //
- //            // 페이지 버튼 셋팅
- //            pageBtnList.btnList = indexBtn;
- //
- //            // 색상처리
- //            setTimeout(function () {
- //                $('li[btn_id]').removeClass( "active" );
- //                $('li[btn_id='+(pagination.currentPage+1)+']').addClass( "active" );
- //            },50)
- //        });
- //    }
 
+    //계약서 수정 권한 추가
+    $("#addMDept").on("click", function (e) {
+        let tbody = $("#authDeptListM");
+        tbody.append($(".deptList option:selected").val()+',  ');
+
+    });
+    $("#addMTeam").on("click", function (e) {
+        let tbody = $("#authTeamListM");
+        tbody.append($(".teamList option:selected").val()+', ');
+
+    });
+    $("#addMPerson").on("click", function (e) {
+        let tbody = $("#authUserListM");
+        tbody.append($(".userList option:selected").val()+', ');
+
+    });
+
+
+
+
+//save button
 
 })(jQuery);

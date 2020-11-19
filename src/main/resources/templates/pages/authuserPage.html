@@ -55,9 +55,9 @@
                                         </div>
                                         <label class="col-sm-1 col-form-label">계약서 종류</label>
                                         <div class="col-sm-2">
-                                            <select id="contractTypeList" class="form-control" >
+                                            <select id="contractTypeList" class="form-control">
                                                 <option value="">선택</option>
-                                                <option v-for="contractType in contractTypeList" v-bind:value="contractType.idx">{{contractType.type}}</option>
+                                                <option v-for="contractType in list" >{{contractType.type}}</option>
                                             </select>
                                         </div>
                                     </div>
@@ -65,16 +65,16 @@
                                     <div class="form-group row row-center text-center">
                                         <label class="col-sm-1 col-form-label">부서/팀</label>
                                         <div class="col-sm-4">
-                                            <select id="departmentList" class="form-control">
+                                            <select id="departmentList" class="form-control" >
                                                 <option value="">선택</option>
-                                                <option v-for="dept in departmentList">{{dept.department}}</option>
+                                                <option v-for="dept in list">{{dept.department}}</option>
 
                                             </select>
                                         </div>
                                         <div class="col-sm-4">
                                             <select id="teamList" class="form-control">
                                                 <option value="">선택</option>
-                                                <option v-for="team in teamList">{{team.idx}}</option>
+                                                <option v-for="team in list">{{team.team}}</option>
                                             </select>
 
                                         </div>
@@ -148,32 +148,20 @@
                                             </tr>
                                             </thead>
                                             <tbody id="itemList">
-                                            <tr role="row" class="odd" v-for="dto in itemList">
-                                                <td class="text-center">{{dto.idx}}</td>
-                                                <td class="text-center">{{dto.code}}</td>
-                                                <td class="text-center">{{dto.name}}</td>
-                                                <td class="text-center">{{dto.contract_type_idx}}</td>
-                                                <td class="text-center">{{dto.user_code}}</td>
-                                                <td class="text-center">{{dto.owner_name}}</td>
-                                                <td class="text-center">{{dto.other_name}}</td><td class="text-center">
-                                                    <button name="authuserBtn" type="button"
-                                                            class="btn btn-danger btn-xs" v-on:click=move()>수정
+                                            <tr role="row" class="odd" v-for="item in list">
+                                                <td class="text-center">{{item.idx}}</td>
+                                                <td class="text-center">{{item.code}}</td>
+                                                <td class="text-center">{{item.name}}</td>
+                                                <td class="text-center">{{item.contract_type_idx}}</td>
+                                                <td class="text-center">{{item.user_code}}</td>
+                                                <td class="text-center">{{item.owner_name}}</td>
+                                                <td class="text-center">{{item.other_name}}</td>
+                                                <td class="text-center">
+                                                    <button type="button" name="modifyBtn" v-on:click="btn(item)"
+                                                            class="btn btn-danger btn-xs">수정
                                                     </button>
                                                 </td>
                                             </tr>
-                                            <!--                                            <tr role="row" class="odd item" th:each="data : ${data}">-->
-                                            <!--                                                <td class="text-center" th:text="${data.idx}"></td>-->
-                                            <!--                                                <td class="text-center" th:text="${data.code}"></td>-->
-                                            <!--                                                <td class="text-center" th:text="${data.name}"></td>-->
-                                            <!--                                                <td class="text-center" th:text="${data.contractTypeIdx}"></td>-->
-                                            <!--                                                <td class="text-center" th:text="${data.userCode}"></td>-->
-                                            <!--                                                <td class="text-center" th:text="${data.ownerName}"></td>-->
-                                            <!--                                                <td class="text-center" th:text="${data.otherName}"></td>-->
-                                            <!--                                                <td class="text-center"-->
-                                            <!--                                                    onClick="location.href='/pages/contract/authuser'"-->
-                                            <!--                                                    th:text="${data.contractQty}"></td>-->
-                                            <!--                                            </tr>-->
-
                                             </tbody>
                                         </table>
                                     </div>
