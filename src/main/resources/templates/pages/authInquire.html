@@ -1,0 +1,123 @@
+<html lang="ko"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.w3.org/1999/xhtml">
+<!--      xmlns:th="http://www.thymeleaf.org/" -->
+<!--      xmlns:v-on="http://www.w3.org/1999/xhtml"-->
+<!--      xmlns:v-bind="http://www.w3.org/1999/xhtml">-->
+
+<!-- head Start-->
+<div th:replace="fragment/head :: head"></div>
+<!-- head End-->
+
+
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+
+
+    <!-- HEADER Start -->
+    <div th:replace="fragment/headerTitle :: headerTitle"></div>
+    <!-- HEADER End -->
+
+    <!-- Side Menu Start -->
+    <div th:replace="fragment/sideMenu :: sideMenu(${code},${menuList})"></div>
+    <!-- Side Menu End -->
+
+
+    <!-- Contents-->
+    <div class="content-wrapper">
+        <section class="content-header">
+            <h1>
+                권한 문의
+            </h1>
+        </section>
+
+        <section class="content">
+            <div class="modal-body">
+                <form id="itemModalForm" >
+                    <div class="col-sm-12">
+                        <div class="form-group row row-center text-center">
+                            <label class="col-sm-2 col-form-label">계약서 번호</label>
+                            <div class="col-sm-5">
+                                <label class="sr-only" for="modalItemId">superCate</label>
+                                <input type="text" class="form-control" id="modalItemId" placeholder="계약서 번호" v-model="selectedItem.id">
+                            </div>
+                            <button class="btn btn-primary" id="searchBtn">조회</button>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-12">
+                        <div class="form-group row row-center text-center">
+                            <label class="col-sm-2 col-form-label">계약서 명</label>
+                            <div class="col-sm-5">
+                                <label class="sr-only" for="itemModalName">superCate</label>
+                                <input type="text" class="form-control" id="itemModalName" placeholder="계약서 명" v-model="selectedItem.name">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-12">
+                        <div class="form-group row row-center text-center">
+                            <label class="col-sm-2 col-form-label">받을 사람</label>
+                            <div class="col-sm-4">
+                                <label for="modalSuperCate">부서</label>
+                                <select id="modalSuperCate" class="form-control" v-model="selectedItem.superCate" v-on:change="handleCate01">
+                                    <option value="">선택</option>
+                                    <option v-for="category in selectCate01" >{{category}}</option>
+                                </select>
+                            </div>
+
+                            <div class="col-sm-4">
+                                <label for="modalSubCateFirst">팀</label>
+                                <select id="modalSubCateFirst" class="form-control" v-model="selectedItem.subCateFirst" v-on:change="handleCate02">
+                                    <option value="">선택</option>
+                                    <option v-for="category in selectCate02" >{{category}}</option>
+                                </select>
+                            </div>
+
+                            <div class="col-sm-4">
+                                <label for="modalSubCateSecond">이름</label>
+                                <select id="modalSubCateSecond" class="form-control" v-model="selectedItem.subCateSecond" >
+                                    <option value="">선택</option>
+                                    <option v-for="category in selectCate03" >{{category}}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-12">
+                        <div class="form-group row row-center text-center">
+                            <label class="col-sm-2 col-form-label">문의내용</label>
+                            <div class="col-sm-12">
+                                <textarea type="text" class="form-control" aria-label="..." rows="10" v-model="selectedItem.detail" ></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+                <button type="button" class="btn btn-primary pull-right" v-on:click="updateItem( window.updateUser)" >문의하기</button>
+            </div>
+        </section>
+    </div>
+</div>
+
+</section>
+</div>
+<!-- Content End -->
+
+<!-- Footer Start -->
+<div th:replace="fragment/footer :: footer"></div>
+<!-- Footer End -->
+
+<!-- controlSidebar Start -->
+<div th:replace="fragment/controlSidebar :: controlSidebar"></div>
+<!-- controlSidebar End -->
+
+
+<div class="control-sidebar-bg"></div>
+</div>
+
+
+<script src="/app/authInquirePage.js"></script>
+</body>
+</html>

@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+<<<<<<< HEAD
 @Data
 @Builder
 @NoArgsConstructor
@@ -39,4 +40,26 @@ public class ContractRequest {
     private String          contractAmount;
     private String          contractQty;
 
+=======
+import java.time.LocalDateTime;
+import java.util.Date;
+
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+public class ContractRequest {
+
+    private Long idx;
+    private String code;
+    private String name;
+    private Long contractTypeIdx;
+    private String userCode;
+
+    private String ownerName;
+
+    private String otherName;
+
+    private String contractQty;
+>>>>>>> a892bbb19ce59dc742e4ccfcc050de55f99b38f6
 }

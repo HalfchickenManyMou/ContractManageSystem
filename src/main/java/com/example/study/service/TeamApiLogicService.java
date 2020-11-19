@@ -2,9 +2,11 @@ package com.example.study.service;
 
 
 import com.example.study.ifs.CrudInterface;
+import com.example.study.model.entity.Contract;
 import com.example.study.model.entity.Team;
 import com.example.study.model.network.Header;
 import com.example.study.model.network.request.TeamRequest;
+import com.example.study.model.network.response.ContractResponse;
 import com.example.study.model.network.response.TeamResponse;
 import com.example.study.repository.DepartmentRepository;
 import com.example.study.repository.TeamRepository;
@@ -95,4 +97,14 @@ public class TeamApiLogicService implements CrudInterface<TeamRequest, TeamRespo
                .build();
         return body;
     }
+
+    public Header<List<TeamResponse>> readAll() {
+        List<Team> contracts = teamRepository.findAll();
+        List<TeamResponse> responsesList = contracts.stream()
+                .map(r -> response(r))
+                .collect(Collectors.toList());
+
+        return Header.OK(responsesList);
+    }
+
 }

@@ -1,5 +1,6 @@
 package com.example.study.service;
 
+<<<<<<< HEAD
 
 import com.example.study.config.ContractSpec;
 import com.example.study.ifs.CrudInterface;
@@ -20,17 +21,36 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
+=======
+import com.example.study.ifs.CrudInterface;
+import com.example.study.model.entity.Contract;
+import com.example.study.model.network.Header;
+import com.example.study.model.network.request.ContractRequest;
+import com.example.study.model.network.response.ContractResponse;
+import com.example.study.repository.ContractRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.Optional;
+import java.util.List;
+>>>>>>> a892bbb19ce59dc742e4ccfcc050de55f99b38f6
 import java.util.stream.Collectors;
 
 @Service
 public class ContractApiLogicService implements CrudInterface<ContractRequest, ContractResponse> {
+<<<<<<< HEAD
 
     @Autowired
     ContractRepository ContractRepository;
+=======
+    @Autowired
+    ContractRepository contractRepository;
+>>>>>>> a892bbb19ce59dc742e4ccfcc050de55f99b38f6
 
     @Override
     public Header<ContractResponse> create(Header<ContractRequest> request) {
         return Optional.ofNullable(request.getData())
+<<<<<<< HEAD
                 .map( body ->{
                     LocalDate date = LocalDate.now();
 
@@ -151,12 +171,59 @@ public class ContractApiLogicService implements CrudInterface<ContractRequest, C
                                 }
                             )
                             .map(updatedType -> ContractRepository.save(updatedType))
+=======
+                .map(u -> {
+                    Contract contract = Contract.builder()
+                            .userCode(u.getUserCode())
+                            .build();
+                    return contract;
+                })
+                .map(u -> contractRepository.save(u))
+                .map(saved -> response(saved))
+                .map(Header::OK)
+                .orElseGet( () -> Header.ERROR("데이터 없음"));
+    }
+
+    private ContractResponse response(Contract contract) {
+        ContractResponse body = ContractResponse.builder()
+                .idx(contract.getIdx())
+                .code(contract.getCode())
+                .name(contract.getName())
+                .contractTypeIdx(contract.getContractTypeIdx())
+                .userCode(contract.getUserCode())
+                .otherName(contract.getOtherName())
+                .ownerName(contract.getOwnerName())
+                .contractQty(contract.getContractQty())
+                .build();
+        return body;
+    }
+
+    @Override
+    public Header<ContractResponse> read(Long id) {
+        return contractRepository.findById(id)
+                .map(ct -> response(ct))
+                .map(Header::OK)
+                .orElseGet(()-> Header.ERROR("데이터 없음"));
+    }
+
+    @Override
+    public Header<ContractResponse> update(Header<ContractRequest> request) {
+        return Optional.ofNullable(request.getData())
+                .map(body -> {
+                    return contractRepository.findById(body.getIdx())
+                            .map(updated -> {
+                                updated.setCode(body.getCode());
+                                return updated;
+                            })
+                            .map(updatedCode -> contractRepository.save(updatedCode))
+>>>>>>> a892bbb19ce59dc742e4ccfcc050de55f99b38f6
                             .map(saved -> response(saved))
                             .map(Header::OK)
                             .orElseGet(()->Header.ERROR("데이터 없음"));
                 }).orElseGet(()->Header.ERROR("데이터 없음"));
     }
 
+<<<<<<< HEAD
 
     public Header<List<Contract>> bulkCreate(Header<List<Contract>> request) {
         return Optional.ofNullable(request.getData())
@@ -191,18 +258,24 @@ public class ContractApiLogicService implements CrudInterface<ContractRequest, C
                 .updateUser( contract.getUpdateUser() )
                 .build();
 
+=======
+    @Override
+    public Header delete(Long id) {
+        return contractRepository.findById(id)
+                .map(deleted -> {
+                    contractRepository.deleteById(id);
+                    return Header.OK();
+                })
+                .orElseGet(()-> Header.ERROR("데이터 없음"));
     }
-    private ContractResponse response(Contract contract) {
-        ContractResponse body = ContractResponse.builder()
-                .idx(contract.getIdx())
-                .code(contract.getCode())
-                .name(contract.getName())
-                .contractTypeIdx(contract.getContractTypeIdx())
-                .userCode(contract.getUserCode())
-                .otherName(contract.getOtherName())
-                .ownerName(contract.getOwnerName())
-                .contractQty(contract.getContractQty())
-                .build();
-        return body;
+
+    public Header<List<ContractResponse>> readAll() {
+        List<Contract> contracts = contractRepository.findAll();
+        List<ContractResponse> responsesList = contracts.stream()
+                .map(r -> response(r))
+                .collect(Collectors.toList());
+
+        return Header.OK(responsesList);
+>>>>>>> a892bbb19ce59dc742e4ccfcc050de55f99b38f6
     }
 }

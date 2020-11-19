@@ -1,0 +1,109 @@
+<<<<<<< HEAD
+package com.example.study.controller.api;
+
+import com.example.study.ifs.CrudInterface;
+import com.example.study.model.network.Header;
+import com.example.study.model.network.request.UserPasswordRequest;
+import com.example.study.model.network.request.UserRequest;
+import com.example.study.model.network.response.UserResponse;
+import com.example.study.service.UserApiLogicService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping("/api")
+public class UserApiController implements CrudInterface<UserRequest, UserResponse> {
+
+    @Autowired
+    UserApiLogicService userApiLogicService;
+
+    @Override
+    @PostMapping("/user")
+    public Header<UserResponse> create(@RequestBody Header<UserRequest> request) {
+        return userApiLogicService.create(request);
+    }
+
+    @Override
+    @PutMapping("/user")
+    public Header<UserResponse> update(@RequestBody Header<UserRequest> request) {
+        return userApiLogicService.update(request);
+    }
+
+    @Override
+    public Header<UserResponse> read(Long id) {
+        return null;
+    }
+
+    @Override
+    public Header delete(Long id) {
+        return null;
+    }
+
+    @GetMapping("/user/{userCode}")
+    public Header<UserResponse> readByUserCode(@PathVariable String userCode){
+        return userApiLogicService.readByUserCode(userCode);
+    }
+
+    @PutMapping("/user/password")
+    public Header updatePassword(@RequestBody Header<UserPasswordRequest> request){
+        return userApiLogicService.updatePassword(request);
+    }
+
+    @DeleteMapping("/user/{userCode}")
+    public Header deleteByUserCode(@PathVariable String userCode){
+        return userApiLogicService.deleteByUserCode(userCode);
+    }
+}
+=======
+//package com.example.study.controller.api;
+//
+//import com.example.study.ifs.CrudInterface;
+//import com.example.study.model.network.Header;
+//import com.example.study.model.network.request.UserApiRequest;
+//import com.example.study.model.network.response.UserApiResponse;
+//import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.web.bind.annotation.*;
+//
+//import java.util.List;
+//
+//
+//@RestController
+//@RequestMapping("/api")
+//public class UserApiController implements CrudInterface<UserApiRequest,UserApiResponse> {
+//
+//    @Autowired
+//    UserInfoService userInfoService;
+//
+//    @Override
+//    @PostMapping("/myInfo")
+//    public Header<UserApiResponse> create(@RequestBody Header<UserApiRequest> request) {
+//        return userInfoService.create(request);
+//    }
+//
+//    @Override
+//    @GetMapping("/myInfo/{id}")
+//    public Header<UserApiResponse> read(@PathVariable  Long id) {
+//        return userInfoService.read(id);
+//    }
+//
+//    @GetMapping("/myInfo")
+//    public Header<List<UserApiResponse>> readAll(){
+//        return userInfoService.readAll();
+//    }
+//
+//
+//    @Override
+//    @PutMapping("/myInfo")
+//    public Header<UserApiResponse> update(Header<UserApiRequest> request) {
+//
+//        return userInfoService.update(request);
+//    }
+//
+//    @Override
+//    @PutMapping("/myInfo/{id}")
+//    public Header delete(Long id) {
+//
+//        return userInfoService.delete(id);
+//    }
+//}
+>>>>>>> a892bbb19ce59dc742e4ccfcc050de55f99b38f6

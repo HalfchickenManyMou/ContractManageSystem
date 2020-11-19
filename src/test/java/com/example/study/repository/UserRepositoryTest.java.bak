@@ -1,0 +1,151 @@
+package com.example.study.repository;
+
+<<<<<<< HEAD
+import com.example.study.model.entity.Department;
+import com.example.study.model.entity.Ranks;
+import com.example.study.model.entity.User;
+import com.example.study.model.entity.Team;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
+import javax.swing.text.html.Option;
+
+import java.util.Optional;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+@SpringBootTest
+class UserRepositoryTest {
+    @Autowired
+    UserRepository userRepository;
+
+    @Autowired
+    TeamRepository teamRepository;
+
+    @Autowired
+    DepartmentRepository departmentRepository;
+
+    @Autowired
+    RankRepository rankRepository;
+
+    @Autowired
+    PasswordEncoder passwordEncoder;
+
+    @Test
+    void create(){
+
+        Department department = departmentRepository.findByIdx(31).orElse(null);
+        Team team = teamRepository.findByIdx(36L).orElse(null);
+        Ranks rank = rankRepository.findByIdx(10).orElse(null);
+        User user = User.builder()
+                .userCode("test1")
+                .name("test")
+                .email("test@naver.com")
+                .pwd(passwordEncoder.encode("1234"))
+                .phoneNumber("010-1234-1234")
+                .department(department)
+                .team(team)
+                .rank(rank)
+                .build();
+
+        System.out.println("---------------User Hibernate-----------------");
+        userRepository.save(user);
+    }
+
+    @Test
+    void read(){
+        User user = userRepository.findByUserCode("test1").orElse(null);
+        System.out.println("--------------User Hibernate--------------");
+        System.out.println(user);
+    }
+
+    @Test
+    void update(){
+        User user = userRepository.findByUserCode("test2").orElse(null);
+        boolean chk = passwordEncoder.matches("1234", user.getPwd());
+        if(chk){
+            user.setName("test(변경)")
+                .setPhoneNumber("010-0000-0000");
+
+            userRepository.save(user);
+        }
+    }
+
+    @Test
+    void updatePwd(){
+        User user = userRepository.findByUserCode("test2").orElse(null);
+        boolean chk = passwordEncoder.matches("1234", user.getPwd());
+        if(chk){
+            user.setPwd(passwordEncoder.encode("12345"));
+            userRepository.save(user);
+
+            User updated = userRepository.findByUserCode("test2").orElse(null);
+            assertTrue(passwordEncoder.matches("12345", updated.getPwd()));
+        }
+    }
+
+}
+=======
+import com.example.study.StudyApplicationTests;
+import com.example.study.model.entity.User;
+import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import java.time.LocalDateTime;
+import java.util.Optional;
+
+public class UserRepositoryTest extends StudyApplicationTests {
+
+    @Autowired
+    UserRepository userRepository;
+
+    @Test
+    public void create(){
+        User my = new User();
+        my.setUserCode("usercreate");
+        my.setName("sunny");
+        my.setEmail("njs2417@naver.com");
+        my.setPwd("비밀번호");
+        my.setDepartmentIdx(9529);
+        my.setTeamIdx(8826);
+        my.setRankIdx(8862);
+        my.setPhoneNumber("010-0000-0000");
+        my.setRegisterDate(LocalDateTime.now());
+        my.setRegisterUser("hs");
+        my.setUpdateDate(LocalDateTime.now());
+        my.setUpdateUser("hs");
+        User newMy = userRepository.save(my);
+    }
+
+    @Test
+    public void read(){
+        Optional<User> m = userRepository.findById("tttt");
+        m.ifPresent(selectUser ->{
+            System.out.println("my:" + selectUser);
+        });
+    }
+
+    @Test
+    public void update(){
+        Optional<User> userInfo = userRepository.findById("test1");
+        userInfo.ifPresent(selectUser -> {
+            selectUser.setDepartmentIdx(4321);
+            selectUser.setTeamIdx(2345);
+            selectUser.setUpdateDate(LocalDateTime.now());
+            selectUser.setUpdateUser("hs");
+            userRepository.save(selectUser);
+        });
+    }
+
+    @Test
+    public void delete(){
+        Optional<User> userInfo = userRepository.findById("tttt");
+        userInfo.ifPresent(selectUser ->{
+            userRepository.delete(selectUser);
+        });
+    }
+}
+>>>>>>> a892bbb19ce59dc742e4ccfcc050de55f99b38f6
