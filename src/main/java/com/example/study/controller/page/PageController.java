@@ -59,6 +59,6 @@ public class PageController {
 
     @RequestMapping(path={"/contract/contractUpdate"})
     public ModelAndView contractUpdate(){
-        return new ModelAndView("/pages/contractUpdatePage");
+        return new ModelAndView("/pages/contractUpdate");
     }
 }

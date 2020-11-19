@@ -40,12 +40,13 @@ public class MailLogicService implements CrudInterface<MailRequest, MailResponse
 
     public void mailSender(Header<MailRequest> request) {
         MailRequest mailRequest = request.getData();
+        System.out.println(mailRequest);
         MimeMessagePreparator messagePreparator = mimeMessage -> {
             MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage,true,"UTF-8");
             //setTo :받는 사람, setFrom 보내는 사람
 
-            messageHelper.setFrom("shkimm5189@naver.com");
-            messageHelper.setTo(mailRequest.getSender());
+            messageHelper.setFrom(mailRequest.getSender());
+            messageHelper.setTo("shkimm5189@gmail.com");
             messageHelper.setSubject(mailRequest.getTitle());
             messageHelper.setText(mailRequest.getContent());
         };
