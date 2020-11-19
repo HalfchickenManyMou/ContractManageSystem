@@ -1,18 +1,9 @@
 package com.example.study.repository;
 
-import com.example.study.model.entity.Department;
-import com.example.study.model.entity.Ranks;
-import com.example.study.model.entity.User;
-import com.example.study.model.entity.Team;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-
-import javax.swing.text.html.Option;
-
-import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
