@@ -82,7 +82,7 @@ public class PageController {
                 ;
     }
 
-    @RequestMapping(path = {"/contract/authuser"})
+    @RequestMapping(path = {"/auth"})
     public ModelAndView authuserPage() {
         return new ModelAndView("/pages/authuserPage")
                 .addObject("menuList", sideMenuService.getSideMenu("계약서 권한 관리1"))
