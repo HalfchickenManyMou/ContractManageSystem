@@ -12,10 +12,12 @@ import com.example.study.model.network.request.UserPasswordRequest;
 import com.example.study.model.network.request.UserRequest;
 import com.example.study.model.network.response.UserResponse;
 import com.example.study.repository.UserRepository;
+import lombok.ToString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
@@ -68,18 +70,18 @@ public class UserApiLogicService implements CrudInterface<UserRequest, UserRespo
                 .map(body -> userRepository.findByUserCode(body.getUserCode())
                         .map(user -> {
                             user.setName(body.getName())
-                                .setEmail(body.getEmail())
-                                .setPhoneNumber(body.getPhoneNumber())
-                                .setDepartment(body.getDepartment())
-                                .setTeam(body.getTeam())
-                                .setRank(body.getRank());
+                                    .setEmail(body.getEmail())
+                                    .setPhoneNumber(body.getPhoneNumber())
+                                    .setDepartment(body.getDepartment())
+                                    .setTeam(body.getTeam())
+                                    .setRank(body.getRank());
                             return userRepository.save(user);
                         })
                         .map(updated -> response(updated))
                         .map(Header::OK)
-                .orElseThrow(UserNotFoundException::new)
+                        .orElseThrow(UserNotFoundException::new)
                 )
-        .orElseThrow(DataNotFoundException::new);
+                .orElseThrow(DataNotFoundException::new);
     }
 
     @Override
@@ -97,19 +99,19 @@ public class UserApiLogicService implements CrudInterface<UserRequest, UserRespo
     public Header updatePassword(Header<UserPasswordRequest> request){
         return Optional.ofNullable(request.getData())
                 .map(body -> userRepository.findByUserCode(body.getUserCode())
-                    .map(user -> {
-                        //비밀번호 확인, exception 발생
-                        boolean chk = passwordEncoder.matches(body.getOriginPassword(), user.getPwd());
-                        if(!chk) throw new InvalidPasswordException();
+                        .map(user -> {
+                            //비밀번호 확인, exception 발생
+                            boolean chk = passwordEncoder.matches(body.getOriginPassword(), user.getPwd());
+                            if(!chk) throw new InvalidPasswordException();
 
-                        user.setPwd(passwordEncoder.encode(body.getNewPassword()));
-                        userRepository.save(user);
-                        return Header.OK();
-                    })
-                //findByUserCode 결과가 null일 경우
-                .orElseThrow(UserNotFoundException::new)
+                            user.setPwd(passwordEncoder.encode(body.getNewPassword()));
+                            userRepository.save(user);
+                            return Header.OK();
+                        })
+                        //findByUserCode 결과가 null일 경우
+                        .orElseThrow(UserNotFoundException::new)
                 )
-        .orElseThrow(DataNotFoundException::new);
+                .orElseThrow(DataNotFoundException::new);
     }
 
     public Header deleteByUserCode(String userCode) {
@@ -118,7 +120,7 @@ public class UserApiLogicService implements CrudInterface<UserRequest, UserRespo
                     userRepository.deleteByUserCode(user.getUserCode());
                     return Header.OK();
                 })
-        .orElseThrow(DataNotFoundException::new);
+                .orElseThrow(DataNotFoundException::new);
     }
     private UserResponse response(User user) {
         //LocalDateTime 형식 바꾸기

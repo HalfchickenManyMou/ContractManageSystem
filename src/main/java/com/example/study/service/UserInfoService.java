@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-package com.example.study.service;//package com.example.study.service;
+//package com.example.study.service;
 //
 //
 //import com.example.study.ifs.CrudInterface;
@@ -99,22 +98,3 @@ package com.example.study.service;//package com.example.study.service;
 //        return Header.OK(responsesList);
 //    }
 //}
-=======
-package com.example.study.service;
-
-
-import com.example.study.model.front.AdminMenu;
-import org.springframework.stereotype.Service;
-
-import java.util.Arrays;
-import java.util.List;
-
-@Service
-
-public class UserInfoService {
-    public List<AdminMenu> getUserInfo(){
-        return Arrays.asList(AdminMenu.builder().title("사용자 정보 수정").url("/pages/userInfo").code("userInfo").build());
-    }
-
-}
->>>>>>> e96389c62b0c40b596d565947d1e477cb833bf2e

@@ -4,9 +4,9 @@ $(function ($) {
     });
     $("#btnSend").on("click", function (e) {
         let body = {
-            sender : document.getElementById("sender"),
-            title : document.getElementById("title"),
-            content:document.getElementById("content")
+            sender : $("#sender").val(),
+            title : $("#title").val(),
+            content: $("#content").val()
         }
         console.log(body);
         if(confirm("메일을 전송합니다.")) {
@@ -14,7 +14,7 @@ $(function ($) {
                 type: 'POST',
                 url: '/api/inquire',
                 data: JSON.stringify({'data':body}),
-                success: function(data) { window.location.assign("/pages/Dashboard") },
+                success: function(data) { window.location.assign("/pages/dashboard") },
                 contentType: "application/json",
                 dataType: 'json'
             });

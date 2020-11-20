@@ -73,91 +73,70 @@ public class PageController {
     public ModelAndView contractPage() {
         return new ModelAndView("/pages/contractPage")
                 .addObject("menuList", sideMenuService.getSideMenu("계약관리"))
-                .addObject("code", "user")
-
-    @RequestMapping(path ={"/userAdd"})
-    public ModelAndView userAdd(){
-        return new ModelAndView("/pages/userAddCopyPage")
-                .addObject("menuList",sideMenuService.getSideMenu("사용자추가/복사"))
-                .addObject("code","user")
-                ;
+                .addObject("code", "user");
     }
+        @RequestMapping(path = {"/userAdd"})
+        public ModelAndView userAdd() {
+            return new ModelAndView("/pages/userAddCopyPage")
+                    .addObject("menuList", sideMenuService.getSideMenu("사용자추가/복사"))
+                    .addObject("code", "user")
+                    ;
+        }
 
-    @RequestMapping(path = {"/auth"})
-    public ModelAndView authuserPage() {
-        return new ModelAndView("/pages/authuserPage")
-                .addObject("menuList", sideMenuService.getSideMenu("계약서 권한 관리1"))
-                .addObject("code", "user")
-                ;
-    }
-    @RequestMapping(path = {"/authuser"})
-    public ModelAndView authuserPageDetail() {
-        return new ModelAndView("/pages/authuserPageDetail")
-                .addObject("menuList", sideMenuService.getSideMenu("계약서 권한 관리2"))
-                .addObject("code", "user")
-                ;
-    }
-
-
-    @RequestMapping(path = {"/authInquire"})
-    public ModelAndView authInquirePage() {
-        return new ModelAndView("/pages/authInquire")
-                .addObject("menuList", sideMenuService.getSideMenu("사용자 정보"))
-                .addObject("code", "user")
-                ;
-    }
-
-    @RequestMapping(path={"/inquire"})
-    public ModelAndView inquire(){
-        return new ModelAndView("/pages/inquirePage");
-    }
-
-    @RequestMapping(path={"/contract/contractUpdate"})
-    public ModelAndView contractUpdate(){
-        return new ModelAndView("/pages/contractUpdatePage");
-    }
+        @RequestMapping(path = {"/auth"})
+        public ModelAndView authuserPage() {
+            return new ModelAndView("/pages/authuserPage")
+                    .addObject("menuList", sideMenuService.getSideMenu("계약서 권한 관리1"))
+                    .addObject("code", "user")
+                    ;
+        }
+        @RequestMapping(path = {"/authuser"})
+        public ModelAndView authuserPageDetail() {
+            return new ModelAndView("/pages/authuserPageDetail")
+                    .addObject("menuList", sideMenuService.getSideMenu("계약서 권한 관리2"))
+                    .addObject("code", "user")
+                    ;
+        }
 
 
-    @RequestMapping(path={"/testPage"})
-    public ModelAndView test(){
-        return new ModelAndView("/pages/testPage");
-    }
+        @RequestMapping(path = {"/authInquire"})
+        public ModelAndView authInquirePage() {
+            return new ModelAndView("/pages/authInquire")
+                    .addObject("menuList", sideMenuService.getSideMenu("사용자 정보"))
+                    .addObject("code", "user")
+                    ;
+        }
+
+        @RequestMapping(path = {"/inquire"})
+        public ModelAndView inquire() {
+            return new ModelAndView("/pages/inquirePage");
+        }
+
+        @RequestMapping(path = {"/contract/contractUpdate"})
+        public ModelAndView contractUpdate() {
+            return new ModelAndView("/pages/contractUpdatePage");
+        }
 
 
-    @RequestMapping(path = {"/authuser"})
-    public ModelAndView authuserPage() {
-        return new ModelAndView("/pages/authuserPage")
-                .addObject("menuList", sideMenuService.getSideMenu("계약서 권한 관리1"))
-                .addObject("code", "user")
-                ;
-    }
-    @RequestMapping(path = {"/authuser/authuserdetail"})
-    public ModelAndView authuserPageDetail() {
-        return new ModelAndView("/pages/authuserPageDetail")
-                .addObject("menuList", sideMenuService.getSideMenu("계약서 권한 관리2"))
-                .addObject("code", "user")
-                ;
-    }
+        @RequestMapping(path = {"/testPage"})
+        public ModelAndView test() {
+            return new ModelAndView("/pages/testPage");
+        }
 
-    @RequestMapping(path = {"/myInfo"})
-    public ModelAndView myInfoPage() {
-        return new ModelAndView("/pages/myInfo")
-                .addObject("menuList", sideMenuService.getSideMenu("내 정보 조회 및 수정"))
-                .addObject("code", "user")
-                ;
-    }
 
-    @RequestMapping(path = {"/userInfo"})
-    public ModelAndView userInfoPage() {
-        return new ModelAndView("/pages/userInfo")
-                .addObject("menuList", sideMenuService.getSideMenu("사용자 정보"))
-                .addObject("code", "user")
-                ;
+
+
+
+        @RequestMapping(path = {"/myInfo"})
+        public ModelAndView myInfoPage() {
+            return new ModelAndView("/pages/myInfo")
+                    .addObject("menuList", sideMenuService.getSideMenu("내 정보 조회 및 수정"))
+                    .addObject("code", "user")
+                    ;
+        }
+
+
+
     }
 
 
-
-
-
-
-}

@@ -1,10 +1,6 @@
 <html lang="ko"
       xmlns="http://www.w3.org/1999/xhtml"
-<<<<<<< HEAD
       xmlns:th="http://www.thymeleaf.org/" xmlns:v-on="http://www.w3.org/1999/xhtml"
-=======
-      xmlns:th="http://www.w3.org/1999/xhtml" xmlns:v-on="http://www.w3.org/1999/xhtml"
->>>>>>> e96389c62b0c40b596d565947d1e477cb833bf2e
       xmlns:v-bind="http://www.w3.org/1999/xhtml" xmlns:float="http://www.w3.org/1999/xhtml"
       xmlns:list-style="http://www.w3.org/1999/xhtml" xmlns:display="http://www.w3.org/1999/xhtml"
       xmlns:background="http://www.w3.org/1999/xhtml">
@@ -46,32 +42,19 @@
 <div class="wrapper">
 
 
-<<<<<<< HEAD
     <!--    HEADER Start &ndash;&gt;-->
     <div th:replace="fragment/headerTitle :: headerTitle"></div>
     <!-- HEADER End -->
 
     <!-- Side Menu Start -->
     <div th:replace="fragment/sideMenu :: sideMenu(${code},${menuList})"></div>
-=======
-    <!-- HEADER Start -->
-    <div th:replace="fragment/headerTitle :: headerTitle(${code},${userInfo})"></div>
-    <!-- HEADER End -->
-
-    <!-- Side Menu Start -->
-    <div th:replace="fragment/sideMenu :: sideMenu(${code},${authList})"></div>
->>>>>>> e96389c62b0c40b596d565947d1e477cb833bf2e
     <!-- Side Menu End -->
 
     <!-- Contents-->
     <div class="content-wrapper">
         <section class="content-header">
             <h1>
-<<<<<<< HEAD
                 계약서 권한 관리2
-=======
-                권한 수정
->>>>>>> e96389c62b0c40b596d565947d1e477cb833bf2e
             </h1>
             <ol class="breadcrumb">
             </ol>
@@ -79,61 +62,41 @@
 
         <section class="content">
 
-<<<<<<< HEAD
-            <div class="row" >
-=======
-            <div class="row" th:each="data: ${data}">
->>>>>>> e96389c62b0c40b596d565947d1e477cb833bf2e
+            <div class="row">
                 <div class="col-xs-12">
                     <div class="box">
                         <!-- /.box-header -->
-                        <div class="box-body">
-<<<<<<< HEAD
-                            <form id="itemList" class="example-form">
-=======
-                            <form method="post" class="example-form">
->>>>>>> e96389c62b0c40b596d565947d1e477cb833bf2e
+                        <div class="box-body" >
+                            <form class="example-form"  >
                                 <div class="row">
-                                    <div class="col-xs-3">
-                                        <div>
+                                    <div id="itemList" class="col-xs-3">
+                                        <div >
                                             <label>계약서 ID</label>
                                         </div>
-<<<<<<< HEAD
-                                        <div>{{itemList.idx}}</div>
-=======
-                                        <div th:value="${data.idx}" th:text="${data.idx}"></div>
->>>>>>> e96389c62b0c40b596d565947d1e477cb833bf2e
+                                        <div>2</div>
+                                        <!--                                        <div v-for="itemList in list">{{itemList.idx}}</div>-->
                                         <table border="1"></table>
                                     </div>
                                     <div class="col-xs-3">
                                         <label>계약서 명</label>
-<<<<<<< HEAD
-                                        <div>계약서 명</div>
-=======
-                                        <div th:value="${data.useridx}" th:text="${data.useridx}"></div>
->>>>>>> e96389c62b0c40b596d565947d1e477cb833bf2e
+                                        <div>name</div>
+                                        <!--                                        <div>{{item.name}}</div>-->
                                         <table border="1"></table>
                                     </div>
                                     <div class="col-xs-3">
                                         <div>
                                             <label>계약서 종류</label>
                                         </div>
-<<<<<<< HEAD
-                                        <div>{{itemList.team_idx}}</div>
-=======
-                                        <div th:value="${data.team_idx}" th:text="${data.team_idx}"></div>
->>>>>>> e96389c62b0c40b596d565947d1e477cb833bf2e
+                                        <!--                                        <div>{{item.contractTypeIdx}}</div>-->
+                                        <div>계약서 타입 3</div>
                                         <table border="1"></table>
                                     </div>
                                     <div class="col-xs-3">
                                         <div>
                                             <label>담당자</label>
                                         </div>
-<<<<<<< HEAD
-                                        <div>{{itemList.useridx}}</div>
-=======
-                                        <div th:value="${data.registerUser}" th:text="${data.registerUser}"></div>
->>>>>>> e96389c62b0c40b596d565947d1e477cb833bf2e
+                                        <div>test1</div>
+                                        <!--                                        <div>{{item.useridx}}</div>-->
                                         <table border="1"></table>
                                     </div>
                                 </div>
@@ -156,138 +119,123 @@
                                     <div class="col-sm-12">
                                         <table id="example1" class="table table-bordered table-hover dataTable"
                                                role="grid" aria-describedby="example1_info">
-<<<<<<< HEAD
-                                            <tbody>
-=======
-
->>>>>>> e96389c62b0c40b596d565947d1e477cb833bf2e
+                                            <!--                                            <tbody id="userList">-->
+                                            <br>
                                             <tr role="row">
                                                 <div>
-                                                    <label>부서/팀 :</label>
+                                                    <label >부서/팀 :</label>
                                                     &emsp;
-                                                    <select name="부서">
-<<<<<<< HEAD
-                                                        <option>{{itemList.department_idx}}</option>
-=======
-                                                        <option value="개발팀">개발팀</option>
-                                                        <option value="법무팀">법무팀</option>
->>>>>>> e96389c62b0c40b596d565947d1e477cb833bf2e
+                                                    <select  class="deptList form-control margin-bottom">
+                                                        <option value="">선택</option>
+                                                        <option>개발부</option>
+                                                        <option>인사부</option>
+                                                        <!--                                                        <option>법무부</option>-->
+                                                        <!--                                                        <option v-for="dept in list">{{dept.department}}</option>-->
+
                                                     </select>
-                                                    &nbsp;
-                                                    <button style='width:auto; height:auto;' , id="addDept"
+
+                                                    &nbsp; &nbsp;
+                                                    <button style='width:auto; height:auto;' id="addDept"
                                                             type="submit"
                                                             class="btn btn-primary bg-light-blue-gradient margin-bottom">
-<<<<<<< HEAD
                                                         추가
-=======
-                                                        조회
->>>>>>> e96389c62b0c40b596d565947d1e477cb833bf2e
                                                     </button>
-                                                </div>
 
-                                                <ul>
-                                                    <li display:block; background:#000; float:left; list-style:none;
-<<<<<<< HEAD
-                                                        >{{itemList.departmnet_idx}}</li>
-=======
-                                                        th:text="${data.department_idx}"></li>
->>>>>>> e96389c62b0c40b596d565947d1e477cb833bf2e
-                                                </ul>
+                                                </div>
+                                                <div >
+                                                    <li id="authDeptList">부서 : 법무부, </li>
+                                                    <!--                                                    <li v-for="authDept in list" display:block; background:#000; float:left;-->
+                                                    <!--                                                        list-style:none;-->
+                                                    <!--                                                    >{{authDept.departmentidx}}-->
+                                                    <!--                                                    </li>-->
+
+                                                </div>
+                                                <br>
                                             </tr>
 
                                             <tr role="row">
                                                 <div>
                                                     <label>팀 :</label>
                                                     &emsp;
-                                                    <select name="부서">
-<<<<<<< HEAD
-                                                        <option >{{개발팀}}</option>
+                                                    <select class="deptList form-control margin-bottom" name="부서">
+                                                        <option value="">선택</option>
+                                                        <!--                                                        <option v-for="dept in list">{{dept.department}}</option>-->
+                                                        <option>개발부</option>
+                                                        <option>인사부</option>
+                                                        <option>법무부</option>
                                                     </select>
                                                     &nbsp;
-                                                    <select name="팀">
-                                                        <option >{{개발1팀}}</option>
-=======
-                                                        <option value="개발팀">개발팀</option>
-                                                        <option value="법무팀">법무팀</option>
+                                                    <select  class="teamList form-control margin-bottom">
+                                                        <option value="">선택</option>
+                                                        <option>개발1팀</option>
+                                                        <option>개발2팀</option>
+                                                        <!--                                                        <option v-for="team in list">{{team.team}}</option>-->
                                                     </select>
-                                                    &nbsp;
-                                                    <select name="팀">
-                                                        <option value="개발1팀">개발1팀</option>
-                                                        <option value="개발2팀">개발2팀</option>
->>>>>>> e96389c62b0c40b596d565947d1e477cb833bf2e
-                                                    </select>
-                                                    &nbsp;
+                                                    &nbsp;&nbsp; &nbsp;
                                                     <button id="addTeam" type="submit"
                                                             class="btn btn-primary bg-light-blue-gradient margin-bottom">
-<<<<<<< HEAD
                                                         추가
-=======
-                                                        조회
->>>>>>> e96389c62b0c40b596d565947d1e477cb833bf2e
                                                     </button>
                                                 </div>
-                                                <ul>
-                                                    <li display:block; background:#000; float:left; list-style:none;
-<<<<<<< HEAD
-                                                        >{{itemList.team_idx}}</li>
-=======
-                                                        th:text="${data.team_idx}"></li>
->>>>>>> e96389c62b0c40b596d565947d1e477cb833bf2e
-                                                </ul>
+                                                <div >
+                                                    <li id="authTeamList">팀 : 법무 1팀, 법무 2팀, </li>
+                                                    <!--                                                    <li v-for="authTeam in list" display:block; background:#000; float:left;-->
+                                                    <!--                                                        list-style:none;-->
+                                                    <!--                                                    >{{authTeam.teamidx}}-->
+                                                    <!--                                                    </li>-->
+
+                                                </div>
+                                                <br>
                                             </tr>
 
                                             <tr role="row">
                                                 <div>
                                                     <label>개인 :</label>
                                                     &emsp;
-                                                    <select name="부서">
-<<<<<<< HEAD
-                                                        <option >{{개발팀}}</option>
+                                                    <select class="deptList form-control margin-bottom" name="부서">
+                                                        <option value="">선택</option>
+                                                        <option>개발부</option>
+                                                        <option>인사부</option>
+                                                        <option>법무부</option>
+                                                        <!--                                                        <option v-for="dept in list">{{dept.department}}</option>-->
+                                                        <!--                                                        <option>{{개발팀}}</option>-->
                                                     </select>
+                                                    <!--                                                    <select name="부서">-->
+                                                    <!--                                                        <option>{{개발팀}}</option>-->
+                                                    <!--                                                    </select>-->
                                                     &nbsp;
-                                                    <select name="팀">
-                                                        <option >{{개발1팀}}</option>
+                                                    <select  class="teamList form-control margin-bottom">
+                                                        <option value="">선택</option>
+                                                        <option>개발1팀</option>
+                                                        <option>개발2팀</option>
+                                                        <!--                                                        <option v-for="team in list">{{team.team}}</option>-->
                                                     </select>
+                                                    <!--                                                    <select name="팀">-->
+                                                    <!--                                                        <option>{{개발1팀}}</option>-->
+                                                    <!--                                                    </select>-->
                                                     &nbsp;
-                                                    <select name="이름">
-                                                        <option >{{홍길동}}</option>
-=======
-                                                        <option value="개발팀">개발팀</option>
-                                                        <option value="법무팀">법무팀</option>
+                                                    <select  class="userList form-control margin-bottom">
+                                                        <option value="">선택</option>
+                                                        <option>3030</option>
+                                                        <option>khs</option>
                                                     </select>
-                                                    &nbsp;
-                                                    <select name="팀">
-                                                        <option value="개발1팀">개발1팀</option>
-                                                        <option value="개발2팀">개발2팀</option>
-                                                    </select>
-                                                    &nbsp;
-                                                    <select name="이름">
-                                                        <option value="홍길동">홍길동</option>
-                                                        <option value="아무개">아무개</option>
->>>>>>> e96389c62b0c40b596d565947d1e477cb833bf2e
-                                                    </select>
-                                                    &nbsp;
+                                                    &nbsp;&nbsp; &nbsp;
                                                     <button id="addPerson" type="submit"
                                                             class="btn btn-primary bg-light-blue-gradient margin-bottom">
-<<<<<<< HEAD
                                                         추가
-=======
-                                                        조회
->>>>>>> e96389c62b0c40b596d565947d1e477cb833bf2e
                                                     </button>
                                                 </div>
-                                                <ul>
-                                                    <li display:block; background:#000; float:left; list-style:none;
-<<<<<<< HEAD
-                                                        >{{itemList.useridx}}</li>
-                                                </ul>
+                                                <div >
+                                                    <li id="authUserList">사용자 : 남상우, </li>
+                                                    <!--                                                    <li v-for="authuser in list" display:block; background:#000; float:left;-->
+                                                    <!--                                                        list-style:none;-->
+                                                    <!--                                                    >{{authuser.useridx}}-->
+                                                    <!--                                                    </li>-->
+
+                                                </div>
+                                                <br>
                                             </tr>
                                             </tbody>
-=======
-                                                        th:text="${data.useridx}"></li>
-                                                </ul>
-                                            </tr>
->>>>>>> e96389c62b0c40b596d565947d1e477cb833bf2e
                                         </table>
                                     </div>
                                 </div>
@@ -302,6 +250,7 @@
                                     <수정 권한>
                                 </label>
                             </div>
+                            <br>
                             <div id="example2_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
                                 <div class="row">
                                     <div class="col-sm-6"></div>
@@ -316,143 +265,128 @@
                                                 <div>
                                                     <label>부서/팀 :</label>
                                                     &emsp;
-                                                    <select name="부서">
-                                                        <option value="개발팀">개발팀</option>
-<<<<<<< HEAD
-=======
-                                                        <option value="법무팀">법무팀</option>
->>>>>>> e96389c62b0c40b596d565947d1e477cb833bf2e
+                                                    <select id="testList" class="form-control margin-bottom">
+                                                        <option value="">선택</option>
+                                                        <option>개발부</option>
+                                                        <option>인사부</option>
+                                                        <option>법무부</option>
+                                                        <!--                                                        <option v-for="dept in list">{{dept.department}}</option>-->
                                                     </select>
-                                                    &nbsp;
+                                                    <!--                                                    <select name="부서">-->
+                                                    <!--                                                        <option value="개발팀">개발팀</option>-->
+                                                    <!--                                                    </select>-->
+                                                    &nbsp;&nbsp;&nbsp; &nbsp;
                                                     <button id="addMDept" type="submit"
                                                             class="btn btn-primary bg-light-blue-gradient margin-bottom">
-<<<<<<< HEAD
                                                         추가
-=======
-                                                        조회
->>>>>>> e96389c62b0c40b596d565947d1e477cb833bf2e
                                                     </button>
                                                 </div>
-                                                <ul>
-                                                    <li display:block; background:#000; float:left; list-style:none;
-<<<<<<< HEAD
-                                                        >{{itemList.department_idx}}</li>
-=======
-                                                        th:text="${data.department_idx}"></li>
->>>>>>> e96389c62b0c40b596d565947d1e477cb833bf2e
-                                                </ul>
+                                                <div >
+                                                    <li id="authDeptListM">부서 : 법무부, </li>
+                                                    <!--                                                    <li v-for="authDept in list" display:block; background:#000; float:left;-->
+                                                    <!--                                                        list-style:none;-->
+                                                    <!--                                                    >{{authDept.departmentidx}}-->
+                                                    <!--                                                    </li>-->
+
+                                                </div>
+                                                <br>
                                             </tr>
                                             <tr>
                                                 <div>
                                                     <label>팀 :</label>
                                                     &emsp;
-                                                    <select name="부서">
-                                                        <option value="개발팀">개발팀</option>
-<<<<<<< HEAD
-=======
-                                                        <option value="법무팀">법무팀</option>
->>>>>>> e96389c62b0c40b596d565947d1e477cb833bf2e
+                                                    <select name="부서" class="form-control margin-bottom">
+                                                        <option value="">선택</option>
+                                                        <option>개발부</option>
+                                                        <option>인사부</option>
+                                                        <option>법무부</option>
+                                                        <!--                                                        <option value="개발팀">개발팀</option>-->
                                                     </select>
                                                     &nbsp;
-                                                    <select name="팀">
-                                                        <option value="개발1팀">개발1팀</option>
-<<<<<<< HEAD
-=======
-                                                        <option value="개발2팀">개발2팀</option>
->>>>>>> e96389c62b0c40b596d565947d1e477cb833bf2e
+                                                    <select name="팀" class="form-control margin-bottom">
+                                                        <option value="">선택</option>
+                                                        <option>개발1팀</option>
+                                                        <option>개발2팀</option>
+                                                        <!--                                                        <option value="개발1팀">개발1팀</option>-->
                                                     </select>
-                                                    &nbsp;
+                                                    &nbsp;&nbsp; &nbsp;
                                                     <button id="addMTeam" type="submit"
                                                             class="btn btn-primary bg-light-blue-gradient margin-bottom">
-<<<<<<< HEAD
                                                         추가
-=======
-                                                        조회
->>>>>>> e96389c62b0c40b596d565947d1e477cb833bf2e
                                                     </button>
                                                 </div>
-                                                <ul>
-                                                    <li display:block; background:#000; float:left; list-style:none;
-<<<<<<< HEAD
-                                                        >{{itemList.team_idx}}</li>
-=======
-                                                        th:text="${data.team_idx}"></li>
->>>>>>> e96389c62b0c40b596d565947d1e477cb833bf2e
-                                                </ul>
+                                                <div >
+                                                    <li id="authTeamListM">팀 : 법무 1팀, 법무 2팀, </li>
+                                                    <!--                                                    <li v-for="authTeam in list" display:block; background:#000; float:left;-->
+                                                    <!--                                                        list-style:none;-->
+                                                    <!--                                                    >{{authTeam.teamidx}}-->
+                                                    <!--                                                    </li>-->
+
+                                                </div>
+                                                <br>
                                             </tr>
                                             <tr>
                                                 <div>
                                                     <label>개인 :</label>
                                                     &emsp;
-                                                    <select name="부서">
-                                                        <option value="개발팀">개발팀</option>
-<<<<<<< HEAD
-=======
-                                                        <option value="법무팀">법무팀</option>
->>>>>>> e96389c62b0c40b596d565947d1e477cb833bf2e
+                                                    <select name="부서" class="form-control margin-bottom">
+                                                        <option value="">선택</option>
+                                                        <option>개발부</option>
+                                                        <option>인사부</option>
+                                                        <option>법무부</option>
                                                     </select>
                                                     &nbsp;
-                                                    <select name="팀">
-                                                        <option value="개발1팀">개발1팀</option>
-<<<<<<< HEAD
-=======
-                                                        <option value="개발2팀">개발2팀</option>
->>>>>>> e96389c62b0c40b596d565947d1e477cb833bf2e
+                                                    <select name="팀" class="form-control margin-bottom">
+                                                        <option value="">선택</option>
+                                                        <option>개발1팀</option>
+                                                        <option>개발2팀</option>
                                                     </select>
                                                     &nbsp;
-                                                    <select name="이름">
-                                                        <option value="홍길동">홍길동</option>
-<<<<<<< HEAD
-=======
-                                                        <option value="아무개">아무개</option>
->>>>>>> e96389c62b0c40b596d565947d1e477cb833bf2e
+                                                    <select name="이름" class="form-control margin-bottom">
+                                                        <option value="">선택</option>
+                                                        <option>3030</option>
+                                                        <option>khs</option>
                                                     </select>
-                                                    &nbsp;
+                                                    &nbsp;&nbsp; &nbsp;
                                                     <button id="addMPerson" type="submit"
                                                             class="btn btn-primary bg-light-blue-gradient margin-bottom">
-<<<<<<< HEAD
                                                         추가
-=======
-                                                        조회
->>>>>>> e96389c62b0c40b596d565947d1e477cb833bf2e
                                                     </button>
                                                 </div>
-                                                <ul>
-                                                    <li display:block; background:#000; float:left; list-style:none;
-<<<<<<< HEAD
-                                                        >{{itemList.useridx}}</li>
-=======
-                                                        th:text="${data.useridx}"></li>
->>>>>>> e96389c62b0c40b596d565947d1e477cb833bf2e
-                                                </ul>
+                                                <div >
+                                                    <li id="authUserListM">사용자 : 남상우, </li>
+                                                    <!--                                                    <li v-for="authuser in list" display:block; background:#000; float:left;-->
+                                                    <!--                                                        list-style:none;-->
+                                                    <!--                                                    >{{authuser.useridx}}-->
+                                                    <!--                                                    </li>-->
+
+                                                </div>
                                             </tr>
+
+
+
                                         </table>
                                     </div>
                                 </div>
                             </div>
 
-
-                            <p>
-                            <div class="pull-right">
-<<<<<<< HEAD
-                                <button type="button" class="btn btn-primary bg-light-blue-gradient pull-right"
-                                        onclick="location.href ='/pages/auth' ">확인
-                                </button>
-=======
-                                <button type="button" class="btn btn-primary bg-light-blue-gradient pull-right" onclick="location.href ='/pages/auth' ">확인</button>
->>>>>>> e96389c62b0c40b596d565947d1e477cb833bf2e
-
-                            </div>
-                            </p>
                         </div>
                     </div>
                 </div>
 
             </div>
+            <p>
+            <div class="pull-right" style="text-align: center;">
+                <button id="saveBtn" type="button" class="btn btn-primary bg-light-blue-gradient "
+                >확인
+                </button>
 
-
+            </div>
+            </p>
         </section>
+
     </div>
+
     <!-- Content End -->
 
     <!-- Footer Start -->
@@ -460,11 +394,7 @@
     <!-- Footer End -->
 
     <!-- controlSidebar Start -->
-<<<<<<< HEAD
     <div th:replace="fragment/controlSidebar :: controlSidebar"></div>
-=======
-    <!--    <div th:replace="fragment/controlSidebar :: controlSidebar"></div>-->
->>>>>>> e96389c62b0c40b596d565947d1e477cb833bf2e
     <!-- controlSidebar End -->
 
 

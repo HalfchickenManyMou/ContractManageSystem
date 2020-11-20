@@ -4,13 +4,9 @@ import com.example.study.ifs.CrudInterface;
 import com.example.study.model.entity.AuthUser;
 import com.example.study.model.network.Header;
 import com.example.study.model.network.request.AuthUserRequest;
-<<<<<<< HEAD
-import com.example.study.model.network.response.AuthUserResponse;
-=======
 import com.example.study.model.network.request.DepartmentRequest;
 import com.example.study.model.network.response.AuthUserResponse;
 import com.example.study.model.network.response.DepartmentResponse;
->>>>>>> e96389c62b0c40b596d565947d1e477cb833bf2e
 import com.example.study.repository.AuthUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,19 +28,11 @@ public class AuthUserApiLogicService implements CrudInterface<AuthUserRequest, A
         return Optional.ofNullable(request.getData())
                 .map(au -> {
                     AuthUser authuser = AuthUser.builder()
-<<<<<<< HEAD
                             .useridx(au.getUseridx())
                             .build();
                     return authuser;
                 })
                 .map(au -> authuserRepository.save(au))
-=======
-                            .authuser(au.getAuthuser())
-                            .build();
-                    return authuser;
-                })
-                .map(dpt -> authuserRepository.save(dpt))
->>>>>>> e96389c62b0c40b596d565947d1e477cb833bf2e
                 .map(saved -> response(saved))
                 .map(Header::OK)
                 .orElseGet( () -> Header.ERROR("데이터 없음"));
@@ -73,11 +61,7 @@ public class AuthUserApiLogicService implements CrudInterface<AuthUserRequest, A
         return Optional.ofNullable(request.getData())
                 .map(body -> authuserRepository.findByIdx(body.getIdx())
                         .map(au -> {
-<<<<<<< HEAD
                             au.setUseridx(body.getUseridx());
-=======
-                            au.setAuthuser(body.getAuthuser());
->>>>>>> e96389c62b0c40b596d565947d1e477cb833bf2e
                             return au;
                         })
                         .map(au -> authuserRepository.save(au))
@@ -102,17 +86,11 @@ public class AuthUserApiLogicService implements CrudInterface<AuthUserRequest, A
     public AuthUserResponse response(AuthUser authuser){
         AuthUserResponse body = AuthUserResponse.builder()
                 .idx(authuser.getIdx())
-<<<<<<< HEAD
                 .contract_idx(authuser.getContract_idx())
                 .useridx(authuser.getUseridx())
                 .team_idx(authuser.getTeam_idx())
                 .department_idx(authuser.getDepartment_idx())
                 .auth_type(authuser.getAuth_type())
-=======
-                .authuser(authuser.getAuthuser())
-//                TODO : stackOverFlow 에러 해결 필요
-//                .teamList(department.getTeamList())
->>>>>>> e96389c62b0c40b596d565947d1e477cb833bf2e
                 .build();
         return body;
     }
