@@ -33,11 +33,11 @@ transparent 25%, transparent 50%, rgba(255,255,255,0.15) 50%, rgba(255,255,255,0
     filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#30405D', endColorstr='#434F66', GradientType=0) !important;
     color:#dfdfdf}
 
-.navbar.dark{background-color:#30405D!important;}
-.main-header.dark>a{background-color:#2A364C!important;}
+.navbar.dark{background-color:#d44242!important;}
+.main-header.dark>a{background-color:#c41d1d!important;}
 .btn-primary.dark{background-color: #2765AA!important;}
 .btn-primary.dark{background-color: #2765AA!important;}
-
+.main-sidebar{background-color: #9f191f!important;}
 .CheckSelector{margin-right:10px}
 
 .row-justify-center{justify-content: center}
