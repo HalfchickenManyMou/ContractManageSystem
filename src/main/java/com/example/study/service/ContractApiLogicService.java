@@ -87,20 +87,18 @@ public class ContractApiLogicService implements CrudInterface<ContractRequest, C
 
     public Header<List<ContractResponse>> readAll( Pageable pageable, ContractRequest request ) {
 
-        System.out.println("request readAll : "+request);
-
         Page<Contract> contracts = ContractRepository.findAll(
                 ContractSpec.idx( request.getIdx() ).and(
-                        ContractSpec.contractName(request.getName())).and(
-                        ContractSpec.register_user(request.getRegisterUser())).and(
-                        ContractSpec.owner_name(request.getOwnerName())).and(
-                        ContractSpec.owner_business_number( request.getOwnerBusinessNumber())).and(
-                        ContractSpec.owner_address( request.getOwnerAddress())).and(
-                        ContractSpec.ohter_name( request.getOtherName() )).and(
-                        ContractSpec.other_business_number( request.getOtherBusinessNumber())).and(
-                        ContractSpec.other_address( request.getOtherAddress())).and(
-                        ContractSpec.start_date( request.getStartDate())).and(
-                        ContractSpec.end_date( request.getEndDate()))
+                ContractSpec.contractName(request.getName())).and(
+                ContractSpec.register_user(request.getRegisterUser())).and(
+                ContractSpec.owner_name(request.getOwnerName())).and(
+                ContractSpec.owner_business_number( request.getOwnerBusinessNumber())).and(
+                ContractSpec.owner_address( request.getOwnerAddress())).and(
+                ContractSpec.ohter_name( request.getOtherName() )).and(
+                ContractSpec.other_business_number( request.getOtherBusinessNumber())).and(
+                ContractSpec.other_address( request.getOtherAddress())).and(
+                ContractSpec.start_date( request.getStartDate())).and(
+                ContractSpec.end_date( request.getEndDate()))
 
                 , pageable );
 

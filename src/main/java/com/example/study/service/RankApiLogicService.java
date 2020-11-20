@@ -1,5 +1,6 @@
 package com.example.study.service;
 
+import com.example.study.model.entity.Department;
 import com.example.study.model.entity.Ranks;
 import com.example.study.model.network.Header;
 import com.example.study.model.network.response.RankResponse;
@@ -8,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -50,5 +53,13 @@ public class RankApiLogicService{
                 .rankName(ranks.getRankName())
                 .build();
         return body;
+    }
+
+    public Header readList( ) {
+        List<Ranks> departments = rankRepository.findAll();
+        List<List> responsesList = departments.stream()
+                .map(rank -> new ArrayList( Arrays.asList( rank.getIdx(), rank.getRankName() ) ) )
+                .collect(Collectors.toList());
+        return Header.OK(responsesList);
     }
 }

@@ -22,4 +22,10 @@ public class UserRequest {
     private Department department;
     private Team team;
     private Ranks rank;
+
+    private Integer departmentIdx;
+    private Integer teamIdx;
+    private Integer rankIdx;
+
+
 }

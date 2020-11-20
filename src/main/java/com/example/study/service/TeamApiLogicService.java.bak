@@ -2,8 +2,11 @@ package com.example.study.service;
 
 
 import com.example.study.ifs.CrudInterface;
+<<<<<<< HEAD
 import com.example.study.model.entity.Contract;
+=======
 import com.example.study.model.entity.Ranks;
+>>>>>>> f1ee785de749aeb37028dfdb2bb2217c6072cb36
 import com.example.study.model.entity.Team;
 import com.example.study.model.network.Header;
 import com.example.study.model.network.request.TeamRequest;
@@ -100,19 +103,21 @@ public class TeamApiLogicService implements CrudInterface<TeamRequest, TeamRespo
                .build();
         return body;
     }
-	public Header<List<TeamResponse>> readAll() {
+
+<<<<<<< HEAD
+    public Header<List<TeamResponse>> readAll() {
         List<Team> contracts = teamRepository.findAll();
         List<TeamResponse> responsesList = contracts.stream()
                 .map(r -> response(r))
                 .collect(Collectors.toList());
 
-        return Header.OK(responsesList);
-    }
+=======
     public Header readList( ) {
         List<Team> departments = teamRepository.findAll();
         List<List> responsesList = departments.stream()
                 .map(team -> new ArrayList( Arrays.asList( team.getIdx(), team.getTeam() ) ) )
                 .collect(Collectors.toList());
+>>>>>>> f1ee785de749aeb37028dfdb2bb2217c6072cb36
         return Header.OK(responsesList);
     }
 

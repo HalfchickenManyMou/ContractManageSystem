@@ -2,6 +2,7 @@ package com.example.study.controller.api;
 
 import com.example.study.model.entity.Ranks;
 import com.example.study.model.network.Header;
+import com.example.study.model.network.response.DepartmentResponse;
 import com.example.study.model.network.response.RankResponse;
 import com.example.study.service.RankApiLogicService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,5 +31,10 @@ public class RankApiController{
     @DeleteMapping("/rank/{idx}")
     public Header delete(@PathVariable Long idx) {
         return rankApiLogicService.delete(idx);
+    }
+
+    @GetMapping("/ranks")
+    public Header read( ) {
+        return rankApiLogicService.readList( );
     }
 }

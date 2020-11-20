@@ -1,0 +1,99 @@
+<html lang="ko"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org/" xmlns:v-on="http://www.w3.org/1999/xhtml">
+
+<div id="userModal" class="modal fade" tabindex="-1" role="dialog"  th:fragment="userModal"  >
+    <div class="modal-dialog modal-lg" role="document" >
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" v-on:click="closeHandler"><span aria-hidden="true">&times;</span></button>
+                <h4 v-if="!modalMode" class="modal-title"> 계약 관리 등록 </h4>
+                <h4 v-if="modalMode" class="modal-title">  자산 정보 수정 </h4>
+
+            </div>
+            <div class="modal-body">
+                <form id="userModalForm" >
+
+                    <!-- contract -->
+                    <div class="row row-center text-center md-3">
+                        <label class="col-sm-3 col-form-label">유저코드</label>
+                        <div class="col-sm-9">
+                            <label class="sr-only" for="user_code">유저코드</label>
+                            <input type="text" class="form-control" id="user_code" placeholder="유저코드" v-model="item.user_code">
+                        </div>
+                    </div>
+
+                    <div class="row row-center text-center md-3">
+                        <label class="col-sm-3 col-form-label">이름</label>
+                        <div class="col-sm-9">
+                            <label class="sr-only" for="name">이름</label>
+                            <input type="text" class="form-control" id="name" placeholder="이름" v-model="item.name">
+                        </div>
+                    </div>
+
+                    <div class="row row-center text-center md-3">
+                        <label class="col-sm-3 col-form-label">이메일</label>
+                        <div class="col-sm-9">
+                            <label class="sr-only" for="email">이메일</label>
+                            <input type="text" class="form-control" id="email" placeholder="이메일" v-model="item.email">
+                        </div>
+                    </div>
+
+                    <div class="row row-center text-center md-3">
+                        <label class="col-sm-3 col-form-label">부서</label>
+                        <div class="col-sm-9">
+                            <label class="sr-only" for="department_idx">부서</label>
+                            <select id="department_idx" class="form-control" v-model="item.department_idx"  style="text-align-last: center">
+                                <option value="">선택</option>
+                                <option v-for="department in departments" >{{department[1]}}</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row row-center text-center md-3">
+                        <label class="col-sm-3 col-form-label">팀</label>
+                        <div class="col-sm-9">
+                            <label class="sr-only" for="team_idx">팀</label>
+                            <select id="team_idx" class="form-control" v-model="item.team_idx"  style="text-align-last: center">
+                                <option value="">선택</option>
+                                <option v-for="team in teams" >{{team[1]}}</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row row-center text-center md-3">
+                        <label class="col-sm-3 col-form-label">직위</label>
+                        <div class="col-sm-9">
+                            <label class="sr-only" for="rank_idx">직위</label>
+                            <select id="rank_idx" class="form-control" v-model="item.rank_idx"  style="text-align-last: center">
+                                <option value="">선택</option>
+                                <option v-for="rank in ranks" >{{rank[1]}}</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row row-center text-center md-3">
+                        <label class="col-sm-3 col-form-label">전화번호</label>
+                        <div class="col-sm-9">
+                            <label class="sr-only" for="phone_number">전화번호</label>
+                            <input type="text" class="form-control col-sm-3" id="phone_number" placeholder="전화번호" v-model="item.phone_number" >
+                        </div>
+                    </div>
+
+
+                </form>
+            </div>
+
+            <div class="modal-footer">
+
+                <button v-if="!modalMode" type="button" class="btn btn-primary" v-on:click="saveHandler" >      Save</button>
+                <button v-if="modalMode" type="button" class="btn btn-danger"   v-on:click="deleteHandler(item.user_code)" >    delete</button>
+                <button v-if="modalMode"  type="button" class="btn btn-primary" v-on:click="updateHandler" >    Save changes</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" v-on:click="closeHandler">   Close</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+</html>
+

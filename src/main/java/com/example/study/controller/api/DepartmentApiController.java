@@ -61,4 +61,9 @@ public class DepartmentApiController implements CrudInterface<DepartmentRequest,
     public Header bulkUpdate(@PathVariable Long idx, @RequestBody Header<DepartmentRequest> request){
         return departmentApiLogicService.bulkUpdate(request, idx);
     }
+
+    @GetMapping("/departments")
+    public Header read( ) {
+        return departmentApiLogicService.readList( );
+    }
 }

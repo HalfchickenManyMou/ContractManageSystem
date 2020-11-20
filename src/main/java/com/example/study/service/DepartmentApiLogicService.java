@@ -12,6 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -127,5 +130,12 @@ public class DepartmentApiLogicService implements CrudInterface<DepartmentReques
         return body;
     }
 
+    public Header readList( ) {
+        List<Department> departments = departmentRepository.findAll();
+        List<List> responsesList = departments.stream()
+                .map(dpt -> new ArrayList( Arrays.asList( dpt.getIdx(), dpt.getDepartment() ) ) )
+                .collect(Collectors.toList());
+        return Header.OK(responsesList);
+    }
 
 }
