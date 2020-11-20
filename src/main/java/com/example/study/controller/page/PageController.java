@@ -110,4 +110,9 @@ public class PageController {
     public ModelAndView contractUpdate(){
         return new ModelAndView("/pages/contractUpdatePage");
     }
+
+    @RequestMapping(path={"/testPage"})
+    public ModelAndView test(){
+        return new ModelAndView("/pages/testPage");
+    }
 }
