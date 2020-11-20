@@ -1,0 +1,136 @@
+<html lang="ko"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org/" xmlns:v-on="http://www.w3.org/1999/xhtml">
+
+<div id="contractModal" class="modal fade" tabindex="-1" role="dialog"  th:fragment="contractModal"  >
+    <div class="modal-dialog modal-lg" role="document" >
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" v-on:click="closeHandler"><span aria-hidden="true">&times;</span></button>
+                <h4 v-if="!modalMode" class="modal-title"> 계약 관리 등록 </h4>
+                <h4 v-if="modalMode" class="modal-title">  자산 정보 수정 </h4>
+
+            </div>
+            <div class="modal-body">
+                <form id="contractModalForm" >
+
+                    <!-- contract -->
+                    <div class="row row-center text-center md-3">
+                        <label class="col-sm-3 col-form-label">계약서idx</label>
+                        <div class="col-sm-9">
+                            <label class="sr-only" for="idx">계약서idx</label>
+                            <input type="text" class="form-control" id="idx" placeholder="계약서번호" v-model="item.idx">
+                        </div>
+                    </div>
+
+                    <div class="row row-center text-center md-3">
+                        <label class="col-sm-3 col-form-label">계약서번호</label>
+                        <div class="col-sm-9">
+                            <label class="sr-only" for="code">계약서번호</label>
+                            <input type="text" class="form-control" id="code" placeholder="계약서번호" v-model="item.code">
+                        </div>
+                    </div>
+
+                    <div class="row row-center text-center md-3">
+                        <label class="col-sm-3 col-form-label">계약서명</label>
+                        <div class="col-sm-9">
+                            <label class="sr-only" for="contractName">계약서명</label>
+                            <input type="text" class="form-control" id="contractName" placeholder="계약서명" v-model="item.name">
+                        </div>
+                    </div>
+
+                    <div class="row row-center text-center md-3">
+                        <label class="col-sm-3 col-form-label">담당자</label>
+                        <div class="col-sm-9">
+                            <label class="sr-only" for="register_user">담당자</label>
+                            <input type="text" class="form-control col-sm-3" id="register_user" placeholder="담당자" v-model="item.register_user" >
+                        </div>
+                    </div>
+
+                    <div class="row row-center text-center md-3">
+                        <label class="col-sm-3 col-form-label">계약종류</label>
+                        <div class="col-sm-9">
+                            <label class="sr-only" for="contract_type_idx">계약종류</label>
+                            <input type="text" class="form-control col-sm-3" id="contract_type_idx" placeholder="계약종류" v-model="item.contract_type_idx" >
+                        </div>
+                    </div>
+
+                    <div class="row row-center text-center md-3">
+                        <label class="col-sm-4 col-form-label">시작일</label>
+                        <div class="col-sm-4">
+                            <input type="text" id="start_date_modal" class="form-control col-sm-3" placeholder="시작일" v-model="item.start_date">
+                        </div>
+                        <label class="col-sm-4 col-form-label">만료일</label>
+                        <div class="col-sm-4">
+                            <input type="text" id="end_date_modal" class="form-control col-sm-3" placeholder="만료일" v-model="item.end_date">
+                        </div>
+                    </div>
+
+
+                    <!-- owner -->
+                    <div class="row row-center text-center md-3">
+                        <label class="col-sm-3 col-form-label">갑.이름</label>
+                        <div class="col-sm-9">
+                            <label class="sr-only" for="owner_name">갑.이름</label>
+                            <input type="text" class="form-control" id="owner_name" placeholder="갑.이름" v-model="item.owner_name">
+                        </div>
+                    </div>
+
+                    <div class="row row-center text-center md-3">
+                        <label class="col-sm-3 col-form-label">갑.사업자번호</label>
+                        <div class="col-sm-9">
+                            <label class="sr-only" for="owner_business_nnumber">갑.사업자번호</label>
+                            <input type="text" class="form-control" id="owner_business_nnumber" placeholder="갑.사업자번호" v-model="item.owner_business_number">
+                        </div>
+                    </div>
+
+                    <div class="row row-center text-center md-3">
+                        <label class="col-sm-3 col-form-label">갑.주소</label>
+                        <div class="col-sm-9">
+                            <label class="sr-only" for="owner_address">갑.주소</label>
+                            <input type="text" class="form-control col-sm-3" id="owner_address" placeholder="갑.주소" v-model="item.owner_address" >
+                        </div>
+                    </div>
+
+
+                    <!-- other -->
+                    <div class="row row-center text-center md-3">
+                        <label class="col-sm-3 col-form-label">을.이름</label>
+                        <div class="col-sm-9">
+                            <label class="sr-only" for="other_name">을.이름</label>
+                            <input type="text" class="form-control" id="other_name" placeholder="을.이름" v-model="item.other_name">
+                        </div>
+                    </div>
+
+                    <div class="row row-center text-center md-3">
+                        <label class="col-sm-3 col-form-label">을.사업자번호</label>
+                        <div class="col-sm-9">
+                            <label class="sr-only" for="other_business_number">을.사업자번호</label>
+                            <input type="text" class="form-control" id="other_business_number" placeholder="을.사업자번호" v-model="item.other_business_number">
+                        </div>
+                    </div>
+
+                    <div class="row row-center text-center md-3">
+                        <label class="col-sm-3 col-form-label">을.주소</label>
+                        <div class="col-sm-9">
+                            <label class="sr-only" for="other_address">을.주소</label>
+                            <input type="text" class="form-control col-sm-3" id="other_address" placeholder="을.주소" v-model="item.other_address" >
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+
+            <div class="modal-footer">
+
+                <button v-if="!modalMode" type="button" class="btn btn-primary" v-on:click="saveHandler" >      Save</button>
+                <button v-if="modalMode" type="button" class="btn btn-danger"   v-on:click="deleteHandler(item.idx)" >    delete</button>
+                <button v-if="modalMode"  type="button" class="btn btn-primary" v-on:click="updateHandler" >    Save changes</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" v-on:click="closeHandler">   Close</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+</html>
+

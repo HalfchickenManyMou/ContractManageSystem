@@ -1,0 +1,67 @@
+<html lang="ko"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org/" xmlns:v-on="http://www.w3.org/1999/xhtml">
+
+<div id="departmentDetailModal" class="modal fade" tabindex="-1" role="dialog"  th:fragment="departmentDetailModal"  >
+    <div class="modal-dialog modal-lg" role="document" >
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" v-on:click="closeHandler"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">부서/팀 정보</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <form id="itemModalForm" >
+                        <div class="col-sm-12">
+                            <div class="form-group row row-center text-center">
+                                <label class="col-sm-2 col-form-label">부서명</label>
+                                <div class="col-sm-4">
+                                    <label class="sr-only" for="departmentName"></label>
+                                    <input type="text" class="form-control" id="departmentName" v-model="departmentInfo.department">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="row">
+                    <div id="example2_wrapper" class="dataTables_wrapper form-inline dt-bootstrap" style="margin-left: 1.5em; margin-right: 1.5em;">
+                        <div class="col-sm-6">
+                            <div class="form-group row row-center text-center">
+                                <table id="" class="table table-bordered table-hover dataTable font-14"
+                                       role="grid" aria-describedby="example2_info">
+                                    <thead>
+                                    <tr role="row">
+                                        <th class="text-center bg-dark-blue-gradient" tabindex="0" rowspan="1" colspan="1" width="20%">
+                                            번호
+                                        </th>
+                                        <th class="text-center bg-dark-blue-gradient" tabindex="0" rowspan="1" colspan="1" width="80%">
+                                            팀
+                                        </th>
+                                        <th class="text-center bg-dark-blue-gradient" tabindex="0" rowspan="1" colspan="1" width="10%">
+                                            <button id="addBtn" type="button" class="btn btn-default btn-xs" v-on:click="addBtn">추가</button>
+                                        </th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="teamList">
+                                    <tr role="row" class="odd" v-for="(dto, index) in departmentInfo.team_list">
+                                        <td class="text-center">{{index + 1}}</td>
+                                        <td name = "team" class="text-center">{{dto.team}}</td>
+                                        <td class="text-center"><button name = "deleteBtn" type="button" class="btn btn-danger btn-xs" v-on:click="deleteLine">삭제</button></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" v-on:click="modifyBtn">수정</button>
+                <button type="button" class="btn btn-danger" v-on:click="totalDeleteBtn">삭제</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" v-on:click="closeHandler">닫기</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+</html>
+

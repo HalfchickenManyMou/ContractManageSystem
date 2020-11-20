@@ -1,0 +1,291 @@
+<html lang="ko"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org/" xmlns:v-on="http://www.w3.org/1999/xhtml"
+      xmlns:v-bind="http://www.w3.org/1999/xhtml">
+
+<!-- head Start-->
+<div th:replace="fragment/head :: head"></div>
+<!-- head End-->
+
+
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+
+
+    <!-- HEADER Start -->
+    <div th:replace="fragment/headerTitle :: headerTitle"></div>
+    <!-- HEADER End -->
+
+    <!-- Side Menu Start -->
+    <div th:replace="fragment/sideMenu :: sideMenu(${code},${menuList})"></div>
+    <!-- Side Menu End -->
+
+
+    <!-- Contents-->
+    <div class="content-wrapper">
+        <section class="content-header">
+            <h1>
+                계약 관리
+                <small>계약상세내역</small>
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-dashboard"></i> 계약 관리</a></li>
+                <li class="active">계약서 조회 및 등록</li>
+            </ol>
+        </section>
+
+        <section class="content">
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="box">
+                        <div class="box-header">
+                            <h3 class="box-title">계약상세정보</h3>
+                        </div>
+                        <!-- /.box-header -->
+                        <div class="box-body">
+                            <form id="queryConditions" >
+
+                                <div class="row col-sm-12">
+                                    <div class="form-group  pull-right">
+                                        <button type="button" class="btn btn-sm btn-primary dark" v-on:click="searchContract"> 조회 </button>
+                                        <button type="button" class="btn btn-sm btn-primary dark" v-on:click="createContract"> 저장 </button>
+                                        <button type="button" class="btn btn-sm btn-primary dark"> 엑셀업로드 </button>
+                                    </div>
+                                </div>
+
+
+                                <div class="row" >
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+
+                                            <div class="row row-center text-center md-3">
+                                                <label class="col-sm-3 col-form-label">계약서번호</label>
+                                                <div class="col-sm-9">
+                                                    <label class="sr-only" for="code">계약서번호</label>
+                                                    <input type="text" class="form-control" id="code" placeholder="계약서번호" v-model="item.code">
+                                                </div>
+                                            </div>
+
+                                            <div class="row row-center text-center md-3">
+                                                <label class="col-sm-3 col-form-label">계약서명</label>
+                                                <div class="col-sm-9">
+                                                    <label class="sr-only" for="contractName">계약서명</label>
+                                                    <input type="text" class="form-control" id="contractName" placeholder="계약서명" v-model="item.name">
+                                                </div>
+                                            </div>
+
+                                            <div class="row row-center text-center md-3">
+                                                <label class="col-sm-3 col-form-label">담당자</label>
+                                                <div class="col-sm-9">
+                                                    <label class="sr-only" for="register_user">담당자</label>
+                                                    <input type="text" class="form-control col-sm-3" id="register_user" placeholder="담당자" v-model="item.registerUser" >
+                                                </div>
+                                            </div>
+
+                                            <div class="row row-center text-center md-3">
+                                                <label class="col-sm-3 col-form-label">계약일</label>
+                                                <div class="col-sm-4">
+                                                    <input type="text" id="start_date" class="form-control col-sm-3" placeholder="시작일" v-model="item.startDate">
+                                                </div>
+                                                <div class="col-sm-1">~</div>
+                                                <div class="col-sm-4">
+                                                    <input type="text" id="start_date_to" class="form-control col-sm-3" placeholder="종료일" v-model="item.startDateTo">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-8">
+                                        <div class="row row-center text-center">
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <div class="row row-center text-center md-3">
+                                                        <label class="col-sm-3 col-form-label">갑.이름</label>
+                                                        <div class="col-sm-9">
+                                                            <label class="sr-only" for="owner_name">갑.이름</label>
+                                                            <input type="text" class="form-control" id="owner_name" placeholder="갑.이름" v-model="item.ownerName">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row row-center text-center md-3">
+                                                        <label class="col-sm-3 col-form-label">갑.사업자번호</label>
+                                                        <div class="col-sm-9">
+                                                            <label class="sr-only" for="owner_business_nnumber">갑.사업자번호</label>
+                                                            <input type="text" class="form-control" id="owner_business_nnumber" placeholder="갑.사업자번호" v-model="item.ownerBusinessNumber">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row row-center text-center md-3">
+                                                        <label class="col-sm-3 col-form-label">갑.주소</label>
+                                                        <div class="col-sm-9">
+                                                            <label class="sr-only" for="owner_address">갑.주소</label>
+                                                            <input type="text" class="form-control col-sm-3" id="owner_address" placeholder="갑.주소" v-model="item.ownerAddress" >
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <div class="row row-center text-center md-3">
+                                                        <label class="col-sm-3 col-form-label">을.이름</label>
+                                                        <div class="col-sm-9">
+                                                            <label class="sr-only" for="other_name">을.이름</label>
+                                                            <input type="text" class="form-control" id="other_name" placeholder="을.이름" v-model="item.otherName">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row row-center text-center md-3">
+                                                        <label class="col-sm-3 col-form-label">을.사업자번호</label>
+                                                        <div class="col-sm-9">
+                                                            <label class="sr-only" for="other_business_number">을.사업자번호</label>
+                                                            <input type="text" class="form-control" id="other_business_number" placeholder="을.사업자번호" v-model="item.otherBusinessNumber">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row row-center text-center md-3">
+                                                        <label class="col-sm-3 col-form-label">을.주소</label>
+                                                        <div class="col-sm-9">
+                                                            <label class="sr-only" for="other_address">을.주소</label>
+                                                            <input type="text" class="form-control col-sm-3" id="other_address" placeholder="을.주소" v-model="item.otherAddress" >
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="row row-center text-center">
+                                            <label class="col-sm-3 col-form-label">만료일</label>
+                                            <div class="col-sm-4">
+                                                <input type="text" id="end_date" class="form-control col-sm-3" placeholder="시작일" v-model="item.endDate">
+                                            </div>
+                                            <div class="col-sm-1">~</div>
+                                            <div class="col-sm-4">
+                                                <input type="text" id="end_date_to" class="form-control col-sm-3" placeholder="종료일" v-model="item.endDateTo">
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="box">
+                        <!-- /.box-header -->
+                        <div class="box-body">
+                            <div id="contracts_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <table id="contracts_table" class="table table-bordered table-hover dataTable font-14"
+                                               role="grid" aria-describedby="example2_info">
+                                            <thead>
+                                            <tr role="row">
+                                                <th id="selectAll" class="text-center bg-dark-blue-gradient table-middle" tabindex="0" rowspan="1" colspan="1">
+                                                    <input type="checkbox" id="rowID" aria-label="Checkbox for following text input">
+                                                </th>
+                                                <th class="text-center bg-dark-blue-gradient" tabindex="0" rowspan="1" colspan="1">
+                                                    계약번호
+                                                </th>
+                                                <th class="text-center bg-dark-blue-gradient" tabindex="0" rowspan="1" colspan="1">
+                                                    계약일자 from
+                                                </th>
+                                                <th class="text-center bg-dark-blue-gradient" tabindex="0" rowspan="1" colspan="1">
+                                                    계약일자 to
+                                                </th>
+                                                <th class="text-center bg-dark-blue-gradient" tabindex="0" rowspan="1" colspan="1">
+                                                    계약서명
+                                                </th>
+                                                <th class="text-center bg-dark-blue-gradient" tabindex="0" rowspan="1" colspan="1">
+                                                    갑.이름
+                                                </th>
+                                                <th class="text-center bg-dark-blue-gradient" tabindex="0" rowspan="1" colspan="1">
+                                                    갑.사업자번호
+                                                </th>
+                                                <th class="text-center bg-dark-blue-gradient" tabindex="0" rowspan="1" colspan="1">
+                                                    갑.주소
+                                                </th>
+                                                <th class="text-center bg-dark-blue-gradient" tabindex="0" rowspan="1" colspan="1">
+                                                    을.이름
+                                                </th>
+                                            </tr>
+                                            </thead>
+                                            <tbody id="contractList">
+                                            <tr role="row" class="odd contract" v-for="(dto, idx) in contractList" >
+                                                <td class="text-center"> <input type="checkbox" aria-label="Checkbox for following text input" v-bind:index="idx"  v-bind:contractId="dto.id"> </td>
+                                                <td class="text-center" v-on:click="updateHandler(event, dto)">{{dto.code}}              </td>
+                                                <td class="text-center" v-on:click="updateHandler(event, dto)">{{dto.start_date}}            </td>
+                                                <td class="text-center" v-on:click="updateHandler(event, dto)">{{dto.end_date}}       </td>
+                                                <td class="text-center" v-on:click="updateHandler(event, dto)">{{dto.name}}    </td>
+                                                <td class="text-center" v-on:click="updateHandler(event, dto)">{{dto.owner_name}}   </td>
+                                                <td class="text-center" v-on:click="updateHandler(event, dto)">{{dto.owner_business_number}}    </td>
+                                                <td class="text-center" v-on:click="updateHandler(event, dto)">{{dto.owner_address}}      </td>
+                                                <td class="text-center" v-on:click="updateHandler(event, dto)">{{dto.other_name}}   </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div id="showPage" class="col-sm-6">
+                                        <span  class="dataTables_info" role="status" aria-live="polite">
+                                            Showing {{current_page}} to 10 of {{total_elements}} entries
+                                        </span>
+
+                                    </div>
+                                </div>
+                                <div class="row text-center col-sm-12">
+                                    <div class="dataTables_paginate paging_simple_numbers" id="pageBtn">
+                                        <ul class="pagination">
+                                            <li class="paginate_button previous" id="previousBtn">
+                                                <a href="javascript:;" v-on:click="previousClick">이전</a>
+                                            </li>
+
+                                            <li class="paginate_button" v-for="btn in btnList" v-bind:btn_id="btn" v-on:click="indexClick">
+                                                <a href="javascript:;" aria-controls="example2" v-bind:btn_id="btn">{{btn}}</a>
+                                            </li>
+
+                                            <li class="paginate_button next" id="nextBtn">
+                                                <a href="javascript:;" v-on:click="nextClick">다음</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+    </div>
+    <!-- Content End -->
+
+    <!-- Footer Start -->
+    <div th:replace="fragment/footer :: footer"></div>
+    <!-- Footer End -->
+
+    <!-- controlSidebar Start -->
+    <div th:replace="fragment/controlSidebar :: controlSidebar"></div>
+    <!-- controlSidebar End -->
+
+    <div class="control-sidebar-bg"></div>
+
+    <!--Modal Start-->
+    <div th:replace="fragment/contractModal :: contractModal"></div>
+    <!--Modal End-->
+</div>
+<script src="/app/contract.js"></script>
+</body>
+</html>

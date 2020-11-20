@@ -1,0 +1,138 @@
+<html lang="ko"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org/" xmlns:v-on="http://www.w3.org/1999/xhtml"
+      xmlns:v-bind="http://www.w3.org/1999/xhtml">
+
+<!-- head Start-->
+<div th:replace="fragment/head :: head"></div>
+<!-- head End-->
+
+
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+
+
+    <!-- HEADER Start -->
+    <div th:replace="fragment/headerTitle :: headerTitle"></div>
+    <!-- HEADER End -->
+
+    <!-- Side Menu Start -->
+    <div th:replace="fragment/sideMenu :: sideMenu(${code},${menuList})"></div>
+    <!-- Side Menu End -->
+
+
+    <!-- Contents-->
+    <div class="content-wrapper">
+        <section class="content-header">
+            <h1>
+                관리자
+                <small>사용자 추가</small>
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-dashboard"></i>관리자</a></li>
+                <li class="active">사용자 추가</li>
+            </ol>
+        </section>
+
+        <section class="content">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="box">
+                        <div class="box-header">
+                            <h3 class="box-title">사용자 추가</h3>
+                        </div>
+                        <!-- /.box-header -->
+                        <div class="box-body">
+                            <form id="registerUser">
+                                <div class="col-sm-12">
+                                    <div class="form-group row row-center">
+                                        <div class="col-sm-6">
+                                            <label class="col-sm-3 col-form-label">사원번호</label>
+                                            <div class="col-sm-5">
+                                                <label class="sr-only" for="userCode"></label>
+                                                <input type="text" class="form-control text-center" id="userCode" v-model="user.userCode">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <label class="col-sm-3 col-form-label">이메일</label>
+                                            <div class="col-sm-5">
+                                                <label class="sr-only" for="userEmail"></label>
+                                                <input type="text" class="form-control text-center" id="userEmail" v-model="user.email">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div class="form-group row row-center">
+                                        <div class="col-sm-6">
+                                            <label class="col-sm-3 col-form-label">이름</label>
+                                            <div class="col-sm-5">
+                                                <label class="sr-only" for="userName"></label>
+                                                <input type="text" class="form-control text-center" id="userName" v-model="user.name">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <label class="col-sm-3 col-form-label">전화번호</label>
+                                            <div class="col-sm-5">
+                                                <label class="sr-only" for="userPhoneNumber"></label>
+                                                <input type="text" class="form-control text-center" id="userPhoneNumber" v-model="user.phoneNumber">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div class="form-group row row-center">
+                                        <div class="col-sm-6">
+                                            <label class="col-sm-3 col-form-label">부서/팀</label>
+                                            <div class="col-sm-4">
+                                                <label class="sr-only" for="department"></label>
+                                                <select id="department" class="form-control" v-on:change="departmentHandle" v-model="selectedDepartment.department" style="text-align-last: center">
+                                                    <option v-for="department in departmentCategory">{{department.department}}</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <label class="sr-only" for="team"></label>
+                                                <select id="team" class="form-control" v-model="selectedTeam.team" v-on:change="teamHandle" style="text-align-last: center">
+                                                    <option v-for="team in selectedDepartment.team_list" >{{team.team}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <label class="col-sm-3 col-form-label">직위</label>
+                                            <div class="col-sm-4">
+                                                <label class="sr-only" for="rank"></label>
+                                                <select id="rank" class="form-control" v-on:change="rankHandle" v-model = "selectedRank.rank_name" style="text-align-last: center">
+                                                    <option v-for="rank in rankCategory" >{{rank.rank_name}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="box-footer">
+                            <div class="box-tools" style="text-align:center;">
+                                <button id="saveBtn" type="button" class="btn btn-primary">확인</button>
+                                <button id="cancelBtn" type="button" class="btn btn-primary">취소</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <!-- Content End -->
+
+    <!-- Footer Start -->
+    <div th:replace="fragment/footer :: footer"></div>
+    <!-- Footer End -->
+
+    <!-- controlSidebar Start -->
+    <div th:replace="fragment/controlSidebar :: controlSidebar"></div>
+    <!-- controlSidebar End -->
+
+    <div class="control-sidebar-bg"></div>
+
+</div>
+
+<script src="/app/userAddCopyPage.js"></script>
+</body>
+</html>
