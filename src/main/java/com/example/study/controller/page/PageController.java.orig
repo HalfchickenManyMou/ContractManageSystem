@@ -69,17 +69,20 @@ public class PageController {
                 ;
     }
 
+<<<<<<< HEAD
     @RequestMapping(path = {"/contract"})
     public ModelAndView contractPage() {
         return new ModelAndView("/pages/contractPage")
                 .addObject("menuList", sideMenuService.getSideMenu("계약관리"))
                 .addObject("code", "user")
-
+=======
+<<<<<<< HEAD
     @RequestMapping(path ={"/userAdd"})
     public ModelAndView userAdd(){
         return new ModelAndView("/pages/userAddCopyPage")
                 .addObject("menuList",sideMenuService.getSideMenu("사용자추가/복사"))
                 .addObject("code","user")
+>>>>>>> e96389c62b0c40b596d565947d1e477cb833bf2e
                 ;
     }
 
@@ -116,13 +119,14 @@ public class PageController {
     public ModelAndView contractUpdate(){
         return new ModelAndView("/pages/contractUpdatePage");
     }
-
+<<<<<<< HEAD
 
     @RequestMapping(path={"/testPage"})
     public ModelAndView test(){
         return new ModelAndView("/pages/testPage");
     }
-
+=======
+=======
 
     @RequestMapping(path = {"/authuser"})
     public ModelAndView authuserPage() {
@@ -160,4 +164,6 @@ public class PageController {
 
 
 
+>>>>>>> 1db4c611f3674d06ba7213925fd729f4fdf0275a
+>>>>>>> e96389c62b0c40b596d565947d1e477cb833bf2e
 }

@@ -18,16 +18,19 @@ public class AuthUserApiController implements CrudInterface<AuthUserRequest, Aut
     @Autowired
     AuthUserApiLogicService authuserApiLogicService;
 
+<<<<<<< HEAD
     @PostMapping("/authInquire")
     public Header<AuthUserResponse> readInquire(@PathVariable Long idx){
         return authuserApiLogicService.read(idx);
-}
+    }
+
+=======
+>>>>>>> e96389c62b0c40b596d565947d1e477cb833bf2e
     @Override
     @PostMapping("/authuser")
     public Header<AuthUserResponse> create(@RequestBody Header<AuthUserRequest> request) {
         System.out.println(request);
         return authuserApiLogicService.create(request);
-
     }
 
     @Override

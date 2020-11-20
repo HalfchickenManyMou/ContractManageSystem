@@ -15,8 +15,12 @@ repositories {
 
 dependencies {
     implementation 'org.junit.jupiter:junit-jupiter:5.4.2'
+<<<<<<< HEAD
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-security'
+=======
+    implementation 'org.junit.jupiter:junit-jupiter:5.4.2'
+>>>>>>> 1db4c611f3674d06ba7213925fd729f4fdf0275a
     compile 'org.springframework.boot:spring-boot-starter-thymeleaf'
     compile 'org.springframework.boot:spring-boot-starter-data-jpa'
     compile 'mysql:mysql-connector-java'

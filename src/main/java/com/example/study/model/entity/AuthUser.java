@@ -18,10 +18,15 @@ import java.time.LocalDateTime;
 public class AuthUser {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private Long idx;
     private Long contract_idx;
     private Integer department_idx;
     private Integer team_idx;
+    private long idx;
+    private long contract_idx;
+    private int department_idx;
+    private int team_idx;
     @Column(name="user_code")
     private String useridx;
     @Enumerated(EnumType.STRING)
@@ -30,6 +35,8 @@ public class AuthUser {
     private String registerUser;
     private LocalDateTime updateDate;
     private String updateUser;
+
+    private String authuser;
 
 }
 
