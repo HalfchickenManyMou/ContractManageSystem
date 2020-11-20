@@ -17,7 +17,7 @@
     <!-- HEADER End -->
 
     <!-- Side Menu Start -->
-    <div th:replace="fragment/sideMenu :: sideMenu(${code},${menuList})"></div>
+    <div th:replace="fragment/sideMenu :: sideMenu"></div>
     <!-- Side Menu End -->
 
 
@@ -43,9 +43,9 @@
                         <div class="box-body">
                                 <div class="row">
                                     <div class="col-md-4">
-                                        <input type="file" id="IMG_FILE" >
-                                        <div id="PREVIEW_IMG_DIV" align="center">
-
+                                        <input type="file" id="input_img" >
+                                        <div id="img_wrap" align="center">
+                                            <img id ="img"/>
                                         </div>
 
                                     </div>

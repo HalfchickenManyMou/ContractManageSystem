@@ -1,30 +1,25 @@
 (function ($) {
 
-    $('#IMG_FILE').change(function(e){
-        var reader = new FileReader();
-        reader.readAsDataURL(e.target.files[0]);
-
-        reader.onload = function  () {
-            var tempImage = new Image();
-            tempImage.src = reader.result;
-            tempImage.onload = function () {
-                var canvas = document.createElement('canvas');
-                var canvasContext = canvas.getContext("2d");
-
-                canvas.width = 100;
-                canvas.height = 100;
-
-                canvasContext.drawImage(this, 0, 0, 100, 100);
-
-                var dataURI = canvas.toDataURL("image/jpeg");
-
-                var imgTag = "<img id='PREVIEW_IMG' style='width: 35%;' src='"+dataURI+"'/>";
-                $("#PREVIEW_IMG_DIV").append(imgTag);
-            };
-        };
+     var sel_file;
+     $(document).ready(function() {
+         $("input_img").on("change",handleImgFileSelect);
     });
-
-
+    function handleImgFileSelect(e){
+        var files = e.target.files;
+        var filesArr = Array.prototype.slice.call(files);
+        filesArr.forEach(function(f){
+            if(!f.type.match("image.*")){
+                alert("확장자는 이미지 확장자만 가능.");
+                return;
+            }
+            sel_file = f;
+            var reader = new FileReader();
+            reader.onload =function (e){
+                $("#img").attr("src",e.target.result);
+            }
+            reader.readAsDataURL(f);
+        })
+    }
 })
 
 
