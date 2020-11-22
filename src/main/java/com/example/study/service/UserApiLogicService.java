@@ -60,6 +60,7 @@ public class UserApiLogicService implements CrudInterface<UserRequest, UserRespo
                 .department_idx(userRequest.getDepartmentIdx())
                 .team_idx(userRequest.getTeamIdx())
                 .rank_idx(userRequest.getRankIdx())
+                .role(userRequest.getRole())
                 .build();
 
         User inserted = userRepository.save(user);

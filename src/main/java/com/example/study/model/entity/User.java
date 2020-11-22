@@ -36,7 +36,7 @@ public class User {
 
     private Integer rank_idx;
 
-
+    private String role;
 
     @ManyToOne
     @JoinColumn(name = "department_idx" , insertable = false, updatable = false)

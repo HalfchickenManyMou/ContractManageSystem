@@ -22,6 +22,7 @@ public class UserRequest {
     private Department department;
     private Team team;
     private Ranks rank;
+    private String role;
 
     private Integer departmentIdx;
     private Integer teamIdx;

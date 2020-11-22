@@ -12,6 +12,7 @@
                name : "",
                email : "",
                phoneNumber : "",
+               role : ""
             },
             departmentCategory : [],
             rankCategory : [],
@@ -53,14 +54,18 @@
     }
 
     $("#saveBtn").on("click", function (e) {
+
+        let role = $("input[name='admin']:checked").val();
+
         let body = {
             user_code : registerUser.user.userCode,
             name : registerUser.user.name,
             email : registerUser.user.email,
             phone_number :  registerUser.user.phoneNumber,
-            department: registerUser.selectedDepartment,
-            team : registerUser.selectedTeam,
-            rank : registerUser.selectedRank
+            department_idx: registerUser.selectedDepartment.idx,
+            team_idx : registerUser.selectedTeam.idx,
+            rank_idx : registerUser.selectedRank.idx,
+            role : role
         }
         console.log(body);
 

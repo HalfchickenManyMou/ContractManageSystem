@@ -1,6 +1,7 @@
 package com.example.study.controller.api;
 
 import com.example.study.ifs.CrudInterface;
+import com.example.study.model.entity.Login;
 import com.example.study.model.network.Header;
 import com.example.study.model.network.request.UserPasswordRequest;
 import com.example.study.model.network.request.UserRequest;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import com.example.study.service.UserApiLogicService;
@@ -47,9 +49,11 @@ public class UserApiController implements CrudInterface<UserRequest, UserRespons
         return null;
     }
 
-    @GetMapping("/user/{userCode}")
-    public Header<UserResponse> readByUserCode(@PathVariable String userCode){
-        return userApiLogicService.readByUserCode(userCode);
+
+    @GetMapping("/user")
+    public Header<UserResponse> readByUserCode(Authentication authentication){
+        Login loginUser = (Login) authentication.getPrincipal();
+        return userApiLogicService.readByUserCode(loginUser.getUser().getUserCode());
     }
 
     @PutMapping("/user/password")
@@ -57,9 +61,10 @@ public class UserApiController implements CrudInterface<UserRequest, UserRespons
         return userApiLogicService.updatePassword(request);
     }
 
-    @DeleteMapping("/user/{userCode}")
-    public Header deleteByUserCode(@PathVariable String userCode){
-        return userApiLogicService.deleteByUserCode(userCode);
+    @DeleteMapping("/user")
+    public Header deleteByUserCode(Authentication authentication){
+        Login loginUser = (Login) authentication.getPrincipal();
+        return userApiLogicService.deleteByUserCode(loginUser.getUser().getUserCode());
     }
 
 

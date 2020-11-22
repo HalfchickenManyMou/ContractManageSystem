@@ -20,6 +20,11 @@ public class PageController {
     @Autowired
     SideMenuService sideMenuService;
 
+    @RequestMapping("/login")
+    public ModelAndView loginPage(){
+        return new ModelAndView("/pages/loginPage");
+    }
+
     @RequestMapping(path = {"/dashboard"})
     public ModelAndView dashboardPage() {
         return new ModelAndView("/pages/dashboardPage")

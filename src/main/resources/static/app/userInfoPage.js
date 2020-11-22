@@ -22,7 +22,7 @@
     //데이터 받아오기
     function getData(){
         //TODO : 로그인한 유저로 변경
-        $.get("/api/user/test1", function (res) {
+        $.get("/api/user", function (res) {
             console.log(res);
             userInfo.info = res.data;
         })

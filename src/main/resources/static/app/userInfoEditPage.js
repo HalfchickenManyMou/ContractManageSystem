@@ -82,7 +82,7 @@
 
     //데이터 받아오기
     function getData(){
-        $.get("/api/user/test1", function (res) {
+        $.get("/api/user", function (res) {
             console.log(res.data);
             editUserInfo.user = res.data;
             editUserInfo.selectedDepartment = res.data.department;
@@ -127,11 +127,11 @@
             name : user.name,
             email : user.email,
             phone_number : user.phone_number,
-            department : editUserInfo.selectedDepartment,
-            team : editUserInfo.selectedTeam,
-            rank : editUserInfo.selectedRank
+            department_idx : editUserInfo.selectedDepartment.idx,
+            team_idx : editUserInfo.selectedTeam.idx,
+            rank_idx : editUserInfo.selectedRank.idx
         };
-        //console.log(data);
+        //console.log(body);
         if(confirm("수정하시겠습니까?")) {
             $.ajax({
                 type: 'PUT',
