@@ -34,10 +34,47 @@
         el : '.teamList',
         data : {
             list : [],
+
         },methods:{
 
         }
     });
+
+
+
+    //  전체 user 정보
+    let userMList = new Vue({
+        el: '.userMList',
+        data : {
+            list:[],
+        },methods:{
+
+        }
+    })
+
+    // 전체 dept 종류
+    let deptMList= new Vue({
+        el : '.deptMList',
+        data : {
+            list : [],
+        },methods:{
+
+        }
+    });
+
+    // 전체 team 종류
+    let teamMList= new Vue({
+        el : '.teamMList',
+        data : {
+            list : [],
+
+        },methods:{
+
+        }
+    });
+
+
+
 
     //해당 계약서의 권한을 가진 부서 정보
     let authDeptList= new Vue({
@@ -122,19 +159,7 @@
     // }
 
     function getData( ) {
-        // // var idx = getParameterByName('idx');
-        //  var link= document.location.href;
-        //  //var idx = link.split("?");
-        //  var path = '${pathIdx}'
-        //  console.log(path);
-        //  debugger
-        //  $.get("/api/contract?id="+idx,function(res){
-        //      itemList.list=res.data;
-        //  });
-        //
-        //  $.get("/api/authuser?id="+idx, function(res){
-        //     userList.list=res.data;
-        //  });
+
         itemList.list.idx=2;
         itemList.list.name="name";
         itemList.list.contractTypeIdx="계약서 타입 3";
@@ -142,16 +167,19 @@
         debugger
         $.get("/api/department", function (res) {
             deptList.list = res.data;
-            testList.list=res.data;
+            deptMList.list=res.data;
+
         });
         debugger
 
         $.get("/api/team", function (res) {
             teamList.list = res.data;
+            teamMList.list=res.data;
         });
 
         $.get("/api/authuser", function(res){
             userList.list=res.data;
+            userMList.list=res.data;
         })
 
         $.get("/api/authdept", function(res){
@@ -191,17 +219,17 @@
     //계약서 수정 권한 추가
     $("#addMDept").on("click", function (e) {
         let tbody = $("#authDeptListM");
-        tbody.append($(".deptList option:selected").val()+',  ');
+        tbody.append($(".deptMList option:selected").val()+',  ');
 
     });
     $("#addMTeam").on("click", function (e) {
         let tbody = $("#authTeamListM");
-        tbody.append($(".teamList option:selected").val()+', ');
+        tbody.append($(".teamMList option:selected").val()+', ');
 
     });
     $("#addMPerson").on("click", function (e) {
         let tbody = $("#authUserListM");
-        tbody.append($(".userList option:selected").val()+', ');
+        tbody.append($(".userMList option:selected").val()+', ');
 
     });
 

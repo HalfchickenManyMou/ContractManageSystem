@@ -54,7 +54,7 @@
     <div class="content-wrapper">
         <section class="content-header">
             <h1>
-                계약서 권한 관리2
+                계약서 권한 관리
             </h1>
             <ol class="breadcrumb">
             </ol>
@@ -265,7 +265,7 @@
                                                 <div>
                                                     <label>부서/팀 :</label>
                                                     &emsp;
-                                                    <select id="testList" class="form-control margin-bottom">
+                                                    <select class="deptMList form-control margin-bottom">
                                                         <option value="">선택</option>
                                                         <option>개발부</option>
                                                         <option>인사부</option>
@@ -303,7 +303,7 @@
                                                         <!--                                                        <option value="개발팀">개발팀</option>-->
                                                     </select>
                                                     &nbsp;
-                                                    <select name="팀" class="form-control margin-bottom">
+                                                    <select name="팀" class="teamMList form-control margin-bottom">
                                                         <option value="">선택</option>
                                                         <option>개발1팀</option>
                                                         <option>개발2팀</option>
@@ -342,7 +342,7 @@
                                                         <option>개발2팀</option>
                                                     </select>
                                                     &nbsp;
-                                                    <select name="이름" class="form-control margin-bottom">
+                                                    <select name="이름" class="userMList form-control margin-bottom">
                                                         <option value="">선택</option>
                                                         <option>3030</option>
                                                         <option>khs</option>
@@ -377,7 +377,7 @@
             </div>
             <p>
             <div class="pull-right" style="text-align: center;">
-                <button id="saveBtn" type="button" class="btn btn-primary bg-light-blue-gradient "
+                <button id="saveBtn" type="button" class="btn btn-primary bg-light-blue-gradient " onclick="location.href='/pages/auth'"
                 >확인
                 </button>
 

@@ -92,7 +92,7 @@ public class PageController {
     @RequestMapping(path = {"/auth"})
     public ModelAndView authuserPage() {
         return new ModelAndView("/pages/authuserPage")
-                .addObject("menuList", sideMenuService.getSideMenu("계약서 권한 관리1"))
+                .addObject("menuList", sideMenuService.getSideMenu("계약서 권한"))
                 .addObject("code", "user")
                 ;
     }
@@ -100,7 +100,7 @@ public class PageController {
     public ModelAndView authuserPageDetail(@PathVariable Long idx) {
         System.out.println("path : " + idx);
         return new ModelAndView("/pages/authuserPageDetail")
-                .addObject("menuList", sideMenuService.getSideMenu("계약서 권한 관리2"))
+                .addObject("menuList", sideMenuService.getSideMenu("계약서 권한 관리"))
                 .addObject("code", "user")
                 .addObject("pathIdx", idx)
                 ;
