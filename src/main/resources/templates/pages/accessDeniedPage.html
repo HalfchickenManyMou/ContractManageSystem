@@ -1,0 +1,23 @@
+<html lang="ko"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org/" xmlns:v-on="http://www.w3.org/1999/xhtml"
+      xmlns:v-bind="http://www.w3.org/1999/xhtml">
+
+<!-- head Start-->
+<div th:replace="fragment/head :: head"></div>
+<!-- head End-->
+
+<body>
+<script th:inline="javascript">
+    window.onload = function(){
+        /*<![CDATA[*/
+        var nextPage = [[@{__${nextPage}__}]], msg = [[${msg}]];
+            alert(msg);
+            location.href = nextPage;
+            /*]]>*/
+    };
+</script>
+</body>
+
+
+</html>

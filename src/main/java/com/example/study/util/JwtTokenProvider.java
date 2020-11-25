@@ -18,7 +18,7 @@ public class JwtTokenProvider {
     public JwtTokenProvider(){
         String key = "01234567890123456789012345678912";
         secretKey = Keys.hmacShaKeyFor(key.getBytes());
-        tokenValidTime = 30 * 60 * 100000L; //30분
+        tokenValidTime = 30 * 60 * 1000L; //30분
     }
 
     //토큰 생성

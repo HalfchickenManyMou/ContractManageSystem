@@ -5,6 +5,7 @@ import com.example.study.model.entity.User;
 import com.example.study.repository.UserRepository;
 import com.example.study.util.JwtTokenProvider;
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -46,36 +47,43 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
 
         //브라우저의 쿠키에서 토큰을 받아온다
         Cookie cookie = Arrays.stream(request.getCookies()).filter(r -> r.getName().equals("Authorization")).findFirst().orElse(null);
-        //System.out.println(cookie);
 
         //비정상적인 사용자 판별(쿠키가 없는 브라우저)
         if(cookie == null){
+            //로그인 페이지로 이동
             chain.doFilter(request,response);
             return;
         }
 
-        String jsonWebToken = cookie.getValue();
-        Claims claims = jwtTokenProvider.getClaims(jsonWebToken);
+        try{
+            String jsonWebToken = cookie.getValue();
+            Claims claims = jwtTokenProvider.getClaims(jsonWebToken);
 
-        //토큰 유효성 검사(존재 ,만료기간 확인)
-        if(claims.get("userCode").toString() != null && !jwtTokenProvider.isTokenExpired(jsonWebToken)){
-            User user = userRepository.findByUserCode(claims.get("userCode").toString()).orElse(null);
+            //토큰 유효성 검사(존재)
+            if(claims.get("userCode").toString() != null){
 
+                User user = userRepository.findByUserCode(claims.get("userCode").toString()).orElse(null);
 
-            //Authentication 객체로 만들어주기 위해 login(UserDetails) 객체로 만들어줌
-            Login login = new Login(user);
+                //Authentication 객체로 만들어주기 위해 login(UserDetails) 객체로 만들어줌
+                Login login = new Login(user);
 
-            Authentication authentication =
-                    new UsernamePasswordAuthenticationToken(
-                            login,
-                            null,
-                            login.getAuthorities()
-                    );
+                Authentication authentication =
+                        new UsernamePasswordAuthenticationToken(
+                                login,
+                                null,
+                                login.getAuthorities()
+                        );
 
-            //시큐리티 세션에 저장, 권한을 위해
-            SecurityContextHolder.getContext().setAuthentication(authentication);
+                //시큐리티 세션에 저장, 권한을 위해
+                SecurityContextHolder.getContext().setAuthentication(authentication);
+            }
+
+            chain.doFilter(request,response);
+
         }
-
-        chain.doFilter(request,response);
+        //토큰 기간 만료시 강제 로그아웃
+        catch (ExpiredJwtException exception){
+            response.sendRedirect("/logout");
+        }
     }
 }
